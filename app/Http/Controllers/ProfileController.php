@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use App\Traits\Wallets;
 use App\Wallet;
+use App\Packeg;
 use App\User;
 use Session;
 use Auth;
@@ -15,8 +16,8 @@ class ProfileController extends Controller
 {
     use Wallets;
 
-    private $userReg = 10;
-    private $userCom = 2;
+    private $userReg = 15;
+    private $userCom = 3;
 
     public function index(){
         return view('profile.profile');
@@ -45,7 +46,8 @@ class ProfileController extends Controller
 
     public function newMember()
     {
-        return view('auth.newMember');
+        $packeg = $this->packArray();
+        return view('auth.newMember',compact('packeg'));
     }
 
 
@@ -57,40 +59,50 @@ class ProfileController extends Controller
             'email' => 'required|string|email|max:50',
             'password' => 'required|string|min:6|confirmed',
             'mobile' => 'required',
+            'packeg' => 'required|exists:packegs,id',
             'referralId' => 'required|exists:users,id',
-            'placementId' => 'required|exists:users,id',
-            'hand' => 'required|unique_with:users,placementId,hand',
+            //'placementId' => 'required|exists:users,id',
+            'placementUsername' => 'required|exists:users,username',
+            //'hand' => 'required|unique_with:users,placementId,hand',
+            'hand' => 'required|unique_with:users,placementUsername,hand',
         ),[
             //'placementId.unique_with' => 'This referral Id already 5 member registered, please try another referral ID'
-            'hand.unique_with' => 'This hand side is already used, please try another hand or another Placement ID',
+            'hand.unique_with' => 'This hand side is already used, please try another hand or another Placement',
         ]);
 
-        if($this->balance(Auth::user()->id,'registerWallet') >= $this->userReg){
+        $packAmount = Packeg::find($request->packeg);
+
+        if($this->balance(Auth::user()->id,'registerWallet') >= $packAmount->amount){
 
             $data = new User;
             $data->name = $request->name;
             $data->username = $request->username;
             $data->email = $request->email;
             $data->mobile = $request->mobile;
+            $data->packeg_id = $request->packeg;
             $data->referralId = $request->referralId;
             $data->placementId = $request->placementId;
+            $data->placementUsername = $request->placementUsername;
             $data->hand = $request->hand;
             $data->password = bcrypt($request->password);
             $data->save();
 
             $data1 = new Wallet;
             $data1->user_id = Auth::user()->id;
-            $data1->payment = $this->userReg;
+            $data1->payment = $packAmount->amount;
             $data1->remark = 'New Member #'.$data->id;
             $data1->wType = 'registerWallet';
             $data1->save();
 
             $data2 = new Wallet;
             $data2->user_id = Auth::user()->id;
-            $data2->receipt = $this->userCom;
+            $data2->receipt = $packAmount->amount*.10;
             $data2->remark = 'New Member #'.$data->id;
             $data2->wType = 'sponsorWallet';
             $data2->save();
+
+            //$this->bonusDist($member->id);
+
             return redirect()->route('home');
         }else{
             Session::flash('warning','Sorry, Your Balance Less then '.$this->userReg);
@@ -98,10 +110,14 @@ class ProfileController extends Controller
         }
     }
 
+
+
     public function updateProfile(Request $request){
+        //dd($request); exit;
         $user_id = Auth::User()->id; 
         $this->validate($request, array(
             'name' => 'required|string|max:255',
+            'pin' => 'required|numeric|digits:4',
             'username' => [
                 'required','alpha_dash','max:30',
                 Rule::unique('users')->ignore($user_id),
@@ -124,7 +140,7 @@ class ProfileController extends Controller
         $data->username = $request->username;
         $data->email = $request->email;
         $data->mobile = $request->mobile;
-        //$data->skypeid = $request->skypeid;
+        $data->pin = $request->pin;
         $data->save();
         Session::flash('success','Successfully Save');
 
@@ -136,7 +152,7 @@ class ProfileController extends Controller
     }
 
     public function changePhoto(Request $request){
-    	$this->validate($request, array(
+        $this->validate($request, array(
         'photo' => 'mimes:jpg,jpeg,png|max:2000'
         ));
 
@@ -162,21 +178,21 @@ class ProfileController extends Controller
     }
     
     public function changePassSave(Request $request){
-    	$this->validate($request, array(
+        $this->validate($request, array(
             'CurrentPassword'=>'required|max:15',
             'password' => 'required|string|min:6|max:15|confirmed',
             ));
-    	//return Auth::user()->password.'<BR>'.Hash::make($request->CurrentPassword);
+        //return Auth::user()->password.'<BR>'.Hash::make($request->CurrentPassword);
 
-    	if(Hash::check($request->CurrentPassword, Auth::user()->password )){
-    		$user_id = Auth::User()->id;                       
-	        $obj_user = User::find($user_id);
-	        $obj_user->password = Hash::make($request->password);
-	        $obj_user->save(); 
-	        return redirect()->route('profile');
-    	}else{
-    		return redirect()->route('changePass');
-    	}
+        if(Hash::check($request->CurrentPassword, Auth::user()->password )){
+            $user_id = Auth::User()->id;                       
+            $obj_user = User::find($user_id);
+            $obj_user->password = Hash::make($request->password);
+            $obj_user->save(); 
+            return redirect()->route('profile');
+        }else{
+            return redirect()->route('changePass');
+        }
 
     }
     

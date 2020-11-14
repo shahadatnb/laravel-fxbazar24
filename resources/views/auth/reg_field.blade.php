@@ -122,7 +122,7 @@
     </div>
 </div> --}}
 
-<div class="form-group{{ $errors->has('placementId') ? ' has-error' : '' }}">
+{{-- <div class="form-group{{ $errors->has('placementId') ? ' has-error' : '' }}">
     <label for="placementId" class="col control-label">Placement ID</label>
 
     <div class="col">
@@ -131,6 +131,34 @@
         @if ($errors->has('placementId'))
             <span class="help-block">
                 <strong>{{ $errors->first('placementId') }}</strong>
+            </span>
+        @endif
+    </div>
+</div> --}}
+
+<div class="form-group{{ $errors->has('placementUsername') ? ' has-error' : '' }}">
+    <label for="placementUsername" class="col control-label">Placement Username</label>
+
+    <div class="col">
+        <input id="placementUsername" type="text" class="form-control" name="placementUsername" value="{{ old('placementUsername') }}" required>
+
+        @if ($errors->has('placementUsername'))
+            <span class="help-block">
+                <strong>{{ $errors->first('placementUsername') }}</strong>
+            </span>
+        @endif
+    </div>
+</div>
+
+<div class="form-group{{ $errors->has('packeg') ? ' has-error' : '' }}">
+    <label for="packeg" class="col control-label">Select Packeg</label>
+
+    <div class="col">
+        {{ Form::select('packeg',$packeg,null,['class'=>'form-control','required'=>'','placeholder'=>'Select Packeg']) }} 
+
+        @if ($errors->has('packeg'))
+            <span class="help-block">
+                <strong>{{ $errors->first('packeg') }}</strong>
             </span>
         @endif
     </div>

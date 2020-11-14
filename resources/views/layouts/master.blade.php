@@ -49,7 +49,7 @@
         <nav class="navbar navbar-expand-sm  navbar-dark bg-dark">{{-- navbar-default --}}
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-@if(Auth::user()->admin==1)
+                @if(Auth::user()->admin==1)
                     <li class="menu-title">Admin</li><!-- /.menu-title -->
                     <li>
                         <a href="{{url('/admin-panel')}}"><i class="menu-icon fa fa-laptop"></i>Admin Dashboard </a>
@@ -68,7 +68,9 @@
                     </li>                    
                     <li class="menu-title">Member</li>
                     @endif
-
+                    <li>
+                        <a href="{{url('/newMember')}}"><i class="menu-icon fa fa-user"></i>New Member </a>
+                    </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>General</a>
                         <ul class="sub-menu children dropdown-menu bg-dark border">
@@ -85,10 +87,9 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-users"></i>Profile</a>
                         <ul class="sub-menu children dropdown-menu bg-dark border">
-                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/withdrawWallet')}}">Change Password</a></li>
-                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/registerWallet')}}">Change Image</a></li>
-                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/sponsorWallet')}}">Change TRX-PIN</a></li>
-                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/selfWallet')}}">Generation income wallet</a></li>
+                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/changePass')}}">Change Password</a></li>
+                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/editProfile')}}">Change Image</a></li>
+                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/editProfile')}}">Change TRX-PIN</a></li>
                             <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/youtubeWallet')}}">My Profile</a></li>
                         </ul>
                     </li>

@@ -71,6 +71,32 @@ class User extends Authenticatable
     }
 
 
+    public static function myChildAmount($id, $hand){
+        global $amount;
+        $amount = 0;
+        $child =  User::where('hand',$hand)->where('placementId',$id)->first(); //->pluck('id')
+        
+        if($child){
+            $amount = $child->packeg->amount;
+            if(count($child->childs)){
+              $amount = User::cChildAmount($child->childs,$amount);
+            }
+        }
+        return $amount;
+    }
+
+    public static function cChildAmount($child,$amount){
+        global $amount;
+        //dd($child);
+        foreach ($child as $member) { //dd($member->childs);//dd(count(User::nChilds($member->id)));            
+            $amount = $member->packeg->amount;
+            if(count($member->childs)){
+                User::cChildAmount($member->childs,$amount);
+            }
+        }
+        return $amount;
+    }
+
     public static function myChildLR($id, $hand){
         global $count;
         $count = 0;

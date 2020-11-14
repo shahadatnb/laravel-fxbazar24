@@ -8,73 +8,44 @@
           <h3 class="card-title">Update Your Profile</h3>
         </div>
         <div class="card-body">
+          @include('layouts._message')
           {!! Form::model($user,['url' => ['updateProfile'],'method'=>'POST','class'=>'form-horizontal']) !!}
-            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+            <div class="form-group">
                 <label for="name" class="col-md-4 control-label">Full Name</label>
 
                 <div class="col-md-6">
                     {{ Form::text('name',null,array('class'=>'form-control','required'=>'','maxlenth'=>'255')) }}
-                    @if ($errors->has('name'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('name') }}</strong>
-                        </span>
-                    @endif
                 </div>
             </div>
 
-            <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
+            <div class="form-group">
                 <label for="username" class="col-md-4 control-label">Username</label>
 
                 <div class="col-md-6">
                     {{ Form::text('username',null,array('class'=>'form-control','required'=>'','maxlenth'=>'255')) }}
-
-                    @if ($errors->has('username'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('username') }}</strong>
-                        </span>
-                    @endif
                 </div>
             </div>
 
-            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+            <div class="form-group">
                 <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
                 <div class="col-md-6">
                     {{ Form::text('email',null,array('class'=>'form-control','required'=>'','maxlenth'=>'255')) }}
-
-                    @if ($errors->has('email'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('email') }}</strong>
-                        </span>
-                    @endif
                 </div>
             </div>
 
-<!--             <div class="form-group{{-- $errors->has('skypeid') ? ' has-error' : '' --}}">
-    <label for="skypeid" class="col-md-4 control-label">Skype ID</label>
+            <div class="form-group">
+              <label for="pin" class="col-md-4 control-label">TRX-PIN</label>
+              <div class="col-md-6">
+              {{Form::number('pin',null,array('class'=>'form-control','required'=>'','maxlenth'=>'255'))}}
+              </div>
+          </div>
 
-    <div class="col-md-6">
-        {{-- Form::text('skypeid',null,array('class'=>'form-control','required'=>'','maxlenth'=>'255')) --}}
-
-        @if ($errors->has('skypeid'))
-            <span class="help-block">
-                <strong>{{-- $errors->first('skypeid') --}}</strong>
-            </span>
-        @endif
-    </div>
-</div> -->
-
-            <div class="form-group{{ $errors->has('mobile') ? ' has-error' : '' }}">
+            <div class="form-group">
                 <label for="mobile" class="col-md-4 control-label">Mobile</label>
 
                 <div class="col-md-6">
                     {{ Form::text('mobile',null,array('class'=>'form-control','required'=>'','maxlenth'=>'255')) }}
-
-                    @if ($errors->has('mobile'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('mobile') }}</strong>
-                        </span>
-                    @endif
                 </div>
             </div>
 
