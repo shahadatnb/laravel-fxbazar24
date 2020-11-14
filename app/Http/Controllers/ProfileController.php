@@ -73,7 +73,7 @@ class ProfileController extends Controller
         $packAmount = Packeg::find($request->packeg);
 
         if($this->balance(Auth::user()->id,'registerWallet') >= $packAmount->amount){
-
+            $placementUser = User::where('username',$request->placementUsername)->first();
             $data = new User;
             $data->name = $request->name;
             $data->username = $request->username;
@@ -81,8 +81,8 @@ class ProfileController extends Controller
             $data->mobile = $request->mobile;
             $data->packeg_id = $request->packeg;
             $data->referralId = $request->referralId;
-            $data->placementId = $request->placementId;
-            $data->placementUsername = $request->placementUsername;
+            $data->placementId = $placementUser->placementId;
+            $data->placementUsername = $request->id;
             $data->hand = $request->hand;
             $data->password = bcrypt($request->password);
             $data->save();
@@ -90,14 +90,14 @@ class ProfileController extends Controller
             $data1 = new Wallet;
             $data1->user_id = Auth::user()->id;
             $data1->payment = $packAmount->amount;
-            $data1->remark = 'New Member #'.$data->id;
+            $data1->remark = 'New Member #'.$data->username;
             $data1->wType = 'registerWallet';
             $data1->save();
 
             $data2 = new Wallet;
             $data2->user_id = Auth::user()->id;
             $data2->receipt = $packAmount->amount*.10;
-            $data2->remark = 'New Member #'.$data->id;
+            $data2->remark = 'New Member #'.$data->username;
             $data2->wType = 'sponsorWallet';
             $data2->save();
 

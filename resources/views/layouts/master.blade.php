@@ -90,15 +90,15 @@
                             <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/changePass')}}">Change Password</a></li>
                             <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/editProfile')}}">Change Image</a></li>
                             <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/editProfile')}}">Change TRX-PIN</a></li>
-                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/youtubeWallet')}}">My Profile</a></li>
+                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/profile')}}">My Profile</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Advertise</a>
                         <ul class="sub-menu children dropdown-menu bg-dark border">
-                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/levelTree')}}">Works List</a></li>
+                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Works List</a></li>
                             <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Works Report</a></li>
-                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/memberList')}}">Package Status</a></li>
+                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Package Status</a></li>
                             <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Forex</a></li>
                         </ul>
                     </li>
@@ -117,31 +117,31 @@
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Transactions</a>
                         <ul class="sub-menu children dropdown-menu bg-dark border">
-                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/withdrawWallet')}}">Balance Transfer</a></li>
-                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/registerWallet')}}">Exchange Register</a></li>
-                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/sponsorWallet')}}">Export Shopping</a></li>
-                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/selfWallet')}}">Exchange Shopping</a></li>
-                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/youtubeWallet')}}">Exchange Record</a></li>
-                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/youtubeWallet')}}">Fund Transferred Records</a></li>
+                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Balance Transfer</a></li>
+                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Exchange Register</a></li>
+                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Export Shopping</a></li>
+                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Exchange Shopping</a></li>
+                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Exchange Record</a></li>
+                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Fund Transferred Records</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Withdrawals</a>
                         <ul class="sub-menu children dropdown-menu bg-dark border">
-                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/withdrawWallet')}}">Agent Withdrawals</a></li>
-                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/registerWallet')}}">Bank Withdrawals</a></li>
-                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/sponsorWallet')}}">Online Withdrawals</a></li>
-                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/selfWallet')}}">My Withdrawals Report</a></li>
+                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Agent Withdrawals</a></li>
+                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Bank Withdrawals</a></li>
+                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Online Withdrawals</a></li>
+                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">My Withdrawals Report</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Top-Up</a>
                         <ul class="sub-menu children dropdown-menu bg-dark border">
-                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/withdrawWallet')}}">Top-Up</a></li>
-                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/registerWallet')}}">Topup Record</a></li>
+                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Top-Up</a></li>
+                            <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Topup Record</a></li>
                         </ul>
                     </li>
-                    <li class="menu-item-has-children dropdown">
+                    {{-- <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Wallat</a>
                         <ul class="sub-menu children dropdown-menu bg-dark border">
                             <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/withdrawWallet')}}">Withdraw wallet</a></li>
@@ -150,12 +150,9 @@
                             <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/selfWallet')}}">Generation income wallet</a></li>
                             <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/youtubeWallet')}}">Youtube wallet</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
                     <li>
                         <a href="{{ url('/youtubeClick') }}"> <i class="menu-icon ti-youtube"></i>Youtube Click</a>
-                    </li>
-                    <li>
-                        <a href="{{ url('/newMember') }}"> <i class="menu-icon ti-user"></i>New Member </a>
                     </li>
                     <li>
                         <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> <i class="menu-icon ti-power-off"></i>Log out </a>

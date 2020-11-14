@@ -33,7 +33,14 @@ class PtcController extends Controller
      */
     public function youtubeClick()
     {
-        $p = Ptc::where('publish_date',date('Y-m-d'))->latest()->get();
+        $ptcs = $this->checkLinks();
+        //dd($ptc); exit;
+        $youtubeEarn = $this->youtubeBalance(Auth::User()->id);
+        return view('ptc.pctClick', compact('ptcs','youtubeEarn'));
+    }
+
+    protected function checkLinks(){
+      $p = Ptc::where('publish_date',date('Y-m-d'))->latest()->get();
         /*$ptc = DB::table('ptcs')
             ->leftJoin('ptc_click','ptcs.id','ptc_click.ptc_id')
             //->whereNot()
@@ -49,9 +56,8 @@ class PtcController extends Controller
                 $ptcs[$key] = $value->id;
             }            
         }
-        //dd($ptc); exit;
-        $youtubeEarn = $this->youtubeBalance(Auth::User()->id);
-        return view('ptc.pctClick', compact('ptcs','youtubeEarn'));
+
+        return $ptcs;
     }
 
     public function youtubeClickPost($id)
@@ -63,66 +69,12 @@ class PtcController extends Controller
                 DB::table('ptc_click')->insert(
                     ['ptc_id' => $ptc->id, 'user_id' => Auth::User()->id]
                 );
-                $youtube_earn = settingValue('youtube_earn');
-                $data = new EarnWallet;                
-                $data->receipt = $youtube_earn;
-                $data->user_id = Auth::User()->id;
-                $data->save();
 
-                $user = User::find(Auth::User()->placementId);
-                if($user){
-                    $c=$this->selfIncomeCheck($user->id);
-                    $amt = $youtube_earn*.5;
-                    if($c){
-                        $this->selfIncomeUpdate($c->id,$amt+$c->receipt);
-                    }else{
-                        $this->selfIncomeNew($user->id, $amt);
-                    }
-                    //------------- L-2
-                    $user2 = User::find($user->placementId);
-                    if($user2){
-                    $c=$this->selfIncomeCheck($user2->id);
-                    $amt = $youtube_earn*.5;
-                    if($c){
-                        $this->selfIncomeUpdate($c->id,$amt+$c->receipt);
-                    }else{
-                        $this->selfIncomeNew($user2->id, $amt);
-                    }
-                      //------------- L-3
-                      $user3 = User::find($user2->placementId);
-                      if($user3){
-                      $c=$this->selfIncomeCheck($user3->id);
-                      $amt = $youtube_earn*.4;
-                      if($c){
-                          $this->selfIncomeUpdate($c->id,$amt+$c->receipt);
-                      }else{
-                          $this->selfIncomeNew($user3->id, $amt);
-                      }
-                        //------------- L-3
-                        $user4 = User::find($user3->placementId);
-                        if($user4){
-                        $c=$this->selfIncomeCheck($user4->id);
-                        $amt = $youtube_earn*.3;
-                        if($c){
-                            $this->selfIncomeUpdate($c->id,$amt+$c->receipt);
-                        }else{
-                            $this->selfIncomeNew($user4->id, $amt);
-                        }
-                          //------------- L-3
-                          $user5 = User::find($user4->placementId);
-                          if($user5){
-                          $c=$this->selfIncomeCheck($user5->id);
-                          $amt = $youtube_earn*.2;
-                          if($c){
-                              $this->selfIncomeUpdate($c->id,$amt+$c->receipt);
-                          }else{
-                              $this->selfIncomeNew($user5->id, $amt);
-                          }
-                        } // user5
-                      }// user4
-                    } // user3
-                  } // user2
-                } // user
+                $ptcs = $this->checkLinks();
+                //dd($ptcs); exit;
+                if(empty($ptcs)){
+                  $this->youtubeBonus();
+                }
 
                 return redirect($ptc->link);
             } //if(!$cl)
@@ -130,21 +82,53 @@ class PtcController extends Controller
         return '';
     } //function
 
-    protected function selfIncomeNew($id, $amt){
-        $data2 = new Wallet;
-        $data2->user_id = $id;
-        $data2->receipt = $amt;
-        $data2->wType = 'selfWallet';
-        $data2->save();
+    protected function youtubeBonus(){      
+        //$youtube_earn = settingValue('youtube_earn');
+        $youtube_earn = Auth::User()->packeg->payment;
+        //dd($youtube_earn); exit;
+        $this->youtubeBonusSave(Auth::User()->id,$youtube_earn);
+
+        $user = User::find(Auth::User()->placementId);
+        if($user){
+            $amt = $youtube_earn*.3;
+            $this->youtubeBonusSave($user->id,$amt);
+
+            //------------- L-2
+            $user2 = User::find($user->placementId);
+            if($user2){
+              $amt = $youtube_earn*.2;
+              $this->youtubeBonusSave($user2->id,$amt);
+              //------------- L-3
+              $user3 = User::find($user2->placementId);
+              if($user3){
+              $amt = $youtube_earn*.1;
+              $this->youtubeBonusSave($user3->id,$amt);
+                //------------- L-4
+                $user4 = User::find($user3->placementId);
+                if($user4){
+                $amt = $youtube_earn*.1;
+                $this->youtubeBonusSave($user4->id,$amt);
+                  //------------- L-5
+                  $user5 = User::find($user4->placementId);
+                  if($user5){
+                  $amt = $youtube_earn*.1;
+                  $this->youtubeBonusSave($user->id,$amt);
+                } // user5
+              }// user4
+            } // user3
+          } // user2
+        } // user
     }
-    protected function selfIncomeCheck($id){
-        return Wallet::where('wType','selfWallet')->where('user_id',$id)->first();
+
+    protected function youtubeBonusSave($id, $amt){
+        $data = new Wallet;                
+        $data->receipt = $amt;
+        $data->user_id = $id;
+        $data->wType = 'worksWallet';
+        $data->remark = 'Youtube Bonus #'.Auth::User()->id;
+        $data->save();
     }
-    protected function selfIncomeUpdate($id,$amt){
-        DB::table('wallets')
-            ->where('id', $id)
-            ->update(['receipt' => $amt]);
-    }
+
 
     /**
      * Store a newly created resource in storage.

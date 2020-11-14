@@ -29,7 +29,8 @@ class HomeController extends Controller
     }
 
     public function index(){
-        //$this->rank();
+        $this->rank();
+        $this->slot();
         $user_id= Auth::user()->id;
        $wallets=$this->allBalance($user_id);
        $wallets['totalWithdraw'] = ['balance'=>$this->totalBalance($user_id,'withdrawWallet'),'title'=>'Total Withdraw','bg'=>'success'];
@@ -79,15 +80,22 @@ class HomeController extends Controller
     }
 
     public function rank(){
-        $cLeft=User::myChildLR(Auth::user()->id,1);
-        $cRight=User::myChildLR(Auth::user()->id,2);
+        $userRank = Auth::user()->rank;
+
+        if($userRank == 0){
+            $cLeft=User::myChildAmount(Auth::user()->id,1);
+            $cRight=User::myChildAmount(Auth::user()->id,2);           
+        }else{
+            $cLeft=User::myChildByPack(Auth::user()->id,1,$userRank);
+            $cRight=User::myChildByPack(Auth::user()->id,2,$userRank); 
+        }
+        
         if($cLeft<=$cRight){
             $small = $cLeft;
         }else{
             $small = $cRight;
-        }
-        
-        $userRank = Auth::user()->rank;
+        } 
+
         $userRank++;
         $rank = $this->rank;
         //dd($cLeft); exit;
@@ -102,6 +110,37 @@ class HomeController extends Controller
             $data2->receipt = $rank[$userRank]['amount'];
             $data2->wType = 'rankWallet';
             $data2->remark = 'Rank Bonus #'.$userRank;
+            $data2->save();
+        }
+
+        return null;
+    }
+
+
+   protected function slot(){
+        $cLeft=User::myChildAmount(Auth::user()->id,1);
+        $cRight=User::myChildAmount(Auth::user()->id,2);
+        if($cLeft<=$cRight){
+            $small = $cLeft;
+        }else{
+            $small = $cRight;
+        }
+        
+        $userSlot = Auth::user()->slot;
+        $userSlot++;
+        $slot = $this->slot;
+        //dd($cLeft); exit;
+        if($small >= $slot[$userSlot]){
+
+            $user = User::find(Auth::user()->id);
+            $user->rank = $userSlot;
+            $user->save();
+
+            $data2 = new Wallet;
+            $data2->user_id = Auth::user()->id;
+            $data2->receipt = $slot[$userSlot]*.5;
+            $data2->wType = 'matchingWallet';
+            $data2->remark = 'Matching Bonus #'.$userSlot;
             $data2->save();
         }
 
@@ -140,234 +179,6 @@ class HomeController extends Controller
         return view('pages.levelTree')->withMembers($member);
     }
 
-
-
-/* ################# Aprove ID     Premium        #########################*/
-    public function getpremium()
-    {
-        $member = User::find(Auth::user()->id);
-        if($member->premium == 0){
-            $member->premium = 1;
-            $member->save();
-
-            $this->bonusDist($member->id);            
-            
-            Session::flash('success','Success');
-        }        
-        
-        return redirect()->route('home');
-    }
-
-
-    protected function bonusDist($id){
-        $member = User::find($id);
-        if($member->referralId != 0){
-
-            $refMember = User::find($member->referralId);
-            $refCount = User::where('referralId',$member->referralId)->count();
-
-            if($refCount==2){
-                $this->joinBonus($member->referralId);
-            }
-            
-            if($refMember->referralId != 0){      
-                $parent = User::find($refMember->referralId);          
-                $this->levelBonus($parent,$refMember->hand);
-            }
-        }
-    }
-
-
-    protected function levelBonus($parent,$hand){              
-        $countLeftChild = User::myChildLR($parent->id, 1);
-        $countRightChild = User::myChildLR($parent->id, 2);
-
-        $this->count++;
-        //echo $parent->id.'-'.$countLeftChild.' '.$countRightChild.'<br>';
-
-        if($hand == 1){
-            if($countRightChild >= $countLeftChild){
-                $this->joinBonus($parent->id);
-                //echo 'left';
-            }                
-        }else{
-            if($countLeftChild >= $countRightChild){
-                $this->joinBonus($parent->id);
-                //echo 'right';
-            }                
-        }
-
-        if($parent->referralId &&  $this->count < 10){
-            $pparent = User::find($parent->referralId);
-            if($pparent->admin != 1){
-                $this->levelBonus($pparent,$parent->hand);
-            }
-        }
-    }
-
-
-
-    protected function joinBonus($referralId){
-        if($referralId !=0 ){
-            $member = User::find($referralId); 
-            if($member->premium == 1){
-                $earn = EarnWallet::where('user_id',$referralId)->sum('receipt');
-                if($earn >= $this->freeLimit){
-                    return true;
-                }
-            }elseif($member->premium == 2){
-                $earn = EarnWallet::where('user_id',$referralId)->whereDate('created_at', Carbon::today())->sum('receipt');
-                if($earn >= $this->dayLimit){
-                    return true;
-                }               
-            }else{
-                return true;
-            }
-            
-            $data = new EarnWallet;
-            $data->user_id = $referralId;
-            $data->receipt = $this->mBonus;
-            $data->adminWid = 0;
-            $data->remark = 'L-'.$this->count.' join ID#'.Auth::user()->id;
-            $data->save();            
-        }
-    }
-  
-    public function xxxxxbonusDist($id){
-        if($this->count == 1){
-            $amt = 3;
-        }elseif($this->count == 2){
-            $amt = 2;
-        }
-        elseif($this->count == 3){
-            $amt = 1;
-        }
-        elseif($this->count == 4){
-            $amt = 1;
-        }
-        elseif($this->count == 5){
-            $amt = 0.5;
-        }
-        elseif($this->count == 6){
-            $amt = 0.5;
-        }else{
-            $amt = 0;
-        }
-        if($amt>0){
-            $data = new MyWallet;
-            $data->user_id = $id;
-            $data->receipt = $amt;
-            $data->remark = 'T Bonus';
-            $data->save();
-            $count = ++$this->count;
-            if($count < 7){
-                $this->aproveBonus($id,$count);
-            } 
-
-        }      
-    }
-
-
-    public function upgrateStandrad(){
-        $member = User::find(Auth::user()->id);
-        $balance = $this->currentBalance(Auth::user()->id);
-        if($member->premium != 1){
-            Session::flash('warning','Sorry');
-        }
-        if($balance >= $this->upgrateAmt) {
-            $member->premium = 2;
-            $member->save();
-
-            $data = new CurrentWallet;
-            $data->user_id = $member->id;
-            $data->payment = $this->upgrateAmt;
-            $data->remark = 'Upgrate Standrad';
-            $data->save();
-        }else{
-            Session::flash('warning','Sorry, Your Balance Less then '.$this->upgrateAmt.' Tk');
-        }
-        return redirect()->back();
-    }
-   
-
-/* ########################### Bonus ###########################*/
-
-
-    public function parent($parent,$hand,$bonus){
-
-        $countLeftChild = User::myChildOnlyPremium($parent->id, 1);
-        $countRightChild = User::myChildOnlyPremium($parent->id, 2);
-
-        if($hand == 1){
-            if($countRightChild >= $countLeftChild){
-                $data = new MyWallet;
-                $data->user_id = $parent->id;
-                $data->receipt = $this->percentage($bonus,10);
-                $data->remark = 'Matching Bonus # '.Auth::user()->id;
-                $data->save();
-            }                
-        }else{
-            if($countLeftChild >= $countRightChild){
-                $data = new MyWallet;
-                $data->user_id = $parent->id;
-                $data->receipt = $this->percentage($bonus,10);
-                $data->remark = 'Matching Bonus # '.Auth::user()->id;
-                $data->save();
-            }                
-        }
-
-        if($parent->sponsorId){
-            $pparent = User::find($parent->sponsorId);
-            if($pparent->admin != 1){
-                $this->parent($pparent,$parent->hand,$bonus);
-            }            
-        }
-    }
-
-    public function countChild($member,$count){
-        $members = $this->where('sponsorId',$member)->get();
-        foreach ($members as $member) {
-            //dd($member);
-            if(count($member->childs)){
-                $count += count($member->childs);
-                $this->countChild($member->id,$count);
-            }
-        }
-        return $count;
-    }
-
-    
-    public function gBonus($id,$count,$bon){
-        if($count < 15){
-            if($count < 5){
-                $bonus = $this->percentage($bon,0.10);
-            }else{$bonus = $this->percentage($bon,0.05);}
-
-            //dd($this->percentage(1,.05));
-            //exit;
-
-            $data = new MyWallet;
-            $data->user_id = $id;
-            $data->receipt = $bonus;
-            $data->remark = 'Generation Bonus # '.Auth::user()->id;
-            $data->save();
-            $count++;
-            $member = User::find($id);
-            $parent = User::find($member->sponsorId);    
-
-            if($parent){
-                $this->gBonus($parent->id,$count,$bon);
-            }
-        }
-    }
-
-    public function bonus($id){
-        $data = new MyWallet;
-        $data->user_id = $id;
-        $data->receipt = 1;
-        $data->remark = 'Matching Bonus';
-        $data->save();
-    }
 
 
 /*#################            ########################################  */

@@ -12,20 +12,39 @@ trait Wallets
         'currentWallet'=>['title'=>'Current Wallet','bg'=>'primary'],
         'registerWallet'=>['title'=>'Register wallet','bg'=>'info'],
         'worksWallet'=>['title'=>'Works Wallet','bg'=>'warning'],
+        'sponsorWallet'=>['title'=>'Sponsor Wallet','bg'=>'danger'],
+        'rankWallet'=>['title'=>'Rank Wallet','bg'=>'dark'],
+        'matchingWallet'=>['title'=>'Matching Wallet','bg'=>'secondary'],
     ];
 
     public $rank = [
         0=>['point'=>0, 'amount'=>0, 'prize'=>'', 'title'=>'No Rank'],
         1=>['point'=>500, 'amount'=>62.50, 'prize'=>'$62.50', 'title'=>'Rubi member'],
-        2=>['point'=>1000, 'amount'=>125, 'prize'=>'$125', 'title'=>'Rubi Executive member'],
-        3=>['point'=>3000, 'amount'=>187.50, 'prize'=>'$187.50', 'title'=>'Executive member'],
-        4=>['point'=>9000, 'amount'=>625, 'prize'=>'$625', 'title'=>'Silver Executive'],
-        5=>['point'=>27000, 'amount'=>1875, 'prize'=>'$1875', 'title'=>'Gold Executive'],
-        6=>['point'=>81000, 'amount'=>3750, 'prize'=>'$3750', 'title'=>'Platinum Executive'],
-        7=>['point'=>243000, 'amount'=>12500, 'prize'=>'$12500', 'title'=>'Diamond Executive'],
-        8=>['point'=>729000, 'amount'=>25000, 'prize'=>'$25000', 'title'=>'Crown Director'],
-        9=>['point'=>2187000, 'amount'=>62500, 'prize'=>'$62500', 'title'=>'Crown Amassador'],
+        2=>['point'=>2, 'amount'=>125, 'prize'=>'$125', 'title'=>'Rubi Executive member'],
+        3=>['point'=>3, 'amount'=>187.50, 'prize'=>'$187.50', 'title'=>'Executive member'],
+        4=>['point'=>3, 'amount'=>625, 'prize'=>'$625', 'title'=>'Silver Executive'],
+        5=>['point'=>3, 'amount'=>1875, 'prize'=>'$1875', 'title'=>'Gold Executive'],
+        6=>['point'=>3, 'amount'=>3750, 'prize'=>'$3750', 'title'=>'Platinum Executive'],
+        7=>['point'=>3, 'amount'=>12500, 'prize'=>'$12500', 'title'=>'Diamond Executive'],
+        8=>['point'=>3, 'amount'=>25000, 'prize'=>'$25000', 'title'=>'Crown Director'],
+        9=>['point'=>3, 'amount'=>62500, 'prize'=>'$62500', 'title'=>'Crown Amassador'],
         //10=>['point'=>3932160, 'amount'=>3500000, 'prize'=>'35 lak + axio car', 'title'=>'Vice chairman'],
+    ];
+
+    public $slot = [
+        0   => 0,
+        1   => 12.5,
+        2   => 25,
+        3   => 50,
+        4   => 100,
+        5   => 200,
+        6   => 500,
+        7   => 1000,
+        8   => 1500,
+        9   => 2500,
+        10  => 3600,
+        11  => 5000,
+        12  => 10000,
     ];
     
     public function wallets() {

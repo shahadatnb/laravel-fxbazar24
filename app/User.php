@@ -125,26 +125,26 @@ class User extends Authenticatable
 
 
 
-    public static function myChildOnlyPremium($id, $hand){
+    public static function myChildByPack($id, $hand, $pack){
         global $count;
         $count = 0;
         $child =  User::where('hand',$hand)->where('placementId',$id)->first(); //->pluck('id')
         if($child){            
-            if($child->premium == 1 || $child->premium == 2){$count = 1;} // || $child->premium == 2
+            if($child->packeg_id == $pack){$count = 1;} // || $child->premium == 2
             if(count($child->childs) > 0){
-              $count = User::cChildOnlyPremium($child->childs,$count);
+              $count = User::cChildOnlyPremium($child->childs,$count,$pack);
             }           
         }
         return $count; 
     }
 
-    public static function cChildOnlyPremium($child,$count){
+    public static function cChildByPack($child,$count){
         foreach ($child as $member) {
             global $count;
             //dd($child); exit;
-            if($member->premium == 1 || $member->premium == 2 ){$count ++;}
+            if($member->packeg_id == $pack){$count ++;}
             if(count($member->childs) > 0){
-                    User::cChildOnlyPremium($member->childs,$count);
+                    User::cChildByPack($member->childs,$count,$pack);
             }
         }
         return $count;
