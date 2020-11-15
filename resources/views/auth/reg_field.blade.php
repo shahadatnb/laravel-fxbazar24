@@ -1,5 +1,5 @@
-<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-    <label for="name" class="col control-label">Full Name</label>
+<div class="row form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+    <label for="name" class="col-3 control-label">Full Name</label>
 
     <div class="col">
         <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
@@ -12,8 +12,8 @@
     </div>
 </div>
 
-<div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-    <label for="username" class="col control-label">Username</label>
+<div class="row form-group{{ $errors->has('username') ? ' has-error' : '' }}">
+    <label for="username" class="col-3 control-label">Username</label>
 
     <div class="col">
         <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" required autofocus>
@@ -26,8 +26,8 @@
     </div>
 </div>
 
-<div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-    <label for="email" class="col control-label">E-Mail Address</label>
+<div class="row form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+    <label for="email" class="col-3 control-label">E-Mail Address</label>
 
     <div class="col">
         <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
@@ -40,8 +40,8 @@
     </div>
 </div>
 
-<div class="form-group{{-- $errors->has('mobile') ? ' has-error' : '' --}}">
-    <label for="mobile" class="col control-label">Mobile No</label>
+<div class="row form-group{{-- $errors->has('mobile') ? ' has-error' : '' --}}">
+    <label for="mobile" class="col-3 control-label">Mobile No</label>
 
     <div class="col">
         <input id="mobile" type="text" class="form-control" name="mobile" value="{{ old('mobile') }}" required>
@@ -54,8 +54,8 @@
     </div>
 </div>
 
-<div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-    <label for="password" class="col control-label">Password</label>
+<div class="row form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+    <label for="password" class="col-3 control-label">Password</label>
 
     <div class="col">
         <input id="password" type="password" class="form-control" name="password" required>
@@ -68,16 +68,16 @@
     </div>
 </div>
 
-<div class="form-group">
-    <label for="password-confirm" class="col control-label">Confirm Password</label>
+<div class="row form-group">
+    <label for="password-confirm" class="col-3 control-label">Confirm Password</label>
 
     <div class="col">
         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
     </div>
 </div>
 
-<div class="form-group{{ $errors->has('hand') ? ' has-error' : '' }}">
-    <label for="hand" class="col control-label">Side</label>
+<div class="row form-group{{ $errors->has('hand') ? ' has-error' : '' }}">
+    <label for="hand" class="col-3 control-label">Side</label>
 
     <div class="col">
         {{ Form::select('hand', ['1' => 'Left Side', '2' => 'Right Side'
@@ -136,8 +136,8 @@
     </div>
 </div> --}}
 
-<div class="form-group{{ $errors->has('placementUsername') ? ' has-error' : '' }}">
-    <label for="placementUsername" class="col control-label">Placement Username</label>
+<div class="row form-group{{ $errors->has('placementUsername') ? ' has-error' : '' }}">
+    <label for="placementUsername" class="col-3 control-label">Placement Username</label>
 
     <div class="col">
         <input id="placementUsername" type="text" class="form-control" name="placementUsername" value="{{ old('placementUsername') }}" required>
@@ -150,8 +150,8 @@
     </div>
 </div>
 
-<div class="form-group{{ $errors->has('packeg') ? ' has-error' : '' }}">
-    <label for="packeg" class="col control-label">Select Packeg</label>
+<div class="row form-group{{ $errors->has('packeg') ? ' has-error' : '' }}">
+    <label for="packeg" class="col-3 control-label">Select Packeg</label>
 
     <div class="col">
         {{ Form::select('packeg',$packeg,null,['class'=>'form-control','required'=>'','placeholder'=>'Select Packeg']) }} 

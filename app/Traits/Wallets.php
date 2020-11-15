@@ -12,9 +12,10 @@ trait Wallets
         'currentWallet'=>['title'=>'Current Wallet','bg'=>'primary'],
         'registerWallet'=>['title'=>'Register wallet','bg'=>'info'],
         'worksWallet'=>['title'=>'Works Wallet','bg'=>'warning'],
-        'sponsorWallet'=>['title'=>'Sponsor Wallet','bg'=>'danger'],
+        'referralWallet'=>['title'=>'Referral Wallet','bg'=>'danger'],
         'rankWallet'=>['title'=>'Rank Wallet','bg'=>'dark'],
-        'matchingWallet'=>['title'=>'Matching Wallet','bg'=>'secondary'],
+        'generationWallet'=>['title'=>'Generation Income','bg'=>'secondary'],
+        'matchingWallet'=>['title'=>'Matching Wallet','bg'=>'primary'],
     ];
 
     public $rank = [

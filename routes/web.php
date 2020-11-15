@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::get('/levelTree', 'HomeController@levelTree')->name('levelTree');
 	Route::get('/levelTree/id/{id}', 'HomeController@levelTreeId')->name('levelTreeId');
 	Route::get('/level', 'HomeController@level')->name('level');
+	Route::get('/mySponsor', 'HomeController@mySponsor')->name('mySponsor');
 	Route::get('/matchingBonus', 'HomeController@matchingBonus')->name('matchingBonus');
 
 	Route::post('/sendMoneyAc', 'HomeController@sendMoneyAc')->name('sendMoneyAc');

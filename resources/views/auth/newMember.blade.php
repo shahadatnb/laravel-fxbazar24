@@ -7,11 +7,9 @@
       </div>
       <div class="card-body">
       @include('layouts._message')
-        {!! Form::open(['route'=>'newMember','method'=>'POST']) !!}
-        <div class="row">
+        {!! Form::open(['route'=>'newMember','method'=>'POST']) !!}        
           @include('auth.reg_field')
           <input type="hidden" name="referralId" value="{{ Auth::user()->id }}" required>
-        </div>
         <div class="row">
           <div class="col-md-12"> <br>
           {{ Form::submit('Submit',array('class'=>'form-control btn btn-success')) }}</div>

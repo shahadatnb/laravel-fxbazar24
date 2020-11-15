@@ -11,7 +11,7 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header with-border">
-        <div class="card-body basic-style" style="background: #ddd">
+        <div class="card-body basic-style" style="background: #000">
           <div class="hv-container">
             <div class="hv-wrapper">
 
@@ -19,9 +19,8 @@
                 <div class="hv-item">
 
                     <div class="hv-item-parent">
-
-                        <p class="simple-card text-center"><img width="50" src="{{ url('/') }}/public/admin/images/logo2.png" alt=""><br> ID# {{ $members->id }} MC# {{ User::myChild($members->id) }} <br>{{ $members->name }} <br>
-                          {{-- <span>LT#{{ App\User::myChild($members->id, 1) }}</span> - <span>RT#{{ App\User::myChild($members->id, 2) }}</span> --}}
+                        <p class="simple-card text-center"><img width="50" src="{{ url('/') }}/public/admin/images/logo3.png" alt=""><br>{{ $members->name }} <br>
+                          <span>LT#{{ App\User::myChildLR($members->id, 1) }}</span> - <span>RT#{{ App\User::myChildLR($members->id, 2) }}</span>
                         </p>
                     </div>
 

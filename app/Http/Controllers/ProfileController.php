@@ -98,7 +98,7 @@ class ProfileController extends Controller
             $data2->user_id = Auth::user()->id;
             $data2->receipt = $packAmount->amount*.10;
             $data2->remark = 'New Member #'.$data->username;
-            $data2->wType = 'sponsorWallet';
+            $data2->wType = 'referralWallet';
             $data2->save();
 
             //$this->bonusDist($member->id);

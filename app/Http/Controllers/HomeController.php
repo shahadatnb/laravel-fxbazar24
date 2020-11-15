@@ -54,6 +54,12 @@ class HomeController extends Controller
         return view('pages.memberList',compact('members','totalMember'));
     }
 
+    public function mySponsor()
+    {
+        $members = User::where('referralId',Auth::user()->id)->get();
+        return view('pages.mySponsor',compact('members'));
+    }
+
     public function memberListId($id)
     {
         $totalMember = User::myChild($id);
@@ -66,7 +72,7 @@ class HomeController extends Controller
         $transaction = $this->listBalance(Auth::user()->id,$wallet);
         $balance = $this->balance(Auth::user()->id,$wallet);
         $walletName = $this->wallets[$wallet]['title'];
-        return view('wallet.'.$wallet,compact('transaction','balance','walletName','wallet'));
+        return view('pages.wallet',compact('transaction','balance','walletName','wallet'));
     }
 
     public function youtubeWallet()
@@ -139,8 +145,8 @@ class HomeController extends Controller
             $data2 = new Wallet;
             $data2->user_id = Auth::user()->id;
             $data2->receipt = $slot[$userSlot]*.5;
-            $data2->wType = 'matchingWallet';
-            $data2->remark = 'Matching Bonus #'.$userSlot;
+            $data2->wType = 'generationWallet';
+            $data2->remark = 'Generation Bonus #'.$userSlot;
             $data2->save();
         }
 

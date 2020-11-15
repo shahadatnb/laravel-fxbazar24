@@ -16,6 +16,7 @@
           
           <table class="table">
             <tr>
+              <thead class="thead-dark">
               <th>ID</th>
               {{-- <th>Type</th> --}}
               <th>Member Name</th>
@@ -24,6 +25,7 @@
               <th>R. ID</th>
               <th>P. ID</th>
               <th>J. Date</th>
+              </thead>
             </tr>
             @foreach ($members as $member)
             <tr>

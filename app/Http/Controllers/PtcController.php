@@ -34,9 +34,7 @@ class PtcController extends Controller
     public function youtubeClick()
     {
         $ptcs = $this->checkLinks();
-        //dd($ptc); exit;
-        $youtubeEarn = $this->youtubeBalance(Auth::User()->id);
-        return view('ptc.pctClick', compact('ptcs','youtubeEarn'));
+        return view('ptc.pctClick', compact('ptcs'));
     }
 
     protected function checkLinks(){
@@ -86,7 +84,13 @@ class PtcController extends Controller
         //$youtube_earn = settingValue('youtube_earn');
         $youtube_earn = Auth::User()->packeg->payment;
         //dd($youtube_earn); exit;
-        $this->youtubeBonusSave(Auth::User()->id,$youtube_earn);
+        //$this->youtubeBonusSave(Auth::User()->id,$youtube_earn);
+        $data = new Wallet;                
+        $data->receipt = $youtube_earn;
+        $data->user_id = Auth::User()->id;
+        $data->wType = 'worksWallet';
+        $data->remark = 'Daily Bonus #'.Auth::User()->id;
+        $data->save();
 
         $user = User::find(Auth::User()->placementId);
         if($user){
@@ -124,7 +128,7 @@ class PtcController extends Controller
         $data = new Wallet;                
         $data->receipt = $amt;
         $data->user_id = $id;
-        $data->wType = 'worksWallet';
+        $data->wType = 'generationWallet';
         $data->remark = 'Youtube Bonus #'.Auth::User()->id;
         $data->save();
     }

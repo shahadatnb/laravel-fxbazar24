@@ -4,9 +4,9 @@
 <div class="content-wrapper">
       <!-- Default box -->
       <div class="card">
-        <div class="card-header bg-success with-border">
+        {{-- <div class="card-header bg-success with-border">
           <strong class="card-title text-light">Balance: {{$youtubeEarn}}</strong>
-        </div>
+        </div> --}}
         <div class="card-body">
             @foreach($ptcs as $ptc)
             <a id="p{{$ptc}}" target="_blank" class="btn btn-danger" href="{{url('youtubeClick',$ptc)}}"><i class="fa fa-youtube"></i>&nbsp; Click</a>

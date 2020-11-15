@@ -9,10 +9,10 @@
 
 	    	<div class="hv-item-parent">
 	    		<a href="{{ route('levelTreeId',$member->id) }}">
-                	<p class="simple-card  text-center"><img width="50" src="{{ url('/') }}/public/admin/images/logo2.png" alt=""><br> ID# {{ $member->id }} MC# {{ User::myChild($member->id) }} <br> {{ $member->name }} <br>
-				
-				{{-- <span>LT#{{ App\User::myChild($member->id, 1) }}</span> - <span>RT#{{ App\User::myChild($member->id, 2) }}</span> --}}
-            	</p>
+                	<p class="simple-card text-center"><img width="50" src="{{ url('/') }}/public/admin/images/logo3.png" alt=""><br>{{ $member->name }} <br>
+                          <span>LT#{{ App\User::myChildLR($member->id, 1) }}</span> - <span>RT#{{ App\User::myChildLR($member->id, 2) }}</span>
+                        </p>
+                </a>
             </div>
 		</div>
     </div>
