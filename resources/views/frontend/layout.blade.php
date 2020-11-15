@@ -1,189 +1,382 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
-  <!-- font awesome 5 free -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-
-  <!-- Poppins font from Google -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-  {!! Html::style('public/fontend/app.css') !!}
-  @yield('style')
-
-  <title>{{ config('app.name', 'Laravel') }}</title>
+<!-- basic -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- mobile metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<!-- site metas -->
+<title>{{ config('app.name', 'Laravel') }}</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- site icons -->
+<link rel="icon" href="{{url('/public/fontend')}}/images/fevicon/fevicon.png" type="image/gif" />
+<!-- bootstrap css -->
+<link rel="stylesheet" href="{{url('/public/fontend')}}/css/bootstrap.min.css" />
+<!-- Site css -->
+<link rel="stylesheet" href="{{url('/public/fontend')}}/css/style.css" />
+<!-- responsive css -->
+<link rel="stylesheet" href="{{url('/public/fontend')}}/css/responsive.css" />
+<!-- colors css -->
+<link rel="stylesheet" href="{{url('/public/fontend')}}/css/colors1.css" />
+<!-- custom css -->
+<link rel="stylesheet" href="{{url('/public/fontend')}}/css/custom.css" />
+<!-- wow Animation css -->
+<link rel="stylesheet" href="{{url('/public/fontend')}}/css/animate.css" />
+<!-- revolution slider css -->
+<link rel="stylesheet" type="text/css" href="{{url('/public/fontend')}}/revolution/css/settings.css" />
+<link rel="stylesheet" type="text/css" href="{{url('/public/fontend')}}/revolution/css/layers.css" />
+<link rel="stylesheet" type="text/css" href="{{url('/public/fontend')}}/revolution/css/navigation.css" />
+@yield('style')
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond./js/1.4.2/respond.min.js"></script>
+      <![endif]-->
 </head>
-
-<body>
-    
-  <!--Hero ====================================== -->
-  <header class="hero container-fluid border-bottom">
-    <div class="alert alert-primary" role="alert">
-      <marquee behavior="" direction="">{{ settingValue('fontend_msg') }}</marquee>   
-    </div>
-    <nav class="hero-nav container px-4 px-lg-0 mx-auto">
-      <ul class="nav w-100 list-unstyled align-items-center p-0">
-        <li class="hero-nav__item">
-          <img class="hero-nav__logo" src="{{ url('/')}}/public/fontend/imgs/logo.jpg">
-        </li>
-        <li id="hero-menu" class="flex-grow-1 hero__nav-list hero__nav-list--mobile-menu ft-menu">
-          <ul class="hero__menu-content nav flex-column flex-lg-row ft-menu__slider animated list-unstyled p-2 p-lg-0">
-            <li class="flex-grow-1">
-              <ul class="nav nav--lg-side list-unstyled align-items-center p-0">
-                <li class="hero-nav__item">
-                  <a href="#contact-us" class="hero-nav__link">Contact Us</a>
-                </li>
-                <li class="hero-nav__item">
-                  <a href="#faq" class="hero-nav__link">FAQ</a>
-                </li>
-                <li class="hero-nav__item">
-                  <a href="#pricing" class="hero-nav__link">Pricing</a>
-                </li>
-                <li class="hero-nav__item">
-                  <a href="#testimonials" class="hero-nav__link">Testimonials</a>
-                </li>
-                <li class="hero-nav__item">
-                  <a href="#features" class="hero-nav__link">Features</a>
-                </li>
-                @if (Auth::check())
-                    <li class="hero-nav__item">
-	                  <a href="{{ url('/home') }}" class="hero-nav__link">Dashboard</a>
-	                </li>
-                @else
-	                {{-- <li class="hero-nav__item">
-	                  <a href="{{ url('/register') }}" class="hero-nav__link">Register</a>
-	                </li> --}}
-	                <li class="hero-nav__item">
-	                  <a href="{{ url('/login') }}" class="hero-nav__link">Login</a>
-	                </li>
-                @endif
-                <li class="hero-nav__item">
-                  <a href="#product" class="hero-nav__link">Product</a>
-                </li>
+<body id="default_theme" class="it_service">
+<!-- loader -->
+<div class="bg_load"> <img class="loader_animation" src="{{url('/public/fontend')}}/images/loaders/loader_1.png" alt="#" /> </div>
+<!-- end loader -->
+<!-- header -->
+<header id="default_header" class="header_style_1">
+  <!-- header top -->
+  <div class="header_top">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="full">
+            <div class="topbar-left">
+              <ul class="list-inline">
+                <li> <span class="topbar-label"><i class="fa  fa-home"></i></span> <span class="topbar-hightlight">540 Lorem Ipsum New York, AB 90218</span> </li>
+                <li> <span class="topbar-label"><i class="fa fa-envelope-o"></i></span> <span class="topbar-hightlight"><a href="mailto:info@yourdomain.com">info@yourdomain.com</a></span> </li>
               </ul>
-            </li>
-          </ul>
-          <button onclick="document.querySelector('#hero-menu').classList.toggle('ft-menu--js-show')"
-            class="ft-menu__close-btn animated">
-            <svg class="bi bi-x" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z"
-                clip-rule="evenodd" />
-              <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z"
-                clip-rule="evenodd" />
-            </svg>
-          </button>
-        </li>
-        <li class="d-lg-none flex-grow-1 d-flex flex-row-reverse hero-nav__item">
-          <button onclick="document.querySelector('#hero-menu').classList.toggle('ft-menu--js-show')"
-            class="text-center px-2">
-            <i class="fas fa-bars"></i>
-          </button>
-        </li>
-      </ul>
-    </nav>
-    <div class="hero__content container mx-auto">
-      <div class="row px-0 mx-0 align-items-center">
-        <div class="col-lg-6 px-0">
-          <h1 class="hero__title mb-3">
-            OUR PRODUCT IS <span class="highlight">BETTER</span> THAN OTHER
-          </h1>
-          <p class="hero__paragraph mb-5">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-            industry's
-            standard
-          </p>
-          <div class="hero__btns-container">
-            <a class="hero__btn btn btn-primary mb-2 mb-lg-0" href="#">
-              Get Free App
-            </a>
-            <a class="hero__btn btn btn-secondary mx-lg-3" href="#">
-              Go Premium
-            </a>
+            </div>
           </div>
         </div>
-        <div class="col-lg-5 mt-5 mt-lg-0 mx-0">
-          <div class="hero__img-container">
-            <img src="{{ url('/')}}/public/fontend/imgs/img-1.png" class="hero__img w-100">
+        <div class="col-md-4 right_section_header_top">
+          <div class="float-left">
+            <div class="social_icon">
+              <ul class="list-inline">
+                <li><a class="fa fa-facebook" href="https://www.facebook.com/" title="Facebook" target="_blank"></a></li>
+                <li><a class="fa fa-google-plus" href="https://plus.google.com/" title="Google+" target="_blank"></a></li>
+                <li><a class="fa fa-twitter" href="https://twitter.com" title="Twitter" target="_blank"></a></li>
+                <li><a class="fa fa-linkedin" href="https://www.linkedin.com" title="LinkedIn" target="_blank"></a></li>
+                <li><a class="fa fa-instagram" href="https://www.instagram.com" title="Instagram" target="_blank"></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="float-right">
+            <div class="make_appo"> 
+              @if (Auth::check())
+                <a class="btn white_btn" href="{{ url('/home') }}">Dashboard</a>
+              @else
+                <a class="btn white_btn" href="{{ url('/login') }}">Login</a>
+              @endif               
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </header>
-@yield('content')
-  <!-- =================================== -->
-
-  <div class="block-44 py-5">
-    <div class="container">
-      <div class="row px-0 mx-0 justify-content-center align-items-center">
-        <div class="block-44__logo-container">
-          <img class="block-44__logo" src="{{ url('/')}}/public/fontend/imgs/logo.svg">
-        </div>
-        <ul class="block-44__list list-unstyled justify-content-center mb-0">
-          <li class="block-44__li-1">
-            <a href="#" class="block-44__link">Affiliate</a>
-          </li>
-          <li class="block-44__li-1">
-            <a href="#" class="block-44__link">Entreprise</a>
-          </li>
-          <li class="block-44__li-1">
-            <a href="#" class="block-44__link">Products</a>
-          </li>
-          <li class="block-44__li-1">
-            <a href="#" class="block-44__link">Account</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <hr class="block-44__divider">
-    <div class="container">
-      <div class="row flex-column flex-md-row px-2 justify-content-center">
-        <div class="flex-grow-1">
-          <ul class="block-44__extra-links d-flex list-unstyled p-0">
-            <li class="mx-2">
-              <a href="#" class="block-44__link m-0">
-                <i class="fab fa-twitter"></i>
-              </a>
-            </li>
-            <li class="mx-2">
-              <a href="#" class="block-44__link m-0">
-                <i class="fab fa-instagram"></i>
-              </a>
-            </li>
-            <li class="mx-2">
-              <a href="#" class="block-44__link m-0">
-                <i class="fas fa-envelope"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <p class="block-41__copyrights">&copy; 2020 {{ config('app.name', 'Laravel') }}. All Rights Reserved.</p>
       </div>
     </div>
   </div>
-
-  <!-- =================================== -->
-
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
+  <!-- end header top -->
+  <!-- header bottom -->
+  <div class="header_bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+          <!-- logo start -->
+          <div class="logo"> <a href="{{ url('/')}}"><img src="{{url('/public/fontend')}}/images/logos/logo.jpg" alt="logo" /></a> </div>
+          <!-- logo end -->
+        </div>
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+          <!-- menu start -->
+          <div class="menu_side">
+            <div id="navbar_menu">
+              <ul class="first-ul">
+                <li> <a class="active" href="{{ url('/')}}">Home</a></li>
+                <li><a href="#it_about.html">About Us</a></li>
+                <li> <a href="#it_service.html">Service</a>
+                  <ul>
+                    <li><a href="#it_service_list.html">Services list</a></li>
+                    <li><a href="#it_service_detail.html">Services Detail</a></li>
+                  </ul>
+                </li>
+                <li> <a href="#it_blog.html">Blog</a>
+                  <ul>
+                    <li><a href="#it_blog.html">Blog List</a></li>
+                    <li><a href="#it_blog_grid.html">Blog Grid</a></li>
+                    <li><a href="#it_blog_detail.html">Blog Detail</a></li>
+                  </ul>
+                </li>
+                <li> <a href="#">Pages</a>
+                  <ul>
+                    <li><a href="#it_career.html">Career</a></li>
+                    <li><a href="#it_price.html">Pricing</a></li>
+                    <li><a href="#it_faq.html">Faq</a></li>
+                    <li><a href="#it_privacy_policy.html">Privacy Policy</a></li>
+                    <li><a href="#it_error.html">Error 404</a></li>
+                  </ul>
+                </li>
+                <li> <a href="#it_shop.html">Shop</a>
+                  <ul>
+                    <li><a href="#it_shop.html">Shop List</a></li>
+                    <li><a href="#it_shop_detail.html">Shop Detail</a></li>
+                    <li><a href="#it_cart.html">Shopping Cart</a></li>
+                    <li><a href="#it_checkout.html">Checkout</a></li>
+                  </ul>
+                </li>
+                <li> <a href="#it_contact.html">Contact</a>
+                  <ul>
+                    <li><a href="#it_contact.html">Contact Page 1</a></li>
+                    <li><a href="#it_contact_2.html">Contact Page 2</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div class="search_icon">
+              <ul>
+                <li><a href="#" data-toggle="modal" data-target="#search_bar"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+              </ul>
+            </div>
+          </div>
+          <!-- menu end -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- header bottom end -->
+</header>
+<!-- end header -->
+@yield('content')
+<!-- Modal -->
+<div class="modal fade" id="search_bar" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><i class="fa fa-close"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-8 col-md-8 col-sm-8 offset-lg-2 offset-md-2 offset-sm-2 col-xs-10 col-xs-offset-1">
+            <div class="navbar-search">
+              <form action="#" method="get" id="search-global-form" class="search-global">
+                <input type="text" placeholder="Type to search" autocomplete="off" name="s" id="search" value="" class="search-global__input">
+                <button class="search-global__btn"><i class="fa fa-search"></i></button>
+                <div class="search-global__note">Begin typing your search above and press return to search.</div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Model search bar -->
+<!-- footer -->
+<footer class="footer_style_2">
+  <div class="container-fuild">
+    <div class="row">
+      <div class="map_section">
+        <div id="map"></div>
+      </div>
+      <div class="footer_blog">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="main-heading left_text">
+              <h2>It Next Theme</h2>
+            </div>
+            <p>Tincidunt elit magnis nulla facilisis. Dolor sagittis maecenas. Sapien nunc amet ultrices, dolores sit ipsum velit purus aliquet, massa fringilla leo orci.</p>
+            <ul class="social_icons">
+              <li class="social-icon fb"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+              <li class="social-icon tw"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+              <li class="social-icon gp"><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <div class="main-heading left_text">
+              <h2>Additional links</h2>
+            </div>
+            <ul class="footer-menu">
+              <li><a href="it_about.html"><i class="fa fa-angle-right"></i> About us</a></li>
+              <li><a href="it_term_condition.html"><i class="fa fa-angle-right"></i> Terms and conditions</a></li>
+              <li><a href="it_privacy_policy.html"><i class="fa fa-angle-right"></i> Privacy policy</a></li>
+              <li><a href="it_news.html"><i class="fa fa-angle-right"></i> News</a></li>
+              <li><a href="it_contact.html"><i class="fa fa-angle-right"></i> Contact us</a></li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <div class="main-heading left_text">
+              <h2>Services</h2>
+            </div>
+            <ul class="footer-menu">
+              <li><a href="it_data_recovery.html"><i class="fa fa-angle-right"></i> Data recovery</a></li>
+              <li><a href="it_computer_repair.html"><i class="fa fa-angle-right"></i> Computer repair</a></li>
+              <li><a href="it_mobile_service.html"><i class="fa fa-angle-right"></i> Mobile service</a></li>
+              <li><a href="it_network_solution.html"><i class="fa fa-angle-right"></i> Network solutions</a></li>
+              <li><a href="it_techn_support.html"><i class="fa fa-angle-right"></i> Technical support</a></li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <div class="main-heading left_text">
+              <h2>Contact us</h2>
+            </div>
+            <p>123 Second Street Fifth Avenue,<br>
+              Manhattan, New York<br>
+              <span style="font-size:18px;"><a href="tel:+9876543210">+987 654 3210</a></span></p>
+            <div class="footer_mail-section">
+              <form>
+                <fieldset>
+                <div class="field">
+                  <input placeholder="Email" type="text">
+                  <button class="button_custom"><i class="fa fa-envelope" aria-hidden="true"></i></button>
+                </div>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cprt">
+        <p>ItNext © Copyrights 2019 Design by html.design</p>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- end footer -->
+<!-- js section -->
+<script src="{{url('/public/fontend')}}/js/jquery.min.js"></script>
+<script src="{{url('/public/fontend')}}/js/bootstrap.min.js"></script>
+<!-- menu js -->
+<script src="{{url('/public/fontend')}}/js/menumaker.js"></script>
+<!-- wow animation -->
+<script src="{{url('/public/fontend')}}/js/wow.js"></script>
+<!-- custom js -->
+<script src="{{url('/public/fontend')}}/js/custom.js"></script>
+<!-- revolution js files -->
+<script src="{{url('/public/fontend')}}/revolution/js/jquery.themepunch.tools.min.js"></script>
+<script src="{{url('/public/fontend')}}/revolution/js/jquery.themepunch.revolution.min.js"></script>
+<script src="{{url('/public/fontend')}}/revolution/js/extensions/revolution.extension.actions.min.js"></script>
+<script src="{{url('/public/fontend')}}/revolution/js/extensions/revolution.extension.carousel.min.js"></script>
+<script src="{{url('/public/fontend')}}/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
+<script src="{{url('/public/fontend')}}/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
+<script src="{{url('/public/fontend')}}/revolution/js/extensions/revolution.extension.migration.min.js"></script>
+<script src="{{url('/public/fontend')}}/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+<script src="{{url('/public/fontend')}}/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
+<script src="{{url('/public/fontend')}}/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+<script src="{{url('/public/fontend')}}/revolution/js/extensions/revolution.extension.video.min.js"></script>
 @yield('script')
-
-    {!! Html::script('public/fontend/app.js') !!}
+<!-- map js -->
+<script>
+         // This example adds a marker to indicate the position of Bondi Beach in Sydney,
+         // Australia.
+         function initMap() {
+           var map = new google.maps.Map(document.getElementById('map'), {
+             zoom: 11,
+             center: {lat: 40.645037, lng: -73.880224},
+         styles: [
+                  {
+                    elementType: 'geometry',
+                    stylers: [{color: '#fefefe'}]
+                  },
+                  {
+                    elementType: 'labels.icon',
+                    stylers: [{visibility: 'off'}]
+                  },
+                  {
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#616161'}]
+                  },
+                  {
+                    elementType: 'labels.text.stroke',
+                    stylers: [{color: '#f5f5f5'}]
+                  },
+                  {
+                    featureType: 'administrative.land_parcel',
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#bdbdbd'}]
+                  },
+                  {
+                    featureType: 'poi',
+                    elementType: 'geometry',
+                    stylers: [{color: '#eeeeee'}]
+                  },
+                  {
+                    featureType: 'poi',
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#757575'}]
+                  },
+                  {
+                    featureType: 'poi.park',
+                    elementType: 'geometry',
+                    stylers: [{color: '#e5e5e5'}]
+                  },
+                  {
+                    featureType: 'poi.park',
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#9e9e9e'}]
+                  },
+                  {
+                    featureType: 'road',
+                    elementType: 'geometry',
+                    stylers: [{color: '#eee'}]
+                  },
+                  {
+                    featureType: 'road.arterial',
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#3d3523'}]
+                  },
+                  {
+                    featureType: 'road.highway',
+                    elementType: 'geometry',
+                    stylers: [{color: '#eee'}]
+                  },
+                  {
+                    featureType: 'road.highway',
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#616161'}]
+                  },
+                  {
+                    featureType: 'road.local',
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#9e9e9e'}]
+                  },
+                  {
+                    featureType: 'transit.line',
+                    elementType: 'geometry',
+                    stylers: [{color: '#e5e5e5'}]
+                  },
+                  {
+                    featureType: 'transit.station',
+                    elementType: 'geometry',
+                    stylers: [{color: '#000'}]
+                  },
+                  {
+                    featureType: 'water',
+                    elementType: 'geometry',
+                    stylers: [{color: '#c8d7d4'}]
+                  },
+                  {
+                    featureType: 'water',
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#b1a481'}]
+                  }
+                ]
+         });
+         
+           var image = '{{url('/public/fontend')}}/images/it_service/location_icon_map_cont.png';
+           var beachMarker = new google.maps.Marker({
+             position: {lat: 40.645037, lng: -73.880224},
+             map: map,
+             icon: image
+           });
+         }
+      </script>
+<!-- google map js -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8eaHt9Dh5H57Zh0xVTqxVdBFCvFMqFjQ&callback=initMap"></script>
+<!-- end google map js -->
 </body>
-
 </html>
