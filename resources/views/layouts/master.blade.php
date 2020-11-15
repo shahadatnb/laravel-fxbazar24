@@ -164,11 +164,11 @@
     </aside>
     <!-- /#left-panel -->
     <!-- Right Panel -->
-    <div id="right-panel" class="right-panel bg-info">
+    <div id="right-panel" class="right-panel bg-secondery">
         <!-- Header-->
-        <header id="header" class="header">
+        <header id="header" class="header bg-dark">
             <div class="top-left">
-                <div class="navbar-header">
+                <div class="navbar-header bg-dark">
                     <a class="navbar-brand" href="{{url('/home')}}">{{ config('app.name') }}</a>
                     <a class="navbar-brand hidden" href="{{url('/home')}}">{{ config('app.name') }}</a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>

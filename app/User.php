@@ -132,13 +132,13 @@ class User extends Authenticatable
         if($child){            
             if($child->packeg_id == $pack){$count = 1;} // || $child->premium == 2
             if(count($child->childs) > 0){
-              $count = User::cChildOnlyPremium($child->childs,$count,$pack);
+              $count = User::cChildByPack($child->childs,$count,$pack);
             }           
         }
         return $count; 
     }
 
-    public static function cChildByPack($child,$count){
+    public static function cChildByPack($child,$count,$pack){
         foreach ($child as $member) {
             global $count;
             //dd($child); exit;
