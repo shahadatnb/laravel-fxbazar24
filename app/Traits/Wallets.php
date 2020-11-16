@@ -20,7 +20,7 @@ trait Wallets
 
     public $rank = [
       0=>['point'=>0, 'req'=>0, 'amount'=>0, 'prize'=>'', 'title'=>'No Rank'],
-      1=>['point'=>500, 'req'=>'Matching', 'amount'=>62.50, 'prize'=>'$62.50', 'title'=>'Rubi member'],
+      1=>['point'=>5000, 'req'=>'Matching', 'amount'=>62.50, 'prize'=>'$62.50', 'title'=>'Rubi member'],
       2=>['point'=>2, 'req'=>'Rubi member', 'amount'=>125, 'prize'=>'$125', 'title'=>'Rubi Executive member'],
       3=>['point'=>3, 'req'=>'Rubi Executive member', 'amount'=>187.50, 'prize'=>'$187.50', 'title'=>'Executive member'],
       4=>['point'=>3, 'req'=>'Executive member', 'amount'=>625, 'prize'=>'$625', 'title'=>'Silver Executive'],

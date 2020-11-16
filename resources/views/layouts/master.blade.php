@@ -52,9 +52,9 @@
 <body>
 	<!-- Left Panel -->
 	<aside id="left-panel" class="left-panel">
-		<nav class="navbar navbar-expand-sm  navbar-danger bg-danger">{{-- navbar-default --}}
+		<nav class="navbar navbar-expand-sm  navbar-danger">{{-- navbar-default --}}
 			<div id="main-menu" class="main-menu collapse navbar-collapse">
-				<ul class="nav navbar-nav">
+				<ul class="nav navbar-nav bg-danger">
 				@if(Auth::user()->admin==1)
 					<li class="menu-title">Admin</li><!-- /.menu-title -->
 					<li>
@@ -173,14 +173,14 @@
 	<div id="right-panel" class="right-panel bg-dark">
 		<!-- Header-->
 		<header id="header" class="header bg-danger">
-			<div class="top-left">
+			<div class="top-left bg-danger">
 				<div class="navbar-header bg-danger">
 					<a class="navbar-brand" href="{{url('/home')}}">{{ config('app.name') }}</a>
 					<a class="navbar-brand hidden" href="{{url('/home')}}">{{ config('app.name') }}</a>
 					<a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
 				</div>
 			</div>
-			<div class="top-right">
+			<div class="top-right d-none d-sm-block">
 				<div class="header-menu">
 					<div class="header-left">
 					</div>
