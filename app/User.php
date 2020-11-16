@@ -89,7 +89,7 @@ class User extends Authenticatable
         global $amount;
         //dd($child);
         foreach ($child as $member) { //dd($member->childs);//dd(count(User::nChilds($member->id)));            
-            $amount = $member->packeg->amount;
+            $amount += $member->packeg->amount;
             if(count($member->childs)){
                 User::cChildAmount($member->childs,$amount);
             }

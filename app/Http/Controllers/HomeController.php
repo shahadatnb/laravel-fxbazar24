@@ -135,18 +135,18 @@ class HomeController extends Controller
         $userSlot = Auth::user()->slot;
         $userSlot++;
         $slot = $this->slot;
-        //dd($cLeft); exit;
+        //dd($slot[$userSlot]); exit;
         if($small >= $slot[$userSlot]){
 
             $user = User::find(Auth::user()->id);
-            $user->rank = $userSlot;
+            $user->slot = $userSlot;
             $user->save();
 
             $data2 = new Wallet;
             $data2->user_id = Auth::user()->id;
-            $data2->receipt = $slot[$userSlot]*.5;
-            $data2->wType = 'generationWallet';
-            $data2->remark = 'Generation Bonus #'.$userSlot;
+            $data2->receipt = $slot[$userSlot]*.05;
+            $data2->wType = 'matchingWallet';
+            $data2->remark = 'Matching Bonus #'.$userSlot;
             $data2->save();
         }
 

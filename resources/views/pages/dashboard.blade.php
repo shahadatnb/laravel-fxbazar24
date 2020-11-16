@@ -12,7 +12,7 @@
                   </div>
                   <div class="stat-content">
                       <div class="text-left dib">
-                          <div class="stat-text">$<span class="count">{{$item['balance']}}</span></div>
+                          <div class="stat-text">${{$item['balance']}}<span class="count"></span></div>
                           <div class="stat-heading">{{$item['title']}}</div>
                       </div>
                   </div>
