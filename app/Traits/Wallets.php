@@ -9,13 +9,13 @@ use App\User;
 trait Wallets
 {
     public $wallets =[
-        'currentWallet'=>['title'=>'Current Wallet','bg'=>'primary'],
-        'registerWallet'=>['title'=>'Register wallet','bg'=>'info'],
-        'worksWallet'=>['title'=>'Works Wallet','bg'=>'warning'],
-        'referralWallet'=>['title'=>'Referral Wallet','bg'=>'danger'],
-        'rankWallet'=>['title'=>'Rank Wallet','bg'=>'dark'],
-        'generationWallet'=>['title'=>'Generation Income','bg'=>'secondary'],
-        'matchingWallet'=>['title'=>'Matching Wallet','bg'=>'primary'],
+        'currentWallet'=>['title'=>'Current Wallet','bg'=>'1'],
+        'registerWallet'=>['title'=>'Register wallet','bg'=>'2'],
+        'worksWallet'=>['title'=>'Works Wallet','bg'=>'3'],
+        'referralWallet'=>['title'=>'Referral Wallet','bg'=>'4'],
+        'rankWallet'=>['title'=>'Rank Wallet','bg'=>'5'],
+        'generationWallet'=>['title'=>'Generation Income','bg'=>'6'],
+        'matchingWallet'=>['title'=>'Matching Wallet','bg'=>'1'],
     ];
 
     public $rank = [
@@ -85,12 +85,14 @@ trait Wallets
     }
 
 
-    public function youtubeBalance($id)
+    public function totalReceive($id)
     {
-        $receipt = EarnWallet::where('user_id',$id)->sum('receipt');
-        $payment = EarnWallet::where('user_id',$id)->sum('payment');
-        $balance = $receipt-$payment;
-        return $balance;
+        return Wallet::where('user_id',$id)->where('receive',1)->sum('receipt');
+    }
+
+    public function totalTransfar($id)
+    {
+        return Wallet::where('user_id',$id)->where('transfar',1)->sum('payment');
     }
 
     public function userArray()

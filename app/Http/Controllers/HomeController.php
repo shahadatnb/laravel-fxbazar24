@@ -33,12 +33,31 @@ class HomeController extends Controller
         $this->slot();
         $user_id= Auth::user()->id;
        $wallets=$this->allBalance($user_id);
-       $wallets['totalWithdraw'] = ['balance'=>$this->totalBalance($user_id,'withdrawWallet'),'title'=>'Total Withdraw','bg'=>'success'];
-       $wallets['totalSponsor'] = ['balance'=>$this->totalBalance($user_id,'sponsorWallet'),'title'=>'Total Sponsor','bg'=>'dark'];
-       $wallets['totalSelf'] = ['balance'=>$this->totalBalance($user_id,'selfWallet'),'title'=>'Total Youtube Income','bg'=>'secondary'];
-       $wallets['youtube'] = ['balance'=>$this->youtubeBalance($user_id),'title'=>'Youtube Wallet','bg'=>'danger'];
-        return view('pages.dashboard',compact('wallets'));
-    }    
+       $wallets['withdrawTotal'] = ['balance'=>$this->totalBalance($user_id,'withdrawWallet'),'title'=>'Total Withdraw','bg'=>'2'];
+       $wallets['sponsorTotal'] = ['balance'=>$this->totalBalance($user_id,'sponsorWallet'),'title'=>'Total Sponsor Income','bg'=>'3'];
+       $wallets['worksWalletTotal'] = ['balance'=>$this->totalBalance($user_id,'worksWallet'),'title'=>'Total Works Earn','bg'=>'4'];
+       $wallets['generationTotal'] = ['balance'=>$this->totalBalance($user_id,'generationWallet'),'title'=>'Generation Total','bg'=>'5'];
+       $wallets['registeredTotal'] = ['balance'=>Auth::user()->sponsorChilds->count(),'title'=>'Total Registered','bg'=>'6'];
+       $wallets['Shopping'] = ['balance'=>0,'title'=>'Shopping','bg'=>'1'];
+       $wallets['TotalShopping'] = ['balance'=>0,'title'=>'Total Shopping','bg'=>'2'];
+       $wallets['wrTotal'] = ['balance'=>0,'title'=>'Withdrawal Request Total','bg'=>'3'];
+       $wallets['wsTotal'] = ['balance'=>0,'title'=>'Withdrawal Success Total','bg'=>'4'];
+       $wallets['frTotal'] = ['balance'=>$this->totalReceive($user_id),'title'=>'Total Fund Receive','bg'=>'5'];
+       $wallets['ftTotal'] = ['balance'=>$this->totalTransfar($user_id),'title'=>'Total Fund Transfer','bg'=>'6'];
+       $wallets['matchTotal'] = ['balance'=>Auth::user()->slot,'title'=>'Total Matched','bg'=>'1'];
+       $wallets['lfTotal'] = ['balance'=>0,'title'=>'Left Flash','bg'=>'2'];
+       $wallets['tfTotal'] = ['balance'=>0,'title'=>'Right Flash','bg'=>'3'];
+       $wallets['lvTotal'] = ['balance'=>0,'title'=>'Total Left Value','bg'=>'4'];
+       $wallets['tvTotal'] = ['balance'=>0,'title'=>'Total Right Value','bg'=>'5'];
+       $wallets['LeftCary'] = ['balance'=>0,'title'=>'Left Cary','bg'=>'6'];
+       $wallets['RightCary'] = ['balance'=>0,'title'=>'Right Cary','bg'=>'1'];
+
+
+       $rank = ['balance'=>$this->rank[Auth::user()->rank]['title'],'title'=>'Rank','bg'=>'6'];
+
+        return view('pages.dashboard',compact('wallets','rank'));
+    }
+
 
     public function rankList(){
        $rankInfo = $this->rank;

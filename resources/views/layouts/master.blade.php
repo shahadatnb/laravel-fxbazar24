@@ -43,6 +43,9 @@
 			padding: 0 0 0 10px;
 			border-left: 2px solid #ddd;
 		}
+		.stat-widget-five .stat-content {
+			margin-left: 75px !important;
+		}
 	</style>
 </head>
 

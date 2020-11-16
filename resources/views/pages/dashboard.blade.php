@@ -2,17 +2,38 @@
 @section('title','Dashboard')
 @section('content')
 <div class="row">
+  <div class="col-lg-3 col-md-6">
+      <div class="card">
+          <div class="card-body">
+              <div class="stat-widget-five">
+                  <div class="stat-icon dib flat-color-{{$rank['bg']}}">
+                      <i class="pe-7s-cash"></i>
+                  </div>
+                  <div class="stat-content">
+                      <div class="text-left dib">
+                          <div class="stat-text">
+                            {{$rank['title']}}
+                            {{-- <span class="count"></span> --}}</div>
+                          <div class="stat-heading">{{$rank['balance']}}</div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
   @foreach($wallets as $item)
   <div class="col-lg-3 col-md-6">
       <div class="card">
           <div class="card-body">
               <div class="stat-widget-five">
-                  <div class="stat-icon dib flat-color-1">
+                  <div class="stat-icon dib flat-color-{{$item['bg']}}">
                       <i class="pe-7s-cash"></i>
                   </div>
                   <div class="stat-content">
                       <div class="text-left dib">
-                          <div class="stat-text">${{$item['balance']}}<span class="count"></span></div>
+                          <div class="stat-text">
+                            ${{$item['balance']}}
+                            {{-- <span class="count"></span> --}}</div>
                           <div class="stat-heading">{{$item['title']}}</div>
                       </div>
                   </div>

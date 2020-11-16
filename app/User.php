@@ -43,6 +43,10 @@ class User extends Authenticatable
         return $this->hasMany('App\User','placementId','id');//->orderBy('hand');
     }
 
+    public function sponsorChilds() {
+        return $this->hasMany('App\User','referralId','id');//->orderBy('hand');
+    }
+
     public static function nChilds($id) {
         return User::where('placementId',$id)->get();
     }

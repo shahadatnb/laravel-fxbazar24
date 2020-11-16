@@ -57,6 +57,7 @@ class AdminController extends Controller
         $data2->user_id = $request->user_id;
         $data2->receipt = $request->receipt;
         $data2->remark = 'Receipt Form Admin';
+        $data2->receive = 1;
         $data2->wType = $request->wType;
         $data2->save();
 
