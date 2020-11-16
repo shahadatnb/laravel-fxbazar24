@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title',$walletName)
+@section('title',$walletInfo['title'])
 @section('content')
 <div class="content-wrapper">
     <!-- Main content -->
@@ -8,7 +8,7 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header bg-success with-border">
-          <strong class="card-title text-light">Your {{$walletName}} Balance <i class="fa fa-dollar"></i>{{ $balance }}</strong>
+          <strong class="card-title text-light">Your {{$walletInfo['title']}} Balance <i class="fa fa-dollar"></i>{{ $balance }}</strong>
         </div>
         <div class="card-body">
           <p>Transaction List</p>
@@ -30,26 +30,14 @@
           </table>
         </div>
         <!-- /.box-body -->
-{{--         <div class="card-footer">
-           @include('layouts._message')
-          <h3 class="card-title">Send Money Another Account</h3>
-          {!! Form::open(['route'=>'sendMoneyAc','method'=>'POST']) !!}
-          <div class="row">
-            <div class="col-md-4">
-            {{ Form::label('user_id','User Id') }}
-            {{ Form::text('user_id',null,['class'=>'form-control','required'=>'']) }} 
-          </div>
-            <div class="col-md-4">
-            {{ Form::label('payment','Amount') }}
-            {{ Form::text('payment',null,['class'=>'form-control','required'=>'']) }}
-          </div>
-            <div class="col-md-4"> <br>
-            {{ Form::submit('Send',array('class'=>'form-control btn btn-success')) }}</div>
-          </div>
-         {!! Form::close() !!}
-
-
-        </div> --}}
+         <div class="card-footer">
+           @if($walletInfo['wid']==1)
+            @include('wallet.sendMoneyWw')
+           @endif
+           @if($walletInfo['trns']==1)
+            @include('wallet.sendMoneyAc')
+           @endif
+        </div>
         <!-- /.box-footer-->
       </div>
       <!-- /.box -->

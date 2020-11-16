@@ -35,7 +35,7 @@ Route::group(['middleware' => ['auth']], function(){
 	//Route::get('/404', 'PageController@notFind')->name('/404');
 
 	Route::get('/myWallet/{wallet}', 'HomeController@myWallet')->name('myWallet');
-	Route::get('/youtubeWallet', 'HomeController@youtubeWallet')->name('youtubeWallet');
+	Route::get('/withdrawWallet', 'HomeController@withdrawWallet')->name('withdrawWallet');
 	
 	Route::get('/memberList', 'HomeController@memberList')->name('memberList');
 	Route::get('/member/id/{id}', 'HomeController@memberListId')->name('memberListId');

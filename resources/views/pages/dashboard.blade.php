@@ -2,43 +2,46 @@
 @section('title','Dashboard')
 @section('content')
 <div class="row">
-  <div class="col-lg-3 col-md-6">
-      <div class="card">
+@foreach($wallets2 as $item)
+  <div class="col-sm-6 col-lg-3">
+      <div class="card text-white bg-flat-color-{{$item['bg']}}">
           <div class="card-body">
-              <div class="stat-widget-five">
-                  <div class="stat-icon dib flat-color-{{$rank['bg']}}">
-                      <i class="pe-7s-cash"></i>
-                  </div>
-                  <div class="stat-content">
-                      <div class="text-left dib">
-                          <div class="stat-text">
-                            {{$rank['title']}}
-                            {{-- <span class="count"></span> --}}</div>
-                          <div class="stat-heading">{{$rank['balance']}}</div>
-                      </div>
-                  </div>
-              </div>
+              <div class="card-left pt-1 float-left">
+                  <h3 class="mb-0 fw-r">
+                  {{$item['balance']}}                      
+                      {{-- <span class="count"></span> --}}
+                  </h3>
+                  <p class="text-light mt-1 m-0">{{$item['title']}}</p>
+              </div><!-- /.card-left -->
+
+              <div class="card-right float-right text-right">
+                  <i class="icon fade-5 icon-lg pe-7s-cash"></i>
+              </div><!-- /.card-right -->
+
           </div>
+
       </div>
-  </div>
+  </div>  
+  @endforeach
   @foreach($wallets as $item)
-  <div class="col-lg-3 col-md-6">
-      <div class="card">
+  <div class="col-sm-6 col-lg-3">
+      <div class="card text-white bg-flat-color-{{$item['bg']}}">
           <div class="card-body">
-              <div class="stat-widget-five">
-                  <div class="stat-icon dib flat-color-{{$item['bg']}}">
-                      <i class="pe-7s-cash"></i>
-                  </div>
-                  <div class="stat-content">
-                      <div class="text-left dib">
-                          <div class="stat-text">
-                            ${{$item['balance']}}
-                            {{-- <span class="count"></span> --}}</div>
-                          <div class="stat-heading">{{$item['title']}}</div>
-                      </div>
-                  </div>
-              </div>
+              <div class="card-left pt-1 float-left">
+                  <h3 class="mb-0 fw-r">
+                      <span class="currency float-left mr-1">$</span>
+                      {{$item['balance']}}
+                      {{-- <span class="count">23569</span> --}}
+                  </h3>
+                  <p class="text-light mt-1 m-0">{{$item['title']}}</p>
+              </div><!-- /.card-left -->
+
+              <div class="card-right float-right text-right">
+                  <i class="icon fade-5 icon-lg pe-7s-cash"></i>
+              </div><!-- /.card-right -->
+
           </div>
+
       </div>
   </div>
   @endforeach

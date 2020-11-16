@@ -87,7 +87,7 @@
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/worksWallet')}}">Work Sponsor Income Report</a></li>
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Auto Pool Report</a></li>
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}"> vip Incentive Report</a></li>
-							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}"> Rank</a></li>
+							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/rankList')}}"> Rank</a></li>
 						</ul>
 					</li>
 					<li class="menu-item-has-children dropdown">
@@ -123,7 +123,7 @@
 					<li class="menu-item-has-children dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Transactions</a>
 						<ul class="sub-menu children dropdown-menu bg-transparent">
-							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Balance Transfer</a></li>
+							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/registerWallet')}}">Balance Transfer</a></li>
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Exchange Register</a></li>
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Export Shopping</a></li>
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Exchange Shopping</a></li>
@@ -134,10 +134,10 @@
 					<li class="menu-item-has-children dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Withdrawals</a>
 						<ul class="sub-menu children dropdown-menu bg-transparent">
-							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Agent Withdrawals</a></li>
-							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Bank Withdrawals</a></li>
-							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Online Withdrawals</a></li>
-							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">My Withdrawals Report</a></li>
+							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/withdrawWallet')}}">Agent Withdrawals</a></li>
+							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/withdrawWallet')}}">Bank Withdrawals</a></li>
+							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/withdrawWallet')}}">Online Withdrawals</a></li>
+							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/withdrawWallet')}}">My Withdrawals Report</a></li>
 						</ul>
 					</li>
 					<li class="menu-item-has-children dropdown">

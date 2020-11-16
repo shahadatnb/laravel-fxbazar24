@@ -30,7 +30,7 @@ class HomeController extends Controller
 
     public function index(){
         $this->rank();
-        $this->slot();
+        $slotAmt = $this->slot();
         $user_id= Auth::user()->id;
        $wallets=$this->allBalance($user_id);
        $wallets['withdrawTotal'] = ['balance'=>$this->totalBalance($user_id,'withdrawWallet'),'title'=>'Total Withdraw','bg'=>'2'];
@@ -40,22 +40,23 @@ class HomeController extends Controller
        $wallets['registeredTotal'] = ['balance'=>Auth::user()->sponsorChilds->count(),'title'=>'Total Registered','bg'=>'6'];
        $wallets['Shopping'] = ['balance'=>0,'title'=>'Shopping','bg'=>'1'];
        $wallets['TotalShopping'] = ['balance'=>0,'title'=>'Total Shopping','bg'=>'2'];
-       $wallets['wrTotal'] = ['balance'=>0,'title'=>'Withdrawal Request Total','bg'=>'3'];
-       $wallets['wsTotal'] = ['balance'=>0,'title'=>'Withdrawal Success Total','bg'=>'4'];
+       $wallets['wrTotal'] = ['balance'=>$this->withdrawalRequest($user_id),'title'=>'Withdrawal Request Total','bg'=>'3'];
+       $wallets['wsTotal'] = ['balance'=>$this->withdrawalRequestSuccess($user_id),'title'=>'Withdrawal Success Total','bg'=>'4'];
        $wallets['frTotal'] = ['balance'=>$this->totalReceive($user_id),'title'=>'Total Fund Receive','bg'=>'5'];
        $wallets['ftTotal'] = ['balance'=>$this->totalTransfar($user_id),'title'=>'Total Fund Transfer','bg'=>'6'];
-       $wallets['matchTotal'] = ['balance'=>Auth::user()->slot,'title'=>'Total Matched','bg'=>'1'];
+       $wallets['matchTotal'] = ['balance'=>$this->slot[Auth::user()->slot],'title'=>'Total Matched','bg'=>'1'];
        $wallets['lfTotal'] = ['balance'=>0,'title'=>'Left Flash','bg'=>'2'];
        $wallets['tfTotal'] = ['balance'=>0,'title'=>'Right Flash','bg'=>'3'];
-       $wallets['lvTotal'] = ['balance'=>0,'title'=>'Total Left Value','bg'=>'4'];
-       $wallets['tvTotal'] = ['balance'=>0,'title'=>'Total Right Value','bg'=>'5'];
+       $wallets['lvTotal'] = ['balance'=>$slotAmt['lvTotal'],'title'=>'Total Left Value','bg'=>'4'];
+       $wallets['rvTotal'] = ['balance'=>$slotAmt['rvTotal'],'title'=>'Total Right Value','bg'=>'5'];
        $wallets['LeftCary'] = ['balance'=>0,'title'=>'Left Cary','bg'=>'6'];
        $wallets['RightCary'] = ['balance'=>0,'title'=>'Right Cary','bg'=>'1'];
 
 
-       $rank = ['balance'=>$this->rank[Auth::user()->rank]['title'],'title'=>'Rank','bg'=>'6'];
-
-        return view('pages.dashboard',compact('wallets','rank'));
+       $wallets2['rankName'] = ['balance'=>'Rank','title'=>$this->rank[Auth::user()->rank]['title'],'bg'=>'5'];
+       $wallets2['myPackeg'] = ['balance'=>Auth::user()->packeg->title,'title'=>'My Packeg','bg'=>'6'];
+       //dd($wallets2); exit;
+        return view('pages.dashboard',compact('wallets','wallets2'));
     }
 
 
@@ -90,18 +91,16 @@ class HomeController extends Controller
     {
         $transaction = $this->listBalance(Auth::user()->id,$wallet);
         $balance = $this->balance(Auth::user()->id,$wallet);
-        $walletName = $this->wallets[$wallet]['title'];
-        return view('pages.wallet',compact('transaction','balance','walletName','wallet'));
+        $walletInfo = $this->wallets[$wallet];
+        return view('pages.wallet',compact('transaction','balance','walletInfo','wallet'));
     }
 
-    public function youtubeWallet()
+    public function withdrawWallet()
     {
-        $user_id = Auth::user()->id;
-        $transaction = EarnWallet::where('user_id',$user_id)->whereNull('receipt')->take(10)->get();
-        $balance = $this->youtubeBalance($user_id);
-        $walletName = 'Youtube Earn';
-        $wallet = 'youtubeWallet';
-        return view('wallet.youtubeWallet',compact('transaction','balance','walletName','wallet'));
+        $transaction = $this->listBalance(Auth::user()->id,'withdrawWallet');
+        $balance = $this->balance(Auth::user()->id,'withdrawWallet');
+        $walletName = 'Withdraw Wallet';
+        return view('wallet.withdrawWallet',compact('transaction','balance','walletName'));
     }
 
     public function rank(){
@@ -169,7 +168,7 @@ class HomeController extends Controller
             $data2->save();
         }
 
-        return null;
+        return ['lvTotal'=>$cLeft,'rvTotal'=>$cRight];
     }
 
 
@@ -211,7 +210,7 @@ class HomeController extends Controller
     public function sendMoneyAc(Request $request)
     {
         $this->validate($request, array(
-            'user_id' => 'required|exists:users,id',
+            'username' => 'required|exists:users,username',
             'wType' => 'required',
             'remark' => 'nullable',
             'payment' => 'required|numeric',//|min:'.$this->withdrowAmt,
@@ -225,15 +224,16 @@ class HomeController extends Controller
             $data->user_id = Auth::user()->id;
             $data->payment = $request->payment;
             $data->wType = $request->wType;
-            $data->remark = 'Sent to ID# '.$request->user_id.' '.$request->remark;
+            $data->remark = 'Sent to ID# '.$request->username.' '.$request->remark;
             $data->save();
 
-            //$payble = $request->payment - ($request->payment/100)*5;
+            $user = User::where('username',$request->username)->first();
+
             $data2 = new Wallet;
-            $data2->user_id = $request->user_id;
+            $data2->user_id = $user->id;
             $data2->receipt = $request->payment;//$payble;
             $data2->wType = $request->wType;
-            $data2->remark = 'Receipt Form ID# '.Auth::user()->id.'('.Auth::user()->name.')';
+            $data2->remark = 'Receipt Form ID# '.Auth::user()->username;
             $data2->save();
 
             Session::flash('success','Money Sent');
@@ -270,7 +270,7 @@ class HomeController extends Controller
             $data2->user_id = Auth::user()->id;
             //$data2->payment = round($payble);
             $data2->payment = $request->payment;
-            $data2->remark = $request->remark;
+            $data2->remark = 'Withdraw '.$request->remark;
             $data2->wType = $request->wType;
             //$data2->admin_id = 1;//$request->paymentId;
             $data2->save();
@@ -283,7 +283,7 @@ class HomeController extends Controller
             $data->wType = 'withdrawWallet';
             $data->save();
 
-            Session::flash('success','Transfared to ');
+            Session::flash('success','Transfared to Withdraw');
         }
         return redirect()->back();
     }
@@ -304,7 +304,7 @@ class HomeController extends Controller
             Session::flash('warning','Sorry, Your Balance Less then $'.$request->payment);
         }else{
             //$remark = $request->paymentMethod.' : '.$request->accountNo;
-            $payble = $request->payment - ($request->payment/100)*10;
+            $payble = $request->payment;// - ($request->payment/100)*10;
             $data2 = new AdminWallet;
             $data2->user_id = Auth::user()->id;
             $data2->payment = round($payble);
