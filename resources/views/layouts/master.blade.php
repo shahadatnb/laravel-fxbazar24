@@ -46,6 +46,10 @@
 		.stat-widget-five .stat-content {
 			margin-left: 75px !important;
 		}
+		a.navbar-brand {
+		    color: #fff;
+		    font-weight: bold;
+		}
 	</style>
 </head>
 

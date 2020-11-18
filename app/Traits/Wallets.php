@@ -108,7 +108,7 @@ trait Wallets
         $user = User::all();
         $users=array();
         foreach ($user as $data) {
-            $users[$data->id]= $data->id.' '.$data->name;
+            $users[$data->id]= $data->username.' '.$data->name;
         }
         return $users;
     }

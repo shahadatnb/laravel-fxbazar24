@@ -1,5 +1,5 @@
  @include('layouts._message')
-  <h3 class="title">Transtfar To Withdraw wallet</h3>
+  <h3 class="title">Transfer To Withdraw wallet</h3>
   {!! Form::open(['route'=>'sendMoneyWw','method'=>'POST','class'=>'form-horizontal mt-2']) !!}
     {{ Form::hidden('wType',$wallet) }} 
   <div class="row form-group">
@@ -18,7 +18,7 @@
   </div>
   <div class="row form-group">
     <div class="col">
-    {{ Form::submit('Transtfar To Withdraw wallet',array('class'=>'form-control btn btn-primary')) }}</div>
+    {{ Form::submit('Transfer To Withdraw wallet',array('class'=>'form-control btn btn-primary')) }}</div>
   </div>
  {!! Form::close() !!}
 

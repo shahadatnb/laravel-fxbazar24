@@ -19,7 +19,7 @@
                 <div class="hv-item">
 
                     <div class="hv-item-parent">
-                        <p class="simple-card text-center"><img width="50" src="{{ url('/') }}/public/admin/images/logo3.png" alt=""><br>{{ $members->name }} <br>
+                        <p class="simple-card text-center"><img width="50" src="{{ url('/') }}/public/admin/images/logo3.png" alt=""><br>{{ $members->username }} <br>
                           <span>LT#{{ App\User::myChildLR($members->id, 1) }}</span> - <span>RT#{{ App\User::myChildLR($members->id, 2) }}</span>
                         </p>
                     </div>

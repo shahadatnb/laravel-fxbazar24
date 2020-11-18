@@ -261,6 +261,26 @@ class HomeController extends Controller
             )
         );
 
+        $wallet_info = $this->wallets[$request->wType]['wid_d'];
+        if($wallet_info>0){
+            $last_tx = Wallet::where('wType',$request->wType)->where('user_id',Auth::user()->id)
+                ->whereNotNull('payment')->latest()->first();
+            if($last_tx){
+                $last_tx_date= $last_tx->created_at;                
+            }else{
+                $last_tx_date= Auth::user()->created_at;
+            }
+
+            $today = Carbon::today()->subDay($wallet_info);
+
+            if($last_tx_date > $today){
+                //dd('Not Mature, wait '.$wallet_info.' dsys after last transfer.'); exit;
+                Session::flash('warning','Not Mature, wait '.$wallet_info.' dsys after last transfer.');
+                return redirect()->back();
+            }
+        }
+        //exit;
+
         if($this->balance(Auth::user()->id,$request->wType) < $request->payment ){
             Session::flash('warning','Sorry, Your Balance Less then $'.$request->payment);
         }else{

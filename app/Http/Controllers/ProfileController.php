@@ -81,7 +81,7 @@ class ProfileController extends Controller
             $data->mobile = $request->mobile;
             $data->packeg_id = $request->packeg;
             $data->referralId = $request->referralId;
-            $data->placementId = $placementUser->placementId;
+            $data->placementId = $placementUser->id;
             $data->placementUsername = $request->placementUsername;
             $data->hand = $request->hand;
             $data->password = bcrypt($request->password);
