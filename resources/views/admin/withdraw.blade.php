@@ -14,8 +14,8 @@
           <table class="table">
             <tr>
               <th>Date</th>
-              <th>User ID</th>
-              <th>User Name</th>
+              <th>Username</th>
+              <th>Name</th>
               <th>Amount</th>
               <th>Remark</th>
               <th>Action</th>
@@ -23,7 +23,7 @@
             @foreach ($transaction as $member)
             <tr>
               <td>{{ $member->created_at->format('d M Y h:i:s A') }}</td>
-              <td>{{ $member->user_id }}</td>
+              <td>{{ $member->userInfo->username }}</td>
               <td>{{ $member->userInfo->name }}</td>
               <td>{{ $member->payment }}</td>
               <td>{{ $member->remark }}</td>
