@@ -2,6 +2,13 @@
 @section('title','Dashboard')
 @section('content')
 <div class="row">
+  <div class="col">
+    <div class="alert alert-info" role="alert">
+      <marquee behavior="" direction="">{{ settingValue('backend_msg') }}</marquee>   
+    </div>    
+  </div>
+</div>
+<div class="row">
 @foreach($wallets2 as $item)
   <div class="col-sm-6 col-lg-3">
       <div class="card text-white bg-flat-color-{{$item['bg']}}">
