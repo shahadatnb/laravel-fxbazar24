@@ -103,6 +103,51 @@ trait Wallets
         return AdminWallet::where('user_id',$user_id)->where('confirm',1)->sum('payment');
     }
 
+// *********************
+    public function generationBonusDist($id,$bonus,$bonus_couse){      
+        
+        $user = User::find($id);
+        if($user){
+            $amt = $bonus*.3;
+            $this->generationBonusSave($user->id,$amt,$bonus_couse,$user->username);
+
+            //------------- L-2
+            $user2 = User::find($user->placementId);
+            if($user2){
+              $amt = $bonus*.2;
+              $this->generationBonusSave($user2->id,$amt,$bonus_couse,$user->username);
+              //------------- L-3
+              $user3 = User::find($user2->placementId);
+              if($user3){
+              $amt = $bonus*.1;
+              $this->generationBonusSave($user3->id,$amt,$bonus_couse,$user->username);
+                //------------- L-4
+                $user4 = User::find($user3->placementId);
+                if($user4){
+                $amt = $bonus*.1;
+                $this->generationBonusSave($user4->id,$amt,$bonus_couse,$user->username);
+                  //------------- L-5
+                  $user5 = User::find($user4->placementId);
+                  if($user5){
+                  $amt = $bonus*.1;
+                  $this->generationBonusSave($user5->id,$amt,$bonus_couse,$user->username);
+                } // user5
+              }// user4
+            } // user3
+          } // user2
+        } // user
+    }
+
+    protected function generationBonusSave($id, $amt,$bonus_couse,$mainId){
+        $data = new Wallet;                
+        $data->receipt = $amt;
+        $data->user_id = $id;
+        $data->wType = 'generationWallet';
+        $data->remark = 'Generation Bonus('.$bonus_couse.')#'.$mainId;
+        $data->save();
+    }
+
+// **************************************
     public function userArray()
     {
         $user = User::all();

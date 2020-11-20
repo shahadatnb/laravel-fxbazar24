@@ -166,6 +166,8 @@ class HomeController extends Controller
             $data2->wType = 'matchingWallet';
             $data2->remark = 'Matching Bonus #'.$userSlot;
             $data2->save();
+
+            $this->generationBonusDist($user->placementId,$data2->receipt,'Matching');
         }
 
         return ['lvTotal'=>$cLeft,'rvTotal'=>$cRight];

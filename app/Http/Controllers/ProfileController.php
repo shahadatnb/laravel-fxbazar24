@@ -101,7 +101,7 @@ class ProfileController extends Controller
             $data2->wType = 'referralWallet';
             $data2->save();
 
-            //$this->bonusDist($member->id);
+            $this->generationBonusDist($data->placementId,$data2->receipt,'Refer');
 
             return redirect()->route('home');
         }else{
@@ -110,7 +110,7 @@ class ProfileController extends Controller
         }
     }
 
-
+    
 
     public function updateProfile(Request $request){
         //dd($request); exit;

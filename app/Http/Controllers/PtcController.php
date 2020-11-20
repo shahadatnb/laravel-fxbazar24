@@ -71,7 +71,13 @@ class PtcController extends Controller
                 $ptcs = $this->checkLinks();
                 //dd($ptcs); exit;
                 if(empty($ptcs)){
-                  $this->youtubeBonus();
+                    $youtube_earn = Auth::User()->packeg->payment;
+                    $data = new Wallet;                
+                    $data->receipt = $youtube_earn;
+                    $data->user_id = Auth::User()->id;
+                    $data->wType = 'worksWallet';
+                    $data->remark = 'Daily Bonus';
+                    $data->save();
                 }
 
                 return redirect($ptc->link);
@@ -79,59 +85,6 @@ class PtcController extends Controller
         } //if($ptc)
         return '';
     } //function
-
-    protected function youtubeBonus(){      
-        //$youtube_earn = settingValue('youtube_earn');
-        $youtube_earn = Auth::User()->packeg->payment;
-        //dd($youtube_earn); exit;
-        //$this->youtubeBonusSave(Auth::User()->id,$youtube_earn);
-        $data = new Wallet;                
-        $data->receipt = $youtube_earn;
-        $data->user_id = Auth::User()->id;
-        $data->wType = 'worksWallet';
-        $data->remark = 'Daily Bonus #'.Auth::User()->id;
-        $data->save();
-
-        $user = User::find(Auth::User()->placementId);
-        if($user){
-            $amt = $youtube_earn*.3;
-            $this->youtubeBonusSave($user->id,$amt);
-
-            //------------- L-2
-            $user2 = User::find($user->placementId);
-            if($user2){
-              $amt = $youtube_earn*.2;
-              $this->youtubeBonusSave($user2->id,$amt);
-              //------------- L-3
-              $user3 = User::find($user2->placementId);
-              if($user3){
-              $amt = $youtube_earn*.1;
-              $this->youtubeBonusSave($user3->id,$amt);
-                //------------- L-4
-                $user4 = User::find($user3->placementId);
-                if($user4){
-                $amt = $youtube_earn*.1;
-                $this->youtubeBonusSave($user4->id,$amt);
-                  //------------- L-5
-                  $user5 = User::find($user4->placementId);
-                  if($user5){
-                  $amt = $youtube_earn*.1;
-                  $this->youtubeBonusSave($user->id,$amt);
-                } // user5
-              }// user4
-            } // user3
-          } // user2
-        } // user
-    }
-
-    protected function youtubeBonusSave($id, $amt){
-        $data = new Wallet;                
-        $data->receipt = $amt;
-        $data->user_id = $id;
-        $data->wType = 'generationWallet';
-        $data->remark = 'Youtube Bonus #'.Auth::User()->id;
-        $data->save();
-    }
 
 
     /**
