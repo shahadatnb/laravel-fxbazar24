@@ -108,28 +108,28 @@ trait Wallets
         
         $user = User::find($id);
         if($user){
-            $amt = $bonus*.3;
+            $amt = $bonus*.03;
             $this->generationBonusSave($user->id,$amt,$bonus_couse,$user->username);
 
             //------------- L-2
             $user2 = User::find($user->placementId);
             if($user2){
-              $amt = $bonus*.2;
+              $amt = $bonus*.02;
               $this->generationBonusSave($user2->id,$amt,$bonus_couse,$user->username);
               //------------- L-3
               $user3 = User::find($user2->placementId);
               if($user3){
-              $amt = $bonus*.1;
+              $amt = $bonus*.01;
               $this->generationBonusSave($user3->id,$amt,$bonus_couse,$user->username);
                 //------------- L-4
                 $user4 = User::find($user3->placementId);
                 if($user4){
-                $amt = $bonus*.1;
+                $amt = $bonus*.01;
                 $this->generationBonusSave($user4->id,$amt,$bonus_couse,$user->username);
                   //------------- L-5
                   $user5 = User::find($user4->placementId);
                   if($user5){
-                  $amt = $bonus*.1;
+                  $amt = $bonus*.01;
                   $this->generationBonusSave($user5->id,$amt,$bonus_couse,$user->username);
                 } // user5
               }// user4
