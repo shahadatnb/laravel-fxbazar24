@@ -88,20 +88,20 @@ class ProfileController extends Controller
             $data->save();
 
             $data1 = new Wallet;
-            $data1->user_id = Auth::user()->id;
+            $data1->user_id = $request->referralId;
             $data1->payment = $packAmount->amount;
             $data1->remark = 'New Member #'.$data->username;
             $data1->wType = 'registerWallet';
             $data1->save();
 
             $data2 = new Wallet;
-            $data2->user_id = Auth::user()->id;
+            $data2->user_id = $request->referralId;
             $data2->receipt = $packAmount->amount*.10;
             $data2->remark = 'New Member #'.$data->username;
             $data2->wType = 'referralWallet';
             $data2->save();
 
-            $this->generationBonusDist($data->placementId,$data2->receipt,'Refer');
+            $this->generationBonusDist($request->referralId,$data2->receipt,'Refer');
 
             return redirect()->route('home');
         }else{

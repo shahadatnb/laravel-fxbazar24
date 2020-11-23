@@ -49,8 +49,8 @@ class HomeController extends Controller
        $wallets['tfTotal'] = ['balance'=>0,'title'=>'Right Flash','bg'=>'3'];
        $wallets['lvTotal'] = ['balance'=>$slotAmt['lvTotal'],'title'=>'Total Left Value','bg'=>'4'];
        $wallets['rvTotal'] = ['balance'=>$slotAmt['rvTotal'],'title'=>'Total Right Value','bg'=>'5'];
-       $wallets['LeftCary'] = ['balance'=>0,'title'=>'Left Cary','bg'=>'6'];
-       $wallets['RightCary'] = ['balance'=>0,'title'=>'Right Cary','bg'=>'1'];
+       $wallets['LeftCary'] = ['balance'=>$slotAmt['lvTotal'],'title'=>'Left Cary','bg'=>'6'];
+       $wallets['RightCary'] = ['balance'=>$slotAmt['rvTotal'],'title'=>'Right Cary','bg'=>'1'];
 
 
        $wallets2['rankName'] = ['balance'=>'Rank','title'=>$this->rank[Auth::user()->rank]['title'],'bg'=>'5'];
@@ -65,6 +65,12 @@ class HomeController extends Controller
        array_shift($rankInfo);
        //dd($rankInfo);
         return view('pages.rankList',compact('rankInfo'));
+    }
+    public function matchinList(){
+       $rankInfo = $this->slot;
+       array_shift($rankInfo);
+       //dd($rankInfo);
+        return view('pages.matchinList',compact('rankInfo'));
     }
 
     public function memberList()
@@ -167,7 +173,7 @@ class HomeController extends Controller
             $data2->remark = 'Matching Bonus #'.$userSlot;
             $data2->save();
 
-            $this->generationBonusDist($user->placementId,$data2->receipt,'Matching');
+            //$this->generationBonusDist($user->placementId,$data2->receipt,'Matching');
         }
 
         return ['lvTotal'=>$cLeft,'rvTotal'=>$cRight];

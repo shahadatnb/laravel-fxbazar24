@@ -92,6 +92,7 @@
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Auto Pool Report</a></li>
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}"> vip Incentive Report</a></li>
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/rankList')}}"> Rank</a></li>
+							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/matchinList')}}"> Matching Info</a></li>
 						</ul>
 					</li>
 					<li class="menu-item-has-children dropdown">
@@ -106,8 +107,8 @@
 					<li class="menu-item-has-children dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Advertise</a>
 						<ul class="sub-menu children dropdown-menu bg-transparent">
-							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Works List</a></li>
-							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Works Report</a></li>
+							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/youtubeClick') }}">Works List</a></li>
+							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/worksWallet')}}">Works Report</a></li>
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Package Status</a></li>
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Forex</a></li>
 						</ul>
@@ -161,9 +162,9 @@
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/youtubeWallet')}}">Youtube wallet</a></li>
 						</ul>
 					</li> --}}
-					<li>
+					{{-- <li>
 						<a href="{{ url('/youtubeClick') }}"> <i class="menu-icon ti-youtube"></i>Youtube Click</a>
-					</li>
+					</li> --}}
 					<li>
 						<a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> <i class="menu-icon ti-power-off"></i>Log out </a>
 					</li>
