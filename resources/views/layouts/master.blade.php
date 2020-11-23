@@ -92,6 +92,7 @@
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Auto Pool Report</a></li>
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}"> vip Incentive Report</a></li>
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/rankList')}}"> Rank</a></li>
+							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/level')}}"> Generation Chart</a></li>
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/matchinList')}}"> Matching Info</a></li>
 						</ul>
 					</li>

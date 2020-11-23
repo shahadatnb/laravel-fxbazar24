@@ -1,20 +1,9 @@
 @extends('layouts.master')
-@section('title','User list')
+@section('title','Generation Chart')
 @section('stylesheet')
 @endsection
 @section('content')
-<div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>Level List</h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Level List</li>
-      </ol>
-    
-
-    <!-- Main content -->
-    
+<div class="content-wrapper">   
 
       <!-- Default box -->
       <div class="card">
@@ -22,8 +11,8 @@
           
           <table class="table table-bordered table-striped">
             <tr>
-              <th>Your Level</th>
-              <th>Your Member</th>
+              <th>Level</th>
+              <th>Refferal Member</th>
             </tr>
             @foreach($datas as $key=>$data)
             <tr>

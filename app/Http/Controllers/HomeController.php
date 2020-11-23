@@ -185,7 +185,7 @@ class HomeController extends Controller
         $ids  = array(Auth::user()->id);
         //$ids  = array(2,3,30,31);
         $datas  = array();
-        for($i=1;$i<11;$i++){
+        for($i=1;$i<6;$i++){
             if(!empty($ids)){
                 $ids = User::whereIn('referralId',$ids)->pluck('id')->toArray();
                 $datas[$i] = count($ids);
