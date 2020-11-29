@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+use Carbon\Carbon;
 use App\PointValue;
 
 class User extends Authenticatable
@@ -101,6 +101,39 @@ class User extends Authenticatable
         return $amount;
     }
 
+
+    public static function myChildAmountDate($id, $hand){
+        global $amount;
+        $amount = 0;
+        $child =  User::where('hand',$hand)->where('placementId',$id)->first(); //->pluck('id')
+        if($child){
+            if($child->created_at->format('Y-m-d') == Carbon::yesterday()->toDateString()){
+                $amount = $child->packeg->amount;
+            }
+            if(count($child->childs)){
+              User::cChildAmountDate($child->childs,$amount);
+            }
+        }
+        return $amount;
+    }
+
+    public static function cChildAmountDate($child,$amount){
+        global $amount;
+        foreach ($child as $member) { //dd($member->childs);//dd(count(User::nChilds($member->id))); 
+            if($member->created_at->format('Y-m-d') == Carbon::yesterday()->toDateString()){
+                $amount += $member->packeg->amount;
+            }            
+            
+            if(count($member->childs)){
+                User::cChildAmountDate($member->childs,$amount);
+            }
+        }
+        return $amount;
+    }
+
+
+
+
     public static function myChildLR($id, $hand){
         global $count;
         $count = 0;
@@ -128,7 +161,7 @@ class User extends Authenticatable
     }
 
 
-
+//$q->whereDate('created_at', '=', Carbon::today()->toDateString());
     public static function myChildByPack($id, $hand, $pack){
         global $count;
         $count = 0;

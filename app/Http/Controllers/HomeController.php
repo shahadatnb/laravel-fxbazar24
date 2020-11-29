@@ -29,6 +29,7 @@ class HomeController extends Controller
     }
 
     public function index(){
+        //$this->matchingBonusDist(); exit;
         $this->rank();
         $slotAmt = $this->slot();
         $user_id= Auth::user()->id;
@@ -45,12 +46,12 @@ class HomeController extends Controller
        $wallets['frTotal'] = ['balance'=>$this->totalReceive($user_id),'title'=>'Total Fund Receive','bg'=>'5'];
        $wallets['ftTotal'] = ['balance'=>$this->totalTransfar($user_id),'title'=>'Total Fund Transfer','bg'=>'6'];
        $wallets['matchTotal'] = ['balance'=>$this->slot[Auth::user()->slot],'title'=>'Total Matched','bg'=>'1'];
-       $wallets['lfTotal'] = ['balance'=>0,'title'=>'Left Flash','bg'=>'2'];
-       $wallets['tfTotal'] = ['balance'=>0,'title'=>'Right Flash','bg'=>'3'];
+       $wallets['lfTotal'] = ['balance'=>$this->balance($user_id,'leftFlash'),'title'=>'Left Flash','bg'=>'2'];
+       $wallets['tfTotal'] = ['balance'=>$this->balance($user_id,'rightFlash'),'title'=>'Right Flash','bg'=>'3'];
        $wallets['lvTotal'] = ['balance'=>$slotAmt['lvTotal'],'title'=>'Total Left Value','bg'=>'4'];
        $wallets['rvTotal'] = ['balance'=>$slotAmt['rvTotal'],'title'=>'Total Right Value','bg'=>'5'];
-       $wallets['LeftCary'] = ['balance'=>$slotAmt['lvTotal'],'title'=>'Left Cary','bg'=>'6'];
-       $wallets['RightCary'] = ['balance'=>$slotAmt['rvTotal'],'title'=>'Right Cary','bg'=>'1'];
+       $wallets['LeftCary'] = ['balance'=>$this->balance($user_id,'leftCarry'),'title'=>'Left Cary','bg'=>'6'];
+       $wallets['RightCary'] = ['balance'=>$this->balance($user_id,'rightCarry'),'title'=>'Right Cary','bg'=>'1'];
 
 
        $wallets2['rankName'] = ['balance'=>'Rank','title'=>$this->rank[Auth::user()->rank]['title'],'bg'=>'5'];
@@ -150,6 +151,8 @@ class HomeController extends Controller
    protected function slot(){
         $cLeft=User::myChildAmount(Auth::user()->id,1);
         $cRight=User::myChildAmount(Auth::user()->id,2);
+        
+/*
         if($cLeft<=$cRight){
             $small = $cLeft;
         }else{
@@ -175,7 +178,7 @@ class HomeController extends Controller
 
             //$this->generationBonusDist($user->placementId,$data2->receipt,'Matching');
         }
-
+*/
         return ['lvTotal'=>$cLeft,'rvTotal'=>$cRight];
     }
 

@@ -103,6 +103,87 @@ trait Wallets
         return AdminWallet::where('user_id',$user_id)->where('confirm',1)->sum('payment');
     }
 
+    /// **********************
+
+  public function matchingBonusDist(){
+    $users = User::all();
+    foreach ($users as $key => $user) {
+      $cLeft=User::myChildAmountDate($user->id,1);
+      $cRight=User::myChildAmountDate($user->id,2);
+      if($cLeft>0 || $cRight>0 ){
+        if($cLeft<=$cRight){
+            $small = $cLeft;
+            $big = $cRight;
+            $flash = 'leftFlash';
+            $carry = 'rightCarry';
+        }else{
+            $small = $cRight;
+            $big = $cLeft;
+            $flash = 'rightFlash';
+            $carry = 'leftCarry';
+        }
+        $s=0;
+        if($small >= $this->slot[12]){
+          $s=12;
+        }elseif($small >= $this->slot[11]){
+          $s=11;
+        }elseif($small >= $this->slot[10]){
+          $s=10;
+        }elseif($small >= $this->slot[9]){
+          $s=9;
+        }elseif($small >= $this->slot[8]){
+          $s=8;
+        }elseif($small >= $this->slot[7]){
+          $s=7;
+        }elseif($small >= $this->slot[6]){
+          $s=6;
+        }elseif($small >= $this->slot[5]){
+          $s=5;
+        }elseif($small >= $this->slot[4]){
+          $s=4;
+        }elseif($small >= $this->slot[3]){
+          $s=3;
+        }elseif($small >= $this->slot[2]){
+          $s=2;
+        }elseif($small >= $this->slot[1]){
+          $s=1;
+        }else{
+          $this->matchingBonusDistCarryFlash($user->id,$small,$carry);
+          $this->matchingBonusDistCarryFlash($user->id,$big,$flash);
+        }
+        if($s>0){
+          $this->matchingBonusDist2($user->id,$s);
+          $this->matchingBonusDistCarryFlash($user->id,$small-$this->slot[$s],$flash);
+          $this->matchingBonusDistCarryFlash($user->id,$big-$this->slot[$s],$carry);
+        }         
+
+        //echo $cLeft.'-'.$cRight;
+        //echo '</br>';
+      }
+      
+    }
+  }
+
+private function matchingBonusDist2($id,$userSlot){
+  $data2 = new Wallet;
+  $data2->user_id = $id;
+  $data2->receipt = $this->slot[$userSlot]*.05;
+  $data2->wType = 'matchingWallet';
+  $data2->remark = 'Matching Bonus #'.$userSlot;
+  $data2->save();
+}
+
+private function matchingBonusDistCarryFlash($id,$amt,$wType){
+  if($amt>0){
+    $data2 = new Wallet;
+    $data2->user_id = $id;
+    $data2->receipt = $amt;
+    $data2->wType = $wType;
+    $data2->remark = '';
+    $data2->save();
+  }  
+}
+
 // *********************
     public function generationBonusDist($id,$bonus,$bonus_couse){      
         
