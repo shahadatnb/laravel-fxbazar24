@@ -100,8 +100,8 @@ class ProfileController extends Controller
             $data2->remark = 'New Member #'.$data->username;
             $data2->wType = 'referralWallet';
             $data2->save();
-
-            $this->generationBonusDist($request->referralId,$data2->receipt,'Refer');
+            $referralUser = User::find($request->referralId);
+            $this->generationBonusDist($referralUser->placementId,$data2->receipt,'Refer');
 
             return redirect()->route('home');
         }else{
