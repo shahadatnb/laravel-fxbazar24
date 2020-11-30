@@ -24,6 +24,9 @@
 	<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 	@yield('stylesheet')
 	<style>
+		.right-panel header.header {
+			height: auto;
+		}
 	  .nav.navbar-nav.navbar-right li a {
 		  color: #e5ec0e;
 	  }
@@ -218,6 +221,7 @@
 		</header>
 		<!-- /#header -->
 		<!-- Breadcrumbs-->
+		@if(View::hasSection('title'))
 		<div class="breadcrumbs">
 			<div class="breadcrumbs-inner">
 				<div class="row m-0">
@@ -241,6 +245,7 @@
 				</div>
 			</div>
 		</div>
+		@endif
 		<!-- /.breadcrumbs-->
 		<!-- Content -->
 		<div class="content">
