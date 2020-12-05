@@ -37,7 +37,7 @@ class HomeController extends Controller
        $wallets['withdrawTotal'] = ['balance'=>$this->totalBalance($user_id,'withdrawWallet'),'title'=>'Total Withdraw','bg'=>'2'];
        $wallets['sponsorTotal'] = ['balance'=>$this->totalBalance($user_id,'sponsorWallet'),'title'=>'Total Sponsor Income','bg'=>'3'];
        $wallets['worksWalletTotal'] = ['balance'=>$this->totalBalance($user_id,'worksWallet'),'title'=>'Total Works Earn','bg'=>'4'];
-       $wallets['generationTotal'] = ['balance'=>$this->totalBalance($user_id,'generationWallet'),'title'=>'Generation Total','bg'=>'5'];
+       //$wallets['generationTotal'] = ['balance'=>$this->totalBalance($user_id,'generationWallet'),'title'=>'Generation Total','bg'=>'5'];
        $wallets['registeredTotal'] = ['balance'=>Auth::user()->sponsorChilds->count(),'title'=>'Total Registered','bg'=>'6'];
        $wallets['Shopping'] = ['balance'=>0,'title'=>'Shopping','bg'=>'1'];
        $wallets['TotalShopping'] = ['balance'=>0,'title'=>'Total Shopping','bg'=>'2'];
@@ -45,13 +45,13 @@ class HomeController extends Controller
        $wallets['wsTotal'] = ['balance'=>$this->withdrawalRequestSuccess($user_id),'title'=>'Withdrawal Success Total','bg'=>'4'];
        $wallets['frTotal'] = ['balance'=>$this->totalReceive($user_id),'title'=>'Total Fund Receive','bg'=>'5'];
        $wallets['ftTotal'] = ['balance'=>$this->totalTransfar($user_id),'title'=>'Total Fund Transfer','bg'=>'6'];
-       $wallets['matchTotal'] = ['balance'=>$this->slot[Auth::user()->slot],'title'=>'Total Matched','bg'=>'1'];
-       $wallets['lfTotal'] = ['balance'=>$this->balance($user_id,'leftFlash'),'title'=>'Left Flash','bg'=>'2'];
-       $wallets['tfTotal'] = ['balance'=>$this->balance($user_id,'rightFlash'),'title'=>'Right Flash','bg'=>'3'];
+       //$wallets['matchTotal'] = ['balance'=>$this->slot[Auth::user()->slot],'title'=>'Total Matched','bg'=>'1'];
+       //$wallets['lfTotal'] = ['balance'=>$this->balance($user_id,'leftFlash'),'title'=>'Left Flash','bg'=>'2'];
+       //$wallets['tfTotal'] = ['balance'=>$this->balance($user_id,'rightFlash'),'title'=>'Right Flash','bg'=>'3'];
        $wallets['lvTotal'] = ['balance'=>$slotAmt['lvTotal'],'title'=>'Total Left Value','bg'=>'4'];
        $wallets['rvTotal'] = ['balance'=>$slotAmt['rvTotal'],'title'=>'Total Right Value','bg'=>'5'];
-       $wallets['LeftCary'] = ['balance'=>$this->balance($user_id,'leftCarry'),'title'=>'Left Cary','bg'=>'6'];
-       $wallets['RightCary'] = ['balance'=>$this->balance($user_id,'rightCarry'),'title'=>'Right Cary','bg'=>'1'];
+       //$wallets['LeftCary'] = ['balance'=>$this->balance($user_id,'leftCarry'),'title'=>'Left Cary','bg'=>'6'];
+       //$wallets['RightCary'] = ['balance'=>$this->balance($user_id,'rightCarry'),'title'=>'Right Cary','bg'=>'1'];
 
 
        $wallets2['rankName'] = ['balance'=>'Rank','title'=>$this->rank[Auth::user()->rank]['title'],'bg'=>'5'];

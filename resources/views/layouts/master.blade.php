@@ -89,14 +89,15 @@
 						<ul class="sub-menu children dropdown-menu bg-transparent">
 							<li><i class="menu-icon fa fa-laptop"></i><a href="{{ url('/home')}}">Dashboard</a></li>
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/referralWallet')}}">Referral Income Report</a></li>
-							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/generationWallet')}}">Generation Income Report</a></li>
-							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/matchingWallet')}}">Matching Income Report</a></li>
+							{{-- <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/generationWallet')}}">Generation Income Report</a></li>
+							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/matchingWallet')}}">Matching Income Report</a></li> --}}
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/worksWallet')}}">Work Sponsor Income Report</a></li>
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Auto Pool Report</a></li>
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}"> vip Incentive Report</a></li>
-							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/rankList')}}"> Rank</a></li>
+							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/rankWallet')}}"> Rank Wallet</a></li>
+							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/rankList')}}"> Rank Info</a></li>
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/level')}}"> Generation Chart</a></li>
-							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/matchinList')}}"> Matching Info</a></li>
+							{{-- <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/matchinList')}}"> Matching Info</a></li> --}}
 						</ul>
 					</li>
 					<li class="menu-item-has-children dropdown">

@@ -14,8 +14,8 @@ trait Wallets
       'worksWallet'=>['title'=>'Works Wallet','bg'=>'3','wid'=>1,'trns'=>0,'wid_d'=>30],
       'referralWallet'=>['title'=>'Referral Wallet','bg'=>'4','wid'=>1,'trns'=>0,'wid_d'=>0],
       'rankWallet'=>['title'=>'Rank Wallet','bg'=>'5','wid'=>1,'trns'=>0,'wid_d'=>0],
-      'generationWallet'=>['title'=>'Generation Income','bg'=>'6','wid'=>1,'trns'=>0,'wid_d'=>30],
-      'matchingWallet'=>['title'=>'Matching Wallet','bg'=>'1','wid'=>1,'trns'=>0,'wid_d'=>0],
+      //'generationWallet'=>['title'=>'Generation Income','bg'=>'6','wid'=>1,'trns'=>0,'wid_d'=>30],
+      //'matchingWallet'=>['title'=>'Matching Wallet','bg'=>'1','wid'=>1,'trns'=>0,'wid_d'=>0],
     ];
 
     public $rank = [

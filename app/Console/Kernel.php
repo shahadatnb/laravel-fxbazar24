@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
     {
         
         $schedule->call(function () {
-            $this->matchingBonusDist();
+            //$this->matchingBonusDist();
         })->everyMinute();
         // $schedule->command('inspire')
         //          ->hourly();
