@@ -16,7 +16,7 @@ use DB;
 class HomeController extends Controller
 {
     use Wallets;
-    private $withdrowAmt = 3;
+    private $withdrowAmt = 0;
     private $mBonus = 10;
     private $dayLimit = 200;
     private $freeLimit = 50;
