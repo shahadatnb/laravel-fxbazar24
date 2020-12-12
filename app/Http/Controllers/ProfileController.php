@@ -102,7 +102,6 @@ class ProfileController extends Controller
             $data2->save();
             //$referralUser = User::find($request->referralId);
             $this->generationBonusDist($data->referralId,$packAmount->amount,'Refer');
-
             return redirect()->route('home');
         }else{
             Session::flash('warning','Sorry, Your Balance Less then '.$this->userReg);
