@@ -101,7 +101,7 @@ class ProfileController extends Controller
             $data2->wType = 'referralWallet';
             $data2->save();
             //$referralUser = User::find($request->referralId);
-            $this->generationBonusDist($data->placementId,$packAmount->amount,'Refer');
+            $this->generationBonusDist($data->referralId,$packAmount->amount,'Refer');
 
             return redirect()->route('home');
         }else{

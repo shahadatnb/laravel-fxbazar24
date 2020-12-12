@@ -16,7 +16,8 @@ use DB;
 class HomeController extends Controller
 {
     use Wallets;
-    private $withdrowAmt = 0;
+    private $withdrowAmt = 3;
+    private $transferToWW = 0;
     private $mBonus = 10;
     private $dayLimit = 200;
     private $freeLimit = 50;
@@ -54,6 +55,7 @@ class HomeController extends Controller
        //$wallets['RightCary'] = ['balance'=>$this->balance($user_id,'rightCarry'),'title'=>'Right Cary','bg'=>'1'];
 
 
+       $wallets2['validate'] = ['balance'=>'Validate','title'=>$this->acValidate(Auth::user()->id),'bg'=>'4'];
        $wallets2['rankName'] = ['balance'=>'Rank','title'=>$this->rank[Auth::user()->rank]['title'],'bg'=>'5'];
        $wallets2['myPackeg'] = ['balance'=>Auth::user()->packeg->title,'title'=>'My Packeg','bg'=>'6'];
        //dd($wallets2); exit;
@@ -268,7 +270,7 @@ class HomeController extends Controller
     {
         $this->validate($request, array(
             'remark' => 'nullable',
-            'payment' => 'required|numeric|min:'.$this->withdrowAmt,
+            'payment' => 'required|numeric|min:'.$this->transferToWW,
             )
         );
 

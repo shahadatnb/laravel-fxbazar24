@@ -3,6 +3,7 @@ namespace App\Traits;
 use App\AdminWallet;
 use App\Wallet;
 use App\EarnWallet;
+use Carbon\Carbon;
 use App\Packeg;
 use App\User;
 
@@ -76,6 +77,14 @@ trait Wallets
                 $balances[$key] = ['balance'=>$this->balance($id,$key),'title'=>$value['title'],'bg'=>$value['bg']];
             }
         return $balances;
+    }
+
+    public function acValidate($id)
+    {
+      $user = User::find($id);
+      $expDate = Carbon::today()->addMonth($user->packeg->exp);
+
+      return prettyDate($expDate);
     }
 
     public function listBalance($id,$wType)
