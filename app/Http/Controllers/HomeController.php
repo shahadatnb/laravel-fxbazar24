@@ -340,7 +340,7 @@ class HomeController extends Controller
             $payble = $request->payment;// - ($request->payment/100)*10;
             $data2 = new AdminWallet;
             $data2->user_id = Auth::user()->id;
-            $data2->payment = round($payble);
+            $data2->payment = $payble;//round($payble);
             //$data2->payment = $request->payment;
             $data2->remark = $request->bankName.' : '.$request->accountNo.' - '.$request->remark;            
             //$data2->admin_id = 1;//$request->paymentId;
