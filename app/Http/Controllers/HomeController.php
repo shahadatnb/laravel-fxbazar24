@@ -32,6 +32,7 @@ class HomeController extends Controller
     public function index(){
         //$this->matchingBonusDist(); exit;
         $this->rank();
+        $this->checkVIP();
         $slotAmt = $this->slot();
         $user_id= Auth::user()->id;
        $wallets=$this->allBalance($user_id);
@@ -58,10 +59,37 @@ class HomeController extends Controller
        $wallets2['validate'] = ['balance'=>'Validate','title'=>$this->acValidate(Auth::user()->id),'bg'=>'4'];
        $wallets2['rankName'] = ['balance'=>'Rank','title'=>$this->rank[Auth::user()->rank]['title'],'bg'=>'5'];
        $wallets2['myPackeg'] = ['balance'=>Auth::user()->packeg->title,'title'=>'My Packeg','bg'=>'6'];
+       if(Auth::user()->packeg_id == 8){
+        $wallets2['vipStatus'] = ['balance'=>Auth::user()->vip.' Star','title'=>'VIP Status','bg'=>'1'];
+        }
        //dd($wallets2); exit;
         return view('pages.dashboard',compact('wallets','wallets2'));
     }
 
+
+    public function checkVIP(){
+
+        if(Auth::user()->packeg_id == 8){
+            $members = User::where('packeg_id',8)->where('id','>',Auth::user()->id)->count();
+            $userVIP = Auth::user()->vip;
+            $userVIP++;
+            $vip = $this->vip;
+            //dd($cLeft); exit;
+            if($members >= $vip[$userVIP]['point']){
+
+                $user = User::find(Auth::user()->id);
+                $user->vip = $userVIP;
+                $user->save();
+
+                $data2 = new Wallet;
+                $data2->user_id = Auth::user()->id;
+                $data2->receipt = $vip[$userVIP]['amount'];
+                $data2->wType = 'vipIncentive';
+                $data2->remark = 'VIP Incentive #'.$userVIP;
+                $data2->save();
+            }
+        }
+    }
 
     public function vipMembers(){
         if(Auth::user()->packeg_id != 8){
