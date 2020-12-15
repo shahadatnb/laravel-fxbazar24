@@ -63,12 +63,29 @@ class HomeController extends Controller
     }
 
 
+    public function vipMembers(){
+        if(Auth::user()->packeg_id != 8){
+            return redirect()->route('home');
+        }
+        $members = User::where('packeg_id',8)->where('id','>',Auth::user()->id)->get();
+        return view('pages.vipMembers',compact('members'));
+    }
+
+
     public function rankList(){
        $rankInfo = $this->rank;
        array_shift($rankInfo);
        //dd($rankInfo);
         return view('pages.rankList',compact('rankInfo'));
     }
+
+    public function vipList(){
+       $rankInfo = $this->vip;
+       array_shift($rankInfo);
+       //dd($rankInfo);
+        return view('pages.vipList',compact('rankInfo'));
+    }
+
     public function matchinList(){
        $rankInfo = $this->slot;
        array_shift($rankInfo);

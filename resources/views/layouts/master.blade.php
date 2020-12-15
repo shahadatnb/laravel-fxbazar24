@@ -93,9 +93,10 @@
 							{{-- <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/matchingWallet')}}">Matching Income Report</a></li> --}}
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/worksWallet')}}">Work Sponsor Income Report</a></li>
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Auto Pool Report</a></li>
-							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}"> vip Incentive Report</a></li>
+							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/vipIncentive')}}"> vip Incentive Report</a></li>
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/myWallet/rankWallet')}}"> Rank Wallet</a></li>
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/rankList')}}"> Rank Info</a></li>
+							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/vipInfoList')}}"> VIP Info</a></li>
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/level')}}"> Generation Chart</a></li>
 							{{-- <li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/matchinList')}}"> Matching Info</a></li> --}}
 						</ul>
@@ -125,7 +126,7 @@
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Re-Activation</a></li>
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/mySponsor')}}">My Sponsored Records</a></li>
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Auto Pool</a></li>
-							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">VIP Member</a></li>
+							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/vipMembers')}}">VIP Member</a></li>
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">FX Share Income</a></li>
 							<li><i class="menu-icon fa fa-fort-awesome"></i><a href="{{ url('/home')}}">Incentive</a></li>
 						</ul>

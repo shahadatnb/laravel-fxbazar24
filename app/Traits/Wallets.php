@@ -16,6 +16,7 @@ trait Wallets
       'referralWallet'=>['title'=>'Referral Wallet','bg'=>'4','wid'=>1,'trns'=>0,'wid_d'=>0],
       'rankWallet'=>['title'=>'Rank Wallet','bg'=>'5','wid'=>1,'trns'=>0,'wid_d'=>0],
       'generationWallet'=>['title'=>'Generation Income','bg'=>'6','wid'=>1,'trns'=>0,'wid_d'=>0],
+      'vipIncentive'=>['title'=>'VIP Incentive','bg'=>'2','wid'=>1,'trns'=>0,'wid_d'=>0],
       //'matchingWallet'=>['title'=>'Matching Wallet','bg'=>'1','wid'=>1,'trns'=>0,'wid_d'=>0],
     ];
 
@@ -31,6 +32,17 @@ trait Wallets
       8=>['point'=>3, 'req'=>'Diamond Executive', 'amount'=>25000, 'prize'=>'$25000', 'title'=>'Crown Director'],
       9=>['point'=>3, 'req'=>'Crown Director', 'amount'=>62500, 'prize'=>'$62500', 'title'=>'Crown Amassador'],
       //10=>['point'=>3932160, 'amount'=>3500000, 'prize'=>'35 lak + axio car', 'title'=>'Vice chairman'],
+    ];
+
+    public $vip = [
+      0=>['point'=>0, 'req'=>0, 'amount'=>0, 'prize'=>'', 'title'=>'No Star'],
+      1=>['point'=>5, 'req'=>'1×5=5', 'amount'=>62.50, 'prize'=>'$62.50 / 5000Tk', 'title'=>'1 star'],
+      2=>['point'=>25, 'req'=>'5×5=25', 'amount'=>125, 'prize'=>'$125 / 10000Tk.', 'title'=>'2 star'],
+      3=>['point'=>125, 'req'=>'25×5=125', 'amount'=>250, 'prize'=>'$250 / 20000Tk', 'title'=>'3 star'],
+      4=>['point'=>625, 'req'=>'125×5=625', 'amount'=>625, 'prize'=>'$625 / 50000Tk.', 'title'=>'4 star'],
+      5=>['point'=>3125, 'req'=>'625×5=3125', 'amount'=>1250, 'prize'=>'$1250 / 100000Tk', 'title'=>'5 star'],
+      6=>['point'=>15625, 'req'=>'3125×5=15625', 'amount'=>3750, 'prize'=>'$3750 / 300000Tk.', 'title'=>'6 star'],
+      7=>['point'=>78125, 'req'=>'15625×5=78125', 'amount'=>22687.50, 'prize'=>'$22687.50 / 1815000Tk', 'title'=>'7 star'],
     ];
 
     public $slot = [
