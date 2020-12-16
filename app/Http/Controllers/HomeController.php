@@ -401,6 +401,10 @@ class HomeController extends Controller
             $data->adminWid = $data2->id;
             $data->save();
 
+            $data3 = Wallet::find($data2->id);
+            $data3->wallet_id = $data->id;
+            $data3->save();
+
             Session::flash('success','Withdraw Processing, Please wait 24 hours');
         }
         return redirect()->back();

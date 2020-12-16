@@ -44,6 +44,24 @@ class AdminController extends Controller
         return redirect()->route('withdrawWetting');
     }
 
+    public function withdrawCancel($id)
+    {
+        $data = AdminWallet::find($id);
+        $data->confirm =2;
+        $data->confirm_by = Auth::User()->id;
+        $data->save();
+
+        $data2 = new Wallet;
+        $data2->user_id = $data->user_id;
+        $data2->receipt = $data->payment;
+        $data2->remark = 'Refund Form Admin';
+        $data2->receive = 1;
+        $data2->wType = 'withdrawWallet';
+        $data2->save();
+
+        return redirect()->route('withdrawWetting');
+    }
+
     public function postSendMoney(Request $request)
     {
        	$data = new AdminWallet;

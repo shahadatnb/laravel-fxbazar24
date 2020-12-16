@@ -20,17 +20,20 @@
               <th>Remark</th>
               <th>Action</th>
             </tr>
-            @foreach ($transaction as $member)
+            @foreach ($transaction as $item)
             <tr>
-              <td>{{ $member->created_at->format('d M Y h:i:s A') }}</td>
-              <td>{{ $member->userInfo->username }}</td>
-              <td>{{ $member->userInfo->name }}</td>
-              <td>{{ $member->payment }}</td>
-              <td>{{ $member->remark }}</td>
-              <td>@if($member->confirm == 0 )
-                  <a onclick="return confirmSubmit();" href="{{ route('withdrawConfirm', $member->id ) }}" class="btn btn-primary btn-sm">Get Confirm</a>
+              <td>{{ $item->created_at->format('d M Y h:i:s A') }}</td>
+              <td>{{ $item->userInfo->username }}</td>
+              <td>{{ $item->userInfo->name }}</td>
+              <td>{{ $item->payment }}</td>
+              <td>{{ $item->remark }}</td>
+              <td>@if($item->confirm == 0 )
+                  <a onclick="return confirmSubmit();" href="{{ route('withdrawConfirm', $item->id ) }}" class="btn btn-primary btn-sm">Get Confirm</a>
+                  <a onclick="return confirmSubmit();" href="{{ route('withdrawCancel', $item->id ) }}" class="btn btn-danger btn-sm">Cancel</a>
+                  @elseif($item->confirm == 2)
+                    Cancel
                   @else
-                  Comfirmed
+                    Comfirmed
                   @endif
                 </td>
             </tr>

@@ -93,6 +93,8 @@ Route::group(['middleware' => ['auth','admin']], function(){
 	Route::put('/saveSetting/{id}', 'AdminController@saveSetting')->name('saveSetting');
 	Route::get('/withdrawWetting', 'AdminController@withdrawWetting')->name('withdrawWetting');
 	Route::get('/withdrawConfirm/{id}', 'AdminController@withdrawConfirm')->name('withdrawConfirm');
+	Route::get('/withdrawCancel/{id}', 'AdminController@withdrawCancel')->name('withdrawCancel');
+	
 	Route::get('/sendMoney', 'AdminController@sendMoney')->name('sendMoney');
 	Route::post('/sendMoney', 'AdminController@postSendMoney')->name('sendMoney');
 	Route::post('/paymentMoney', 'AdminController@paymentMoney')->name('paymentMoney');

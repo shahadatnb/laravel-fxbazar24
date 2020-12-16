@@ -1,0 +1,1 @@
+ALTER TABLE `admin_wallets` ADD `wallet_id` INT(10) UNSIGNED NULL DEFAULT NULL AFTER `confirm_by`; 

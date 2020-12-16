@@ -36,13 +36,14 @@ trait Wallets
 
     public $vip = [
       0=>['point'=>0, 'req'=>0, 'amount'=>0, 'prize'=>'', 'title'=>'No Star'],
-      1=>['point'=>5, 'req'=>'1×5=5', 'amount'=>62.50, 'prize'=>'$62.50 / 5000Tk', 'title'=>'1 star'],
-      2=>['point'=>25, 'req'=>'5×5=25', 'amount'=>125, 'prize'=>'$125 / 10000Tk.', 'title'=>'2 star'],
-      3=>['point'=>125, 'req'=>'25×5=125', 'amount'=>250, 'prize'=>'$250 / 20000Tk', 'title'=>'3 star'],
-      4=>['point'=>625, 'req'=>'125×5=625', 'amount'=>625, 'prize'=>'$625 / 50000Tk.', 'title'=>'4 star'],
-      5=>['point'=>3125, 'req'=>'625×5=3125', 'amount'=>1250, 'prize'=>'$1250 / 100000Tk', 'title'=>'5 star'],
-      6=>['point'=>15625, 'req'=>'3125×5=15625', 'amount'=>3750, 'prize'=>'$3750 / 300000Tk.', 'title'=>'6 star'],
-      7=>['point'=>78125, 'req'=>'15625×5=78125', 'amount'=>22687.50, 'prize'=>'$22687.50 / 1815000Tk', 'title'=>'7 star'],
+      1=>['point'=>5, 'req'=>'1×5=5', 'amount'=>6.25, 'prize'=>'$6.25', 'title'=>'1 star'],
+      2=>['point'=>25, 'req'=>'5×5=25', 'amount'=>25, 'prize'=>'$25', 'title'=>'2 star'],
+      3=>['point'=>125, 'req'=>'25×5=125', 'amount'=>62.50, 'prize'=>'$62.50', 'title'=>'3 star'],
+      4=>['point'=>625, 'req'=>'125×5=625', 'amount'=>200, 'prize'=>'$200', 'title'=>'4 star'],
+      5=>['point'=>3125, 'req'=>'625×5=3125', 'amount'=>625, 'prize'=>'$625', 'title'=>'5 star'],
+      6=>['point'=>15625, 'req'=>'3125×5=15625', 'amount'=>1000, 'prize'=>'$1000', 'title'=>'6 star'],
+      7=>['point'=>78125, 'req'=>'15625×5=78125', 'amount'=>2000, 'prize'=>'$2000', 'title'=>'7 star'],
+      8=>['point'=>390625, 'req'=>'78125x5=390625', 'amount'=>3000, 'prize'=>'$3000', 'title'=>'8 star'],
     ];
 
     public $slot = [
