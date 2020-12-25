@@ -1,0 +1,192 @@
+Active-12.50$
+🔰(১০০০ হাজার টাকায়) 
+দৈনিক ১০টাকা করে ২০০দিনে
+২০০০টাকা পাবেন
+
+Easy-25$
+🔰(২০০০ হাজারে)  
+দৈনিক ২০ টাকা করে ২০০ দিনে ৪০০০ টাকা পাবেন
+
+Super-62.50$
+🔰(৫ হাজারে) 
+দৈনিক ২৫ টাকা করে ১ বছরে ৯১২৫ টাকা পাবেন।
+
+
+Business-125$
+🔰 (১০ হাজারে)
+  দৈনিক ৪৫ টাকা করে ১৮ মাসে ২৪৩০০ টাকা ইনকাম।
+
+
+Silver-250$
+🔰 ( ২০ হাজারে) 
+দৈনিক ৯০ টাকা করে ৪৮ হাজার ৬ শত টাকা ইনকাম ১৮ মাসে।
+
+Gold-625$
+🔰(৫০ হাজারে) 
+দৈনিক ২২৫ টাকা করে ১৮ মাসে টোটাল পাবেন ১ লাখ ২১ হাজার ৫ শত টাকা।
+
+
+Diamond-1250$
+🔰(১ লক্ষ টাকায়) 
+দৈনিক ৫০০ শত করে টোটাল ২ লক্ষ ৭০ হাজার টাকা, ১৮ মাসে।
+
+Crown-5000$
+🔰 (৪ লক্ষ টাকায়)
+ দৈনিক ২ হাজার টাকা করে টোটাল পাবে ১০ লক্ষ ৮০ হাজার টাকা ১৮ মাসে।
+
+UPDATE `users` SET `placementUsername`=(SELECT `username` FROM `users` WHERE `id`=`placementId`)
+
+ইনকাম থেকে জেনারেশন
+
+1/ জেনারেশন 3%
+2/জেনারেশন 2%
+3/জেনারেশন 1%
+4/জেনারেশন 1%
+5/জেনারেশন 1%
+
+Only refer and matching bonus take generation pabe
+
+.....................................
+Slot system
+
+1/12.50-12.50
+2/25-25
+3/50-50
+4/100-100
+5/200-200
+6/500-500
+7/1000-1000
+8/1500-1500
+9/2500-2500
+10/3600-3600
+11/5000-5000
+12/10000-10000
+
+রেফার কমিশন 10%
+ ম্যাচিং কমিশন 5℅
+
+Rank System and name
+
+1/5000 মেচিং Rubi member ইন্সেন্টিভ 5000Tk 62.50$
+
+2/ 2ta Rubi Executive member ইন্সেন্টিভ 10000tk 125$
+
+3/Executive 3ta Sr Executive member ইন্সেন্টিভ 15000tk 187.50$
+
+4/Sr Executive 3ta Silver
+Executive ইন্সেন্টিভ 50000tk 625$
+
+5/Silver Executive 3ta Gold Executive ইন্সেন্টিভ 150000Tk 1875$
+
+6/ Gold Executive 3ta Platinum Executive ইন্সেন্টিভ 300000tk 3750$
+
+7/Platinum Executive 3ta Diamond Executive ইন্সেন্টিভ 10Lak tk 12500$
+
+8/Diamond Executive 3ta  Crown Director ইন্সেন্টিভ
+20Lak tk 25000$
+
+9/Crown Director 3ta Crown Amassador ইন্সেন্টিভ
+50Lak Tk 62500$
+
+
+Current Wallet -
+
+Total Record 	
+
+Works Wallet
+
+Total Works Earn
+
+Register Wallet
+
+Total Registered
+
+Shopping
+
+Total Shopping
+
+Withdrawal Request Total
+
+Withdrawal Success Total
+
+Total Fund Receive
+
+Total Fund Transfer
+
+Total Matched
+
+Left Flash
+
+Right Flash
+
+Total Left Value
+
+Total Right Value
+
+Left Cary
+
+Right Cary
+
+
+General
+........Dashboard
+.........Referral Income Report
+.........Generation Income Report
+...........Matching Income Report
+............Work Sponsor Income Report
+.............vip Incentive Report
+.............Rank
+
+
+Profile
+............Change Password
+.............Change Image
+..............Change TRX-PIN
+..............My Profile
+
+Networks
+................Downline Network
+................Re-Activation
+................My Sponsored Records
+...............My Registration Records
+..............VIP Member
+...............Incentive
+
+
+Advertise
+................Works List
+...............Works Report
+............Package Status
+
+
+
+Transactions
+.............Balance Transfer
+.............Fund Transferred Records
+.............Fund Received Records
+
+
+Withdrawals
+............Agent Withdrawals
+............Bank Withdrawals
+............My Withdrawals Report
+
+Logout  niche diben
+
+
+
+Vip member=1:5
+
+1×5=5   1star=62.50$ 5000Tk.
+
+5×5=25  2star=125$ 10000Tk.
+
+25×5=125 3star=250$ 20000Tk.
+
+125×5=625 4star=625$50000Tk.
+
+625×5=3125  5star= 1250$100000Tk.
+
+3125×5=15625  6star =3750$ 300000Tk.
+
+15625×5=78125  7star=22687.50$ 1815000Tk.
