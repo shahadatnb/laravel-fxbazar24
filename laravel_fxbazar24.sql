@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2020 at 06:27 PM
+-- Generation Time: Feb 14, 2021 at 05:23 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -35,6 +35,7 @@ CREATE TABLE `admin_wallets` (
   `payment` double(10,2) DEFAULT NULL,
   `confirm` tinyint(3) UNSIGNED NOT NULL DEFAULT 0,
   `confirm_by` int(10) UNSIGNED DEFAULT NULL,
+  `wallet_id` int(10) UNSIGNED DEFAULT NULL,
   `admin_id` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -44,17 +45,19 @@ CREATE TABLE `admin_wallets` (
 -- Dumping data for table `admin_wallets`
 --
 
-INSERT INTO `admin_wallets` (`id`, `user_id`, `remark`, `receipt`, `payment`, `confirm`, `confirm_by`, `admin_id`, `created_at`, `updated_at`) VALUES
-(1, 5000, 'Sent By: apogee24', 500.00, NULL, 0, NULL, 5000, '2020-10-29 17:46:46', '2020-10-29 17:46:46'),
-(2, 5046, 'Sent By: apogee24', 500.00, NULL, 0, NULL, 5000, '2020-10-30 15:43:29', '2020-10-30 15:43:29'),
-(3, 5046, 'registerWallet Sent By: apogee24', 500.00, NULL, 0, NULL, 5000, '2020-10-30 15:45:25', '2020-10-30 15:45:25'),
-(4, 5046, 'test', NULL, 10.00, 0, NULL, NULL, '2020-10-30 16:13:05', '2020-10-30 16:13:05'),
-(5, 5046, 'test', NULL, 10.00, 0, NULL, NULL, '2020-10-30 16:13:24', '2020-10-30 16:13:24'),
-(6, 5000, '0 : 01912624881 - test', NULL, 10.00, 0, NULL, NULL, '2020-10-31 17:46:46', '2020-10-31 17:46:46'),
-(7, 5000, '1 : 01912624881 - test', NULL, 10.00, 0, NULL, NULL, '2020-10-31 17:48:21', '2020-10-31 17:48:21'),
-(8, 5000, 'withdrawWallet Sent By: apogee24', 10.00, NULL, 0, NULL, 5000, '2020-11-06 16:51:14', '2020-11-06 16:51:14'),
-(9, 5000, 'registerWallet Sent By: apogee24', 10.00, NULL, 0, NULL, 5000, '2020-11-06 16:54:02', '2020-11-06 16:54:02'),
-(10, 5000, 'bKash : 01912624881 - test', NULL, 9.00, 1, 5000, NULL, '2020-11-07 16:53:37', '2020-11-07 16:53:55');
+INSERT INTO `admin_wallets` (`id`, `user_id`, `remark`, `receipt`, `payment`, `confirm`, `confirm_by`, `wallet_id`, `admin_id`, `created_at`, `updated_at`) VALUES
+(1, 5000, 'Sent By: apogee24', 500.00, NULL, 0, NULL, NULL, 5000, '2020-10-29 17:46:46', '2020-10-29 17:46:46'),
+(2, 5046, 'Sent By: apogee24', 500.00, NULL, 0, NULL, NULL, 5000, '2020-10-30 15:43:29', '2020-10-30 15:43:29'),
+(3, 5046, 'registerWallet Sent By: apogee24', 500.00, NULL, 0, NULL, NULL, 5000, '2020-10-30 15:45:25', '2020-10-30 15:45:25'),
+(4, 5046, 'test', NULL, 10.00, 0, NULL, NULL, NULL, '2020-10-30 16:13:05', '2020-10-30 16:13:05'),
+(5, 5046, 'test', NULL, 10.00, 0, NULL, NULL, NULL, '2020-10-30 16:13:24', '2020-10-30 16:13:24'),
+(6, 5000, '0 : 01912624881 - test', NULL, 10.00, 0, NULL, NULL, NULL, '2020-10-31 17:46:46', '2020-10-31 17:46:46'),
+(7, 5000, '1 : 01912624881 - test', NULL, 10.00, 2, 5000, NULL, NULL, '2020-10-31 17:48:21', '2020-12-16 15:49:37'),
+(8, 5000, 'withdrawWallet Sent By: apogee24', 10.00, NULL, 0, NULL, NULL, 5000, '2020-11-06 16:51:14', '2020-11-06 16:51:14'),
+(9, 5000, 'registerWallet Sent By: apogee24', 10.00, NULL, 0, NULL, NULL, 5000, '2020-11-06 16:54:02', '2020-11-06 16:54:02'),
+(10, 5000, 'bKash : 01912624881 - test', NULL, 9.00, 1, 5000, NULL, NULL, '2020-11-07 16:53:37', '2020-11-07 16:53:55'),
+(11, 5021, 'registerWallet Sent By: apogee24', 500.00, NULL, 0, NULL, NULL, 5000, '2020-11-20 02:48:25', '2020-11-20 02:48:25'),
+(12, 5022, 'registerWallet Sent By: apogee24', 1000.00, NULL, 0, NULL, NULL, 5000, '2020-12-11 08:05:54', '2020-12-11 08:05:54');
 
 -- --------------------------------------------------------
 
@@ -222,7 +225,7 @@ CREATE TABLE `packegs` (
   `title` varchar(55) COLLATE utf8_unicode_ci NOT NULL,
   `amount` decimal(8,2) UNSIGNED DEFAULT NULL,
   `payment` decimal(6,3) UNSIGNED DEFAULT NULL,
-  `exp` tinyint(3) UNSIGNED DEFAULT NULL,
+  `exp` smallint(3) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -438,6 +441,7 @@ CREATE TABLE `users` (
   `hand` tinyint(1) UNSIGNED DEFAULT NULL,
   `rank` tinyint(2) UNSIGNED DEFAULT 0,
   `slot` tinyint(2) UNSIGNED NOT NULL DEFAULT 0,
+  `vip` tinyint(1) UNSIGNED NOT NULL DEFAULT 0,
   `payment_method` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `account_details` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `pin` varchar(12) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -456,77 +460,81 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `username`, `email`, `mobile`, `referralId`, `placementId`, `placementUsername`, `hand`, `rank`, `slot`, `payment_method`, `account_details`, `pin`, `packeg_id`, `premium`, `admin`, `password`, `photo`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(5000, 'apogee24', 'shahadat', 'apogee24@apogee24.com', '01700000000', 0, NULL, NULL, 0, 1, 0, NULL, NULL, '1111', 1, 2, b'1', '$2y$10$.ZuvdXjDhCb41OwA7shYNuf4g5DDo9HuhHk8Jb/DfLD1TnSyFhuIu', NULL, 1, 'jdxvCjA4fMHTFsvKmZkOxXTwpNls5XJhA19jQ055KsoQdCzG6sVx8Zq5Feev', '2018-02-11 19:35:05', '2020-11-14 02:25:16'),
-(5001, 'apoogee24', 'apoogee1', 'tatusar1993@gmail.com', '01700000000', 5000, 5000, 'shahadat', 1, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$eQI9T3F5BRTgxD/iPSSCQuuwTmttagG7k.UbDULxWD5T.9WjrJ51C', NULL, 1, '8UhOiZtT3DT9RKa6eAY3im6KjmKLYgQ91CsD2vKqGsjRPa73Ukx7On35caN4', '2020-10-10 14:06:00', '2020-10-10 14:06:00'),
-(5002, 'apoogee24', 'apoogee2', 'tatusar1993@gmail.com', '01700000000', 5001, 5000, 'shahadat', 2, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$1wY8M.4ITAtVRGO0u4JCFeRZUQ4VfNLOLV8HgwEfrmHBYuNWzWBXy', NULL, 1, 'ING0OXFXPILogc4H8a2HT2CVJ1U5zHoguz9dACVAzQ6ji9WIUdckoGveLlAn', '2020-10-10 14:09:10', '2020-10-10 14:09:10'),
-(5003, 'apoogee24', 'apoogee3', 'tatusar1993@gmail.com', '01700000000', 5001, 5002, 'apoogee2', 2, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$vjLjdoJju3kd7QloxKJXyeUR112rp.aJDO0W62QWiLxBw5I35hDQm', NULL, 1, 'HJYMUmnbElrEJ6MCRUHVNaQ31S1vBgC0k9mUwBD0cSgJnpDZkgB60jGVDchj', '2020-10-10 14:11:14', '2020-10-10 14:11:14'),
-(5004, 'apoogee24', 'apoogee4', 'tatusar1993@gmail.com', '01700000000', 5002, 5002, 'apoogee2', 1, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$FKkKcMFphEE89ZKaw5rImeqEfivgGjhtZ5vQSwGstuyg53ywCbWlK', NULL, 1, 'xGcRrqJ9ZvruTDorFG0PgQsjOBxdYkTJorVaEi7UNm3ePKqaKAse2KI2M8T7', '2020-10-10 14:24:36', '2020-10-10 14:24:37'),
-(5005, 'apoogee24', 'apoogee5', 'tatusar1993@gmail.com', '01700000000', 5002, 5003, 'apoogee3', 2, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$zDUAMNjjTPTBJtJk55qltuYFV5IqW.yMu3xOtsxqWJPFTNo7Xs/2W', NULL, 1, 'FOWO59MqX4DeNAM6FKauiFYR8iXDdCNJMGrI0CzsE2EYanPyZcs3zUuaRJla', '2020-10-10 14:27:25', '2020-10-10 14:27:25'),
-(5006, 'apoogee24', 'apoogee6', 'tatusar1993@gmail.com', '01700000000', 5003, 5003, 'apoogee3', 1, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$NAfOwhl3edWBZ.ennz8jc.V4V3Mt1pi2Zj0T0DjUkIS12tO5/0Gy.', NULL, 1, 'oEKvTZvgk8a8Y0r6K7R3Ia0KINkY7scKBtMnwjK8cJ5fvivjcUxyHRrhGt4h', '2020-10-10 14:29:27', '2020-10-10 14:29:27'),
-(5007, 'apoogee24', 'apoogee7', 'tatusar1993@gmail.com', '01700000000', 5003, 5004, 'apoogee4', 2, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$c6eqOF29vwjQFZqGzrxYyu8epUq55OnPBgYhISe3/d/mNHBVEkuIO', NULL, 1, 'gcfFqGe2NMBVTBIcUvACg1lolRsMzHoziM3jqAz2da92v1dbo5XGYge0J7R5', '2020-10-10 14:30:56', '2020-10-10 14:30:56'),
-(5008, 'apoogee24', 'aoogee8', 'tatusar1993@gmail.com', '123456', 5004, 5004, 'apoogee4', 1, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$/ihBVfHyLBWkQT3ld7p33./84vXHykgNAgUEotB/Yn9fdcynSdyO2', NULL, 1, 'b9lEAq2cBzwmG07WykHmoPzcQv8JcFxgyNL5GX3YDA2siX2peJLde9Gturmu', '2020-10-10 14:40:20', '2020-10-10 14:40:20'),
-(5009, 'apoogee24', 'apoogee9', 'tatusar1993@gmail.com', '01700000000', 5004, 5005, 'apoogee5', 2, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$ZlE/W0qnycRVgOo7sWli5e2PTFDHhjdXxhYM3mLHzQJw39f4OvW..', NULL, 1, 'nnrltHJ2Axef2DHkODpjGdZDLtCQsZolbLcmm9QQNMCeM3tqDNvysf54zfqd', '2020-10-10 14:41:51', '2020-10-10 14:41:51'),
-(5010, 'apoogee24', 'apoogee10', 'tatusar1993@gmail.com', '01700000000', 5005, 5005, 'apoogee5', 1, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$v.zQAzIsvv3qwTcq0G2Yh.cx3j/r0MFrX5SpQBykTQBMGZT9oYgBq', NULL, 1, '9GK90XhrGGEVW2tqbkxGcMc6elcdDQ2CgrKI7luUoW5YJcrnO77hJ9xIgoIA', '2020-10-10 14:43:32', '2020-10-10 14:43:33'),
-(5011, 'apoogee24', 'apoogee11', 'tatusar1993@gmail.com', '01700000000', 5005, 5006, 'apoogee6', 2, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$NIbfsQbDnJE6oW0ZA4esRepQK0DHts08Pt/UPWuIPDkEaxQ/OFJMi', NULL, 1, 'XEH7YCyO1NAU19kAgvF2ZctOtVkt5P36D4g5jbtDo7mHAuvfoaqMs8chlgu8', '2020-10-10 14:45:05', '2020-10-10 14:45:05'),
-(5012, 'apoogee24', 'apoogee12', 'tatusar1993@gmail.com', '01700000000', 5006, 5006, 'apoogee6', 1, 0, 0, NULL, NULL, NULL, 1, 2, b'0', '$2y$10$TcJli.XEi6of3.hxF7oSlOu2mzlB7zPttZ.QTYSbkoo/GT1/5RAsi', NULL, 1, 'fMMw0LZET9MCoFSzkxkwukEHmRQtDi2jxFuGn2P5k4T8m1UaKbxzUciD0SLF', '2020-10-10 14:47:42', '2020-10-10 19:26:03'),
-(5013, 'RASHIDUL', 'ISLAM', 'a.b.rashidul@gmail.com', '01773174197', 5009, 5007, 'apoogee7', 1, 0, 0, NULL, NULL, NULL, 1, 2, b'0', '$2y$10$YuhK61NHdcgmciY7Uctx4.hRN78Yut/NEP6s44swhzyDBoZdD3Tym', NULL, 1, NULL, '2020-10-10 17:30:33', '2020-10-10 17:51:41'),
-(5014, 'Md Moyez Uddin', 'Moyez123', 'mdmoyez93@gmail.com', '01609136331', 5009, 5007, 'apoogee7', 2, 0, 0, NULL, NULL, NULL, 1, 2, b'0', '$2y$10$7exUSmcX2kCuhHXwkx5XfOpyf5RBW23/vFgUI/JyBB5CkDxX.zCs2', '1602334904_inbound3603512968673552168.jpg', 1, NULL, '2020-10-10 17:38:42', '2020-10-10 18:01:45'),
-(5015, 'Sujon123', 'Sujon123', 'sujonpramanik2002@gmail.com', '01744867583', 5010, 5008, 'aoogee8', 1, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$vR3v96zpUipIbgOKMcxTHeuwa/6EK1enPK..TmYBz8JXf/6uOnTkm', NULL, 1, NULL, '2020-10-10 18:02:32', '2020-10-10 18:02:32'),
-(5016, 'appogee24', 'appogee13', 'tatusar1993@gmail.com', '01700000000', 5012, 5008, 'aoogee8', 2, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$ncrT71K949GxEWY1cVoxK.HVf3jyE.j2/.0629Y8h9k.4Tf32KGGq', NULL, 1, 'ppH8WIRqyi3scSpkkhoGAPah4ojTOi55n8LcChWSy3SKzeHn13jsygUISagm', '2020-10-10 18:46:17', '2020-10-10 18:46:18'),
-(5017, 'apoogee24', 'apoogee14', 'tatusar1993@gmail.com', '01700000000', 5012, 5009, 'apoogee9', 2, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$./8/laFEn88p1P2.9X/DVeozuXp4Awo4QAQWA9aPHuKJsRxoTz.jS', NULL, 1, 'WAaZZc9fOADA5qieQHIdZhrOgkOBUHCM5pHbXdfj8gqRP6iIrtYYBkHuwsXs', '2020-10-10 18:48:36', '2020-10-10 18:48:37'),
-(5018, 'appogee24', 'apoogee15', 'tatusar1993@gmail.com', '01700000000', 5016, 5009, 'apoogee9', 1, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$7tTm2lXyjwXmhMh5Zb8k3uHtMZm503LyjRxuMyy4aULi.gzYKprWW', NULL, 1, 'cqTaKHnLLkxFKwSBSodbR7jpIDSh9WUFijFSyDnWBLCpjVn7xnB6WyZU2DAC', '2020-10-10 18:51:37', '2020-10-10 18:51:38'),
-(5019, 'appogee24', 'apoogee16', 'tatusar1993@gmail.com', '01700000000', 5016, 5010, 'apoogee10', 2, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$qHSwY980X4fOaWcIBfZVPux8aCoGY5ueIX6ikZqUFLw/mRrPrRzS2', NULL, 1, '3onLmYvEdQNU7jtYididqAsoqeQ4XVGaq0wv0MswubbWRPRDakpkCD6NebZF', '2020-10-10 18:53:26', '2020-10-10 18:53:27'),
-(5020, 'apoogee24', 'apoogee17', 'tatusar1993@gmail.com', '01700000000', 5017, 5010, 'apoogee10', 1, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$.pDQj./im919pFtLDQ4Dt.u6J2VwcsiwOm9baYk6k4DzPwWKQP4Tu', NULL, 1, 'hycj4uALQHPQ8BGOKVPXkXxSoh5p6LK6Qx5su9Ct3q2yADz1elgvX9VeByfY', '2020-10-10 18:56:51', '2020-10-10 18:56:52'),
-(5021, 'apoogee24', 'apoogee18', 'tatusar1993@gmail.com', '01700000000', 5017, 5011, 'apoogee11', 2, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$OA/3iFipQ9TYyckDHRS8M.mYSqkPKbfiGrf93B3oos6imVU3NA3R.', NULL, 1, 'huZKHTj70jOc18xuz9PvuTaG3HlTE4l80vlzDwFrsaJAuUVpR7AHoVVBeOfT', '2020-10-10 18:58:31', '2020-10-10 18:58:32'),
-(5022, 'appogee24', 'apoogee19', 'tatusar1993@gmail.com', '01700000000', 5018, 5011, 'apoogee11', 1, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$vjZi4iwQaNEsqs4Od1xUluJqB40ZaQZYTKxNLnMdGmb4jWmiB2pfi', NULL, 1, 'AeEp2CKDyZ5YfRqTaAtq1HMgMT3wCd7OcXenHcxirsc7yZGfRbhi2QkbbhLx', '2020-10-10 19:02:02', '2020-10-10 19:02:03'),
-(5023, 'apoogee24', 'apoogee20', 'tatusar1993@gmail.com', '01700000000', 5018, 5012, 'apoogee12', 2, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$p6wsSXZKhoEeIPVIF05iP.3IWD82.DDYPRiizy9nfzU8C09jv8r42', NULL, 1, 'QH7aSefQz3kn0rlQSjfhQakFafzZTsXDbC3jiuQZVQPwbyCfLtLSAJ5ElR5j', '2020-10-10 19:03:24', '2020-10-10 19:03:25'),
-(5024, 'apoogee24', 'apoogee21', 'tatusar1993@gmail.com', '01700000000', 5019, 5012, 'apoogee12', 1, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$qiMr4q2jtE47UI2BvON7zeuEdk7.jSHfD2C68/Zf8dhX.8QbH6ngu', NULL, 1, 'luUUL7KJRAMz63DF3TdglBTPa4w2lQFAXmLHU08NjHDnbSbdyNNG5DqksA4J', '2020-10-10 19:05:33', '2020-10-10 19:05:33'),
-(5025, 'appogee24', 'apoogee22', 'tatusar1993@gmail.com', '01700000000', 5019, 5013, 'ISLAM', 2, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$uIw.AEkwBCwRtDPd3UXuY.yJO2rYIpcRnJ2GhFPRdUaeBjwaT5dUO', NULL, 1, 'jf4MlA3CFjFC8QZkImJv7vWV4BjuFSAVlnzRghe4od3ZpCTVafY0kbosTfbd', '2020-10-10 19:09:10', '2020-10-10 19:09:11'),
-(5026, 'appogee24', 'apoogee23', 'tatusar1993@gmail.com', '01700000000', 5020, 5013, 'ISLAM', 1, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$LZ0KCOrTXPUTS6M3Rg4H/u1TYMrny2YJav5ulfXxBbQ2Ar3r1DxL2', NULL, 1, '2yREuCa17GtaEd1WipDW6L5SPcJXLzjuxao0XEG9vYQsc2TMViMjkHooRYNf', '2020-10-10 19:13:20', '2020-10-10 19:13:20'),
-(5027, 'apoogee24', 'apoogee25', 'tatusar1993@gmail.com', '01700000000', 5020, 5014, 'Moyez123', 2, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$2YvMhhoOhFnipt6DJm/ZxevVoDnDjHNAkcynnNQFPAJgj98o53/hi', NULL, 1, '3l6wwvRIcfPHhrfdGfE5LE57LcG3gAxs6bcRzCBm5YcB6GBQjZTvFpZ9A75n', '2020-10-10 19:15:18', '2020-10-10 19:15:19'),
-(5028, 'appogee24', 'apoogee26', 'tatusar1993@gmail.com', '01700000000', 5021, 5014, 'Moyez123', 1, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$O/N8mzSjMlbfngYTWXxUP.8Dl3cqbdxHYAQmJBZBKSImUbaMvp4EK', NULL, 1, 'L8ZBCGbeyqlw8rjQHUKng8XLfyzYl8UZ3Apffn1zBIeV2koO1Fx1BZ2ebbIk', '2020-10-10 19:16:56', '2020-10-10 19:16:57'),
-(5029, 'appogee24', 'apoogee27', 'tatusar1993@gmail.com', '01700000000', 5021, 5015, 'Sujon123', 2, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$g0KSkDfhFEcghhSSqQFXweF9/2Zpan8XyZDBAuPntUgqBdctuWchO', NULL, 1, 'lHN1Y5PSINLWukNd5rnYPmJxGgqlLaCWTF7TNVQVdfZO191Hhe3aq2ZRxzZk', '2020-10-10 19:18:46', '2020-10-10 19:18:47'),
-(5030, 'appogee24', 'apoogee28', 'tatusar1993@gmail.com', '01700000000', 5022, 5015, 'Sujon123', 1, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$qbR2AtV45DJkLvB2Hr2TSuJBPg.pPkhP0BcGjfvuDoxgKxFE/2RjW', NULL, 1, 'YQkIZJZkUFZQwBs1kddOg1SRBwdViwyfsAipGhkWKWqmIeFTBzZjLpwfQVoe', '2020-10-10 19:21:59', '2020-10-10 19:21:59'),
-(5031, 'appogee24', 'apoogee29', 'tatusar1993@gmail.com', '01700000000', 5022, 5016, 'appogee13', 2, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$KAAwNsjqabrZ4Y8PylXxd.Y36YATaWa1JNiAlGrdsP0aJwZgCZH/2', NULL, 1, 'u6XtStUc2vFdj3w5TIv4YWEi3GjTV2ioX7OAREB5xwnu6oNkSqmAt6r2MQxs', '2020-10-10 19:23:28', '2020-10-10 19:23:28'),
-(5032, 'appogee24', 'apoogee30', 'tatusar1993@gmail.com', '01700000000', 5023, 5016, 'appogee13', 1, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$/5AviYr821TEno7v5H85TuqLbRYJ//b7hnKvvoxmGzyGyIhAun2Fu', NULL, 1, 'z8ITnRHenurLjLs2D9avmDQKgWvIG5Ly7gSdNNdok2IeuSt7iTFd5QinlRxC', '2020-10-10 19:24:56', '2020-10-10 19:24:57'),
-(5033, 'appogee24', 'apoogee31', 'tatusar1993@gmail.com', '01700000000', 5023, 5017, 'apoogee14', 2, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$h4g40QDY01/Q.umM7xIZRum7uHJ6wIP9vXzJaLem7wgwFrRHv.4Gy', NULL, 1, 'CpOYK4bNiTiuZ6ocJUGpaxKmYgMQWVKXP8GPtFmjIbXLKBIO4IOvGloITseu', '2020-10-10 19:26:09', '2020-10-10 19:26:09'),
-(5034, 'appogee24', 'apoogee32', 'tatusar1993@gmail.com', '01700000000', 5024, 5017, 'apoogee14', 1, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$uhyR4oSlmH5bUcyYNjwVMev.J2w.o.NVF4ImbizLa9MPj/dC8IXx.', NULL, 1, 'RbgH7AcaHkgjaLK0v2aN6w08ZF4F50u7zmx0MofzQBHuVznMNJrqeP6N1MAe', '2020-10-10 19:28:09', '2020-10-10 19:28:10'),
-(5035, 'appogee24', 'apoogee33', 'tatusar1993@gmail.com', '01700000000', 5024, 5018, 'apoogee15', 2, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$uBh7J1D3YM79DJ/CkGiCuOzF07KEctsAHdeFBpp4uxpeVODbVVvOS', NULL, 1, 'US3WxE5pzohXzUPlq8kOOeYEHTOnwMtrHxmp13h3fToARGP1huZldqLtoiWk', '2020-10-10 19:29:24', '2020-10-10 19:29:24'),
-(5036, 'apoogee24', 'apoogee34', 'tatusar1993@gmail.com', '01700000000', 5025, 5018, 'apoogee15', 1, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$8VaEnedtUXTs9eUJiRS0juSVqpE7FJ0tZYAgjBOSSfkw3VjA.SkSm', NULL, 1, 'HWLotPQ0hr6ow4EngRTbvZo4ELxxksVT17HRn6dRmrByLHdNQPu34XFSb7mh', '2020-10-10 19:30:56', '2020-10-10 19:30:57'),
-(5037, 'appogee24', 'apoogee35', 'tatusar1993@gmail.com', '01700000000', 5025, 5019, 'apoogee16', 2, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$iY.os7oUkvRw7geR7ecY/.y8TPGn.DJqBC5XEBDjiidaMUsvfZidi', NULL, 1, '9H2ghRvNPSlzODAjnT6x79VBsBUFn9XivVVadQ6mucs8Tr9tnwuB3oZJn86B', '2020-10-10 19:34:00', '2020-10-10 19:34:01'),
-(5038, 'appogee24', 'apoogee36', 'tatusar1993@gmail.com', '01700000000', 5026, 5019, 'apoogee16', 1, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$gIwyWrVLnjezkCc4rcfErObCx4AaLD/LDHRNccuQWGRi7C2LO9rOG', NULL, 1, 'YuiJiUvMMvHDtuzMXGMIQCWWPEvaB6K1Rm0sU17t2rIcE6HCHFZqj8WXfn5r', '2020-10-10 19:42:56', '2020-10-10 19:42:56'),
-(5039, 'appogee24', 'apoogee37', 'tatusar1993@gmail.com', '01700000000', 5026, 5020, 'apoogee17', 2, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$xAlPt6QFyvAhQrbHUqouHuQZrgrZ5n9xOi7FELoHrB8RmEQFh8UrO', NULL, 1, 'Qc4zRQ3bduBsvV3jDfoOlbS78kV4r34Md7mfVkDwkYKEGGIoonXDRLE3tF0O', '2020-10-10 19:44:17', '2020-10-10 19:44:18'),
-(5040, 'appogee24', 'apoogee38', 'tatusar1993@gmail.com', '01700000000', 5027, 5020, 'apoogee17', 1, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$LjHbiMbwM2LQ8r1GxpxSu.ryuXbfnvj9UAVP/RG2RkbyHyDYpc7cu', NULL, 1, 'aOqFL61RWHLGxpL6vl3HeXfb6v4VZBXwF0UwKfPCSdogrfrmkGAdCCaULiki', '2020-10-10 19:46:07', '2020-10-10 19:46:07'),
-(5041, 'appogee24', 'apoogee40', 'tatusar1993@gmail.com', '01700000000', 5027, 2021, 'apoogee18', 2, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$isxVS6cwuDlY5oDYAsJmeOhuzq7CY0nxRbLE8nqpLc70vP148hjpW', NULL, 1, 'yeV08cJzAp3R1DkE3ICr7yKd72mUwY2b0q9WvwanlhCDziEcCRSpoUQM4ftQ', '2020-10-10 19:47:28', '2020-10-10 19:47:29'),
-(5042, 'appogee24', 'apoogee41', 'tatusar1993@gmail.com', '01700000000', 5028, 5021, 'apoogee18', 1, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$8uzXlfb.rIN/0NXdn3YK3umuKbL42rPZF2TQoAtGGbjrr4ni0d..K', NULL, 1, 'f0Wm2iQ09i4R7lzYriaQkMp7SYLJkuacSwj6acMdgPZTOeNMVfEJsxFisMSp', '2020-10-10 19:48:54', '2020-10-10 19:48:54'),
-(5043, 'appogee24', 'apoogee42', 'tatusar1993@gmail.com', '01700000000', 5028, 5022, 'apoogee19', 2, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$qHS6cwKp1.Q5ocqr3gtMR.pAueuUXugjYhToLELnM3p9p7P4dGoZy', NULL, 1, 'bPUBNtAG6QQig4Dx0idcogT6FqxycXUIJvJ2Pt87hCBt0vWge8XYdjw0hp1S', '2020-10-10 19:50:22', '2020-10-10 19:50:23'),
-(5044, 'appogee24', 'apoogee43', 'tatusar1993@gmail.com', '01700000000', 5029, 5022, 'apoogee19', 1, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$ay864CO/0JK57J7a0i4kNuCDTnj8QOkeOptg.rZOMi.4gR0C4xDvG', NULL, 1, 'Nr3d4x8S5a09unNqTSPlsoKHHsIQb86xx5Zd11vH5xLihheVinMzzItV0Cz6', '2020-10-10 19:51:41', '2020-10-10 19:51:41'),
-(5045, 'appogee24', 'apoogee44', 'tatusar1993@gmail.com', '01700000000', 5029, 5023, 'apoogee20', 2, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$5x2ehTlCN6gKB6TSlTDGK.fWRoRwzMqh8J3Nh3yJqEAX5WKMMpXU2', NULL, 1, '93pXcBNiqlqCv5DzsggWJT07VKR5RFyaFpGFZgzPUU5DLtjAd1aWWXDaedvr', '2020-10-10 19:52:49', '2020-10-10 16:19:03'),
-(5046, 'Test', 'test', 'shahadat@asiancoder.com', '01757839516', 5000, 5023, 'apoogee20', 1, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$ULDqeUjKeWsd3rRlpGo9hODpufFbvwlPi9PqF4bQn7o1fxi0um2He', NULL, 1, '93AHwjw26zGZu1uBbH0IDKSY3kGIeLtjAG3R2cb8vndT2s518WaMA5aDxeNo', '2020-10-30 04:08:40', '2020-10-30 04:08:40'),
-(5047, 'Test2', 'test2', 'shahadat@asiancoder.com', '01757839516', 5000, 5024, 'apoogee21', 2, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$e/wzqjuKgsL4QBWAsrwdyOJfDsVTGe8EQF3x/scCk0DU8NyGl1rLm', NULL, 1, NULL, '2020-10-30 04:39:49', '2020-10-30 04:39:49'),
-(5048, 'Test', 'test3', 'shahadat@asiancoder.com', '01757839516', 5000, 5024, 'apoogee21', 1, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$acGkhbQdjlfCFTkBN48NCOyq6kgofZWpYGS2Q3ta5E8owBaUBxKwG', NULL, 1, NULL, '2020-10-30 04:44:47', '2020-10-30 04:44:47'),
-(5049, 'Test', 'test8', 'shahadat@asiancoder.com', '01757839516', 5000, 5025, 'apoogee22', 2, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$ar/N1rTBybAGb.aJp5wlT.DHDPSthv1RgKVbOBwar5Nt2Mz3jCzxi', NULL, 1, NULL, '2020-10-30 10:59:21', '2020-10-30 10:59:21'),
-(5050, 'Test', 'test9', 'shahadat@asiancoder.com', '01757839516', 5000, 5001, 'apoogee1', 1, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$pqMzNlWHwoIRudgqZ5IqyuNaBTjPK4HwdbG29iLMT0GWvQUz/O/VS', NULL, 1, NULL, '2020-10-30 11:02:37', '2020-10-30 11:02:37'),
-(5051, 'Test', 'test11', 'shahadat@asiancoder.com', '01757839516', 5000, 5004, NULL, 2, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$IsMgpXGh80aXw0bCfSwrT.Hj1pLmg9poCHjHqsL3HVtqUEiFqAI8y', NULL, 1, NULL, '2020-10-30 11:48:27', '2020-10-30 11:48:27'),
-(5052, 'Test', 'test12', 'shahadat@asiancoder.com', '01757839516', 5000, 5001, 'apoogee1', 2, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$WgrHrS5cqxrj8EnAPUMxeeZULpyEnRnggPCZx5RgubDUmLYCepLPW', NULL, 1, NULL, '2020-10-30 11:51:10', '2020-10-30 11:51:10'),
-(5053, 'Azmira', 'test66', 'shahadat@asiancoder.com', '01757839516', 5000, 5051, 'test11', 1, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$6.iOVbcx7QdK2ZlPbHZ3bewfI1Ze6VCMrq99x1VJlzqhAMxbDIZ5e', NULL, 1, NULL, '2020-11-02 02:16:23', '2020-11-02 02:16:23'),
-(5054, 'Azmira', 'test78', 'shahadat@asiancoder.com', '01757839516', 5000, 5051, 'test11', 2, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$JUo7F8MMz2sfSWYRD9Q1Qu3D9R04Yy4Z2l0tMhT3oXwHjSYTDzEU2', NULL, 1, NULL, '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
-(5055, 'Azmira', 'test788', 'shahadat@asiancoder.com', '01757839516', 5000, 5050, 'test9', 1, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$JUo7F8MMz2sfSWYRD9Q1Qu3D9R04Yy4Z2l0tMhT3oXwHjSYTDzEU2', NULL, 1, NULL, '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
-(5056, 'Azmira', 'test788e', 'shahadat@asiancoder.com', '01757839516', 5000, 5050, 'test9', 2, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$JUo7F8MMz2sfSWYRD9Q1Qu3D9R04Yy4Z2l0tMhT3oXwHjSYTDzEU2', NULL, 1, NULL, '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
-(5057, 'Azmira', 'test788w', 'shahadat@asiancoder.com', '01757839516', 5000, 5052, 'test12', 1, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$JUo7F8MMz2sfSWYRD9Q1Qu3D9R04Yy4Z2l0tMhT3oXwHjSYTDzEU2', NULL, 1, NULL, '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
-(5058, 'Azmira', 'test788ew', 'shahadat@asiancoder.com', '01757839516', 5000, 5052, 'test12', 2, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$JUo7F8MMz2sfSWYRD9Q1Qu3D9R04Yy4Z2l0tMhT3oXwHjSYTDzEU2', NULL, 1, NULL, '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
-(5059, 'Azmira', 'test788wq', 'shahadat@asiancoder.com', '01757839516', 5000, 5057, 'test788w', 1, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$JUo7F8MMz2sfSWYRD9Q1Qu3D9R04Yy4Z2l0tMhT3oXwHjSYTDzEU2', NULL, 1, NULL, '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
-(5060, 'Azmira', 'test788ewq', 'shahadat@asiancoder.com', '01757839516', 5000, 5057, 'test788w', 2, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$JUo7F8MMz2sfSWYRD9Q1Qu3D9R04Yy4Z2l0tMhT3oXwHjSYTDzEU2', NULL, 1, NULL, '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
-(5061, 'Azmira', 'test788wqa', 'shahadat@asiancoder.com', '01757839516', 5000, 5058, 'test788ew', 1, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$JUo7F8MMz2sfSWYRD9Q1Qu3D9R04Yy4Z2l0tMhT3oXwHjSYTDzEU2', NULL, 1, NULL, '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
-(5062, 'Azmira', 'test788ewqa', 'shahadat@asiancoder.com', '01757839516', 5000, 5058, 'test788ew', 2, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$JUo7F8MMz2sfSWYRD9Q1Qu3D9R04Yy4Z2l0tMhT3oXwHjSYTDzEU2', NULL, 1, NULL, '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
-(5063, 'Azmira', 'test788wqaq', 'shahadat@asiancoder.com', '01757839516', 5000, 5055, 'test788', 1, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$JUo7F8MMz2sfSWYRD9Q1Qu3D9R04Yy4Z2l0tMhT3oXwHjSYTDzEU2', NULL, 1, NULL, '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
-(5064, 'Azmira', 'test788ewqad', 'shahadat@asiancoder.com', '01757839516', 5000, 5055, 'test788', 2, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$JUo7F8MMz2sfSWYRD9Q1Qu3D9R04Yy4Z2l0tMhT3oXwHjSYTDzEU2', NULL, 1, NULL, '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
-(5065, 'Azmira', 'test788wqaqn', 'shahadat@asiancoder.com', '01757839516', 5000, 5056, 'test788e', 1, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$JUo7F8MMz2sfSWYRD9Q1Qu3D9R04Yy4Z2l0tMhT3oXwHjSYTDzEU2', NULL, 1, NULL, '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
-(5066, 'Azmira', 'test788ewqadm', 'shahadat@asiancoder.com', '01757839516', 5000, 5056, 'test788e', 2, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$JUo7F8MMz2sfSWYRD9Q1Qu3D9R04Yy4Z2l0tMhT3oXwHjSYTDzEU2', NULL, 1, 'p9qBARiUuutSZZWiVsuyg88QieLDZ51ayJ7F3YklpU0DfSaqjJwGpzOT0SlH', '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
-(5067, 'Shahadat Hosain', 'test112', 'azmiranu@gmail.com', '01757839516', 5000, 5066, 'test788ewqadm', 1, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$7tXAloTLjOQ3ZWfmRifNzujMeZHqiaHv4f9zC5JG26RrFRIRnq9mu', NULL, 1, NULL, '2020-11-06 09:37:22', '2020-11-06 09:37:22'),
-(5068, 'Shahadat Hosain', 'test7852', 'shahadat@asiancoder.com', '01757839516', 5000, 5066, 'test788ewqadm', 2, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$6EMF/G/IJfirtcOkQIlMJOjgQY0ytD4OTJtOkBlwPwy6Xz3U112pG', NULL, 1, NULL, '2020-11-14 13:55:23', '2020-11-14 13:55:23'),
-(5069, 'Azmira', 'test87', 'shahadat@asiancoder.com', '01757839516', 5000, 5067, 'test112', 1, 0, 0, NULL, NULL, NULL, 2, 0, b'0', '$2y$10$XXdimbclaL.mGFo1hz1JqOOQoK9YtN6B8VPCUTPiTays4z3t02SDm', NULL, 1, NULL, '2020-11-14 14:10:12', '2020-11-14 14:10:12');
+INSERT INTO `users` (`id`, `name`, `username`, `email`, `mobile`, `referralId`, `placementId`, `placementUsername`, `hand`, `rank`, `slot`, `vip`, `payment_method`, `account_details`, `pin`, `packeg_id`, `premium`, `admin`, `password`, `photo`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
+(5000, 'apogee24', 'shahadat', 'apogee24@apogee24.com', '01700000000', 0, NULL, NULL, 0, 2, 6, 1, NULL, NULL, '1111', 8, 2, b'1', '$2y$10$.ZuvdXjDhCb41OwA7shYNuf4g5DDo9HuhHk8Jb/DfLD1TnSyFhuIu', NULL, 1, 'WbfszkLUIRXWUL3E0ufDHN8q8TVHZ9E0Lwnr9n7lbqThJQqU3NOAxjC6FmSm', '2018-02-11 19:35:05', '2020-12-15 19:36:00'),
+(5001, 'apoogee24', 'apoogee1', 'tatusar1993@gmail.com', '01700000000', 5000, 5000, 'shahadat', 1, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$eQI9T3F5BRTgxD/iPSSCQuuwTmttagG7k.UbDULxWD5T.9WjrJ51C', NULL, 1, '8UhOiZtT3DT9RKa6eAY3im6KjmKLYgQ91CsD2vKqGsjRPa73Ukx7On35caN4', '2020-11-28 18:03:22', '2020-10-10 14:06:00'),
+(5002, 'apoogee24', 'apoogee2', 'tatusar1993@gmail.com', '01700000000', 5001, 5000, 'shahadat', 2, 0, 0, 0, NULL, NULL, NULL, 8, 1, b'0', '$2y$10$1wY8M.4ITAtVRGO0u4JCFeRZUQ4VfNLOLV8HgwEfrmHBYuNWzWBXy', NULL, 1, 'ING0OXFXPILogc4H8a2HT2CVJ1U5zHoguz9dACVAzQ6ji9WIUdckoGveLlAn', '2020-11-29 14:09:10', '2020-10-10 14:09:10'),
+(5003, 'apoogee24', 'apoogee3', 'tatusar1993@gmail.com', '01700000000', 5001, 5002, 'apoogee2', 2, 0, 0, 0, NULL, NULL, NULL, 8, 1, b'0', '$2y$10$vjLjdoJju3kd7QloxKJXyeUR112rp.aJDO0W62QWiLxBw5I35hDQm', NULL, 1, 'HJYMUmnbElrEJ6MCRUHVNaQ31S1vBgC0k9mUwBD0cSgJnpDZkgB60jGVDchj', '2020-10-10 14:11:14', '2020-10-10 14:11:14'),
+(5004, 'apoogee24', 'apoogee4', 'tatusar1993@gmail.com', '01700000000', 5002, 5002, 'apoogee2', 1, 0, 0, 0, NULL, NULL, NULL, 8, 1, b'0', '$2y$10$FKkKcMFphEE89ZKaw5rImeqEfivgGjhtZ5vQSwGstuyg53ywCbWlK', NULL, 1, 'xGcRrqJ9ZvruTDorFG0PgQsjOBxdYkTJorVaEi7UNm3ePKqaKAse2KI2M8T7', '2020-10-10 14:24:36', '2020-10-10 14:24:37'),
+(5005, 'apoogee24', 'apoogee5', 'tatusar1993@gmail.com', '01700000000', 5002, 5003, 'apoogee3', 2, 0, 0, 0, NULL, NULL, NULL, 8, 1, b'0', '$2y$10$zDUAMNjjTPTBJtJk55qltuYFV5IqW.yMu3xOtsxqWJPFTNo7Xs/2W', NULL, 1, 'FOWO59MqX4DeNAM6FKauiFYR8iXDdCNJMGrI0CzsE2EYanPyZcs3zUuaRJla', '2020-10-10 14:27:25', '2020-10-10 14:27:25'),
+(5006, 'apoogee24', 'apoogee6', 'tatusar1993@gmail.com', '01700000000', 5003, 5003, 'apoogee3', 1, 0, 0, 0, NULL, NULL, NULL, 8, 1, b'0', '$2y$10$NAfOwhl3edWBZ.ennz8jc.V4V3Mt1pi2Zj0T0DjUkIS12tO5/0Gy.', NULL, 1, 'oEKvTZvgk8a8Y0r6K7R3Ia0KINkY7scKBtMnwjK8cJ5fvivjcUxyHRrhGt4h', '2020-10-10 14:29:27', '2020-10-10 14:29:27'),
+(5007, 'apoogee24', 'apoogee7', 'tatusar1993@gmail.com', '01700000000', 5003, 5004, 'apoogee4', 2, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$c6eqOF29vwjQFZqGzrxYyu8epUq55OnPBgYhISe3/d/mNHBVEkuIO', NULL, 1, 'gcfFqGe2NMBVTBIcUvACg1lolRsMzHoziM3jqAz2da92v1dbo5XGYge0J7R5', '2020-10-10 14:30:56', '2020-10-10 14:30:56'),
+(5008, 'apoogee24', 'aoogee8', 'tatusar1993@gmail.com', '123456', 5004, 5004, 'apoogee4', 1, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$/ihBVfHyLBWkQT3ld7p33./84vXHykgNAgUEotB/Yn9fdcynSdyO2', NULL, 1, 'b9lEAq2cBzwmG07WykHmoPzcQv8JcFxgyNL5GX3YDA2siX2peJLde9Gturmu', '2020-10-10 14:40:20', '2020-10-10 14:40:20'),
+(5009, 'apoogee24', 'apoogee9', 'tatusar1993@gmail.com', '01700000000', 5004, 5005, 'apoogee5', 2, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$ZlE/W0qnycRVgOo7sWli5e2PTFDHhjdXxhYM3mLHzQJw39f4OvW..', NULL, 1, 'nnrltHJ2Axef2DHkODpjGdZDLtCQsZolbLcmm9QQNMCeM3tqDNvysf54zfqd', '2020-10-10 14:41:51', '2020-10-10 14:41:51'),
+(5010, 'apoogee24', 'apoogee10', 'tatusar1993@gmail.com', '01700000000', 5005, 5005, 'apoogee5', 1, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$v.zQAzIsvv3qwTcq0G2Yh.cx3j/r0MFrX5SpQBykTQBMGZT9oYgBq', NULL, 1, '9GK90XhrGGEVW2tqbkxGcMc6elcdDQ2CgrKI7luUoW5YJcrnO77hJ9xIgoIA', '2020-10-10 14:43:32', '2020-10-10 14:43:33'),
+(5011, 'apoogee24', 'apoogee11', 'tatusar1993@gmail.com', '01700000000', 5005, 5006, 'apoogee6', 2, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$NIbfsQbDnJE6oW0ZA4esRepQK0DHts08Pt/UPWuIPDkEaxQ/OFJMi', NULL, 1, 'XEH7YCyO1NAU19kAgvF2ZctOtVkt5P36D4g5jbtDo7mHAuvfoaqMs8chlgu8', '2020-11-28 18:03:06', '2020-10-10 14:45:05'),
+(5012, 'apoogee24', 'apoogee12', 'tatusar1993@gmail.com', '01700000000', 5006, 5006, 'apoogee6', 1, 0, 0, 0, NULL, NULL, NULL, 1, 2, b'0', '$2y$10$TcJli.XEi6of3.hxF7oSlOu2mzlB7zPttZ.QTYSbkoo/GT1/5RAsi', NULL, 1, 'fMMw0LZET9MCoFSzkxkwukEHmRQtDi2jxFuGn2P5k4T8m1UaKbxzUciD0SLF', '2020-10-10 14:47:42', '2020-10-10 19:26:03'),
+(5013, 'RASHIDUL', 'ISLAM', 'a.b.rashidul@gmail.com', '01773174197', 5009, 5007, 'apoogee7', 1, 0, 0, 0, NULL, NULL, NULL, 1, 2, b'0', '$2y$10$YuhK61NHdcgmciY7Uctx4.hRN78Yut/NEP6s44swhzyDBoZdD3Tym', NULL, 1, NULL, '2020-10-10 17:30:33', '2020-10-10 17:51:41'),
+(5014, 'Md Moyez Uddin', 'Moyez123', 'mdmoyez93@gmail.com', '01609136331', 5009, 5007, 'apoogee7', 2, 0, 0, 0, NULL, NULL, NULL, 1, 2, b'0', '$2y$10$7exUSmcX2kCuhHXwkx5XfOpyf5RBW23/vFgUI/JyBB5CkDxX.zCs2', '1602334904_inbound3603512968673552168.jpg', 1, NULL, '2020-10-10 17:38:42', '2020-10-10 18:01:45'),
+(5015, 'Sujon123', 'Sujon123', 'sujonpramanik2002@gmail.com', '01744867583', 5010, 5008, 'aoogee8', 1, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$vR3v96zpUipIbgOKMcxTHeuwa/6EK1enPK..TmYBz8JXf/6uOnTkm', NULL, 1, NULL, '2020-10-10 18:02:32', '2020-10-10 18:02:32'),
+(5016, 'appogee24', 'appogee13', 'tatusar1993@gmail.com', '01700000000', 5012, 5008, 'aoogee8', 2, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$ncrT71K949GxEWY1cVoxK.HVf3jyE.j2/.0629Y8h9k.4Tf32KGGq', NULL, 1, 'ppH8WIRqyi3scSpkkhoGAPah4ojTOi55n8LcChWSy3SKzeHn13jsygUISagm', '2020-10-10 18:46:17', '2020-10-10 18:46:18'),
+(5017, 'apoogee24', 'apoogee14', 'tatusar1993@gmail.com', '01700000000', 5012, 5009, 'apoogee9', 2, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$./8/laFEn88p1P2.9X/DVeozuXp4Awo4QAQWA9aPHuKJsRxoTz.jS', NULL, 1, 'WAaZZc9fOADA5qieQHIdZhrOgkOBUHCM5pHbXdfj8gqRP6iIrtYYBkHuwsXs', '2020-10-10 18:48:36', '2020-10-10 18:48:37'),
+(5018, 'appogee24', 'apoogee15', 'tatusar1993@gmail.com', '01700000000', 5016, 5009, 'apoogee9', 1, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$7tTm2lXyjwXmhMh5Zb8k3uHtMZm503LyjRxuMyy4aULi.gzYKprWW', NULL, 1, 'cqTaKHnLLkxFKwSBSodbR7jpIDSh9WUFijFSyDnWBLCpjVn7xnB6WyZU2DAC', '2020-10-10 18:51:37', '2020-10-10 18:51:38'),
+(5019, 'appogee24', 'apoogee16', 'tatusar1993@gmail.com', '01700000000', 5016, 5010, 'apoogee10', 2, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$qHSwY980X4fOaWcIBfZVPux8aCoGY5ueIX6ikZqUFLw/mRrPrRzS2', NULL, 1, '3onLmYvEdQNU7jtYididqAsoqeQ4XVGaq0wv0MswubbWRPRDakpkCD6NebZF', '2020-10-10 18:53:26', '2020-10-10 18:53:27'),
+(5020, 'apoogee24', 'apoogee17', 'tatusar1993@gmail.com', '01700000000', 5017, 5010, 'apoogee10', 1, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$.pDQj./im919pFtLDQ4Dt.u6J2VwcsiwOm9baYk6k4DzPwWKQP4Tu', NULL, 1, 'hycj4uALQHPQ8BGOKVPXkXxSoh5p6LK6Qx5su9Ct3q2yADz1elgvX9VeByfY', '2020-10-10 18:56:51', '2020-10-10 18:56:52'),
+(5021, 'apoogee24', 'apoogee18', 'tatusar1993@gmail.com', '01700000000', 5017, 5011, 'apoogee11', 2, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$OA/3iFipQ9TYyckDHRS8M.mYSqkPKbfiGrf93B3oos6imVU3NA3R.', NULL, 1, 'huZKHTj70jOc18xuz9PvuTaG3HlTE4l80vlzDwFrsaJAuUVpR7AHoVVBeOfT', '2020-10-10 18:58:31', '2020-10-10 18:58:32'),
+(5022, 'appogee24', 'apoogee19', 'tatusar1993@gmail.com', '01700000000', 5018, 5011, 'apoogee11', 1, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$vjZi4iwQaNEsqs4Od1xUluJqB40ZaQZYTKxNLnMdGmb4jWmiB2pfi', NULL, 1, 'AeEp2CKDyZ5YfRqTaAtq1HMgMT3wCd7OcXenHcxirsc7yZGfRbhi2QkbbhLx', '2020-10-10 19:02:02', '2020-10-10 19:02:03'),
+(5023, 'apoogee24', 'apoogee20', 'tatusar1993@gmail.com', '01700000000', 5018, 5012, 'apoogee12', 2, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$p6wsSXZKhoEeIPVIF05iP.3IWD82.DDYPRiizy9nfzU8C09jv8r42', NULL, 1, 'QH7aSefQz3kn0rlQSjfhQakFafzZTsXDbC3jiuQZVQPwbyCfLtLSAJ5ElR5j', '2020-10-10 19:03:24', '2020-10-10 19:03:25'),
+(5024, 'apoogee24', 'apoogee21', 'tatusar1993@gmail.com', '01700000000', 5019, 5012, 'apoogee12', 1, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$qiMr4q2jtE47UI2BvON7zeuEdk7.jSHfD2C68/Zf8dhX.8QbH6ngu', NULL, 1, 'luUUL7KJRAMz63DF3TdglBTPa4w2lQFAXmLHU08NjHDnbSbdyNNG5DqksA4J', '2020-10-10 19:05:33', '2020-10-10 19:05:33'),
+(5025, 'appogee24', 'apoogee22', 'tatusar1993@gmail.com', '01700000000', 5019, 5013, 'ISLAM', 2, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$uIw.AEkwBCwRtDPd3UXuY.yJO2rYIpcRnJ2GhFPRdUaeBjwaT5dUO', NULL, 1, 'jf4MlA3CFjFC8QZkImJv7vWV4BjuFSAVlnzRghe4od3ZpCTVafY0kbosTfbd', '2020-10-10 19:09:10', '2020-10-10 19:09:11'),
+(5026, 'appogee24', 'apoogee23', 'tatusar1993@gmail.com', '01700000000', 5020, 5013, 'ISLAM', 1, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$LZ0KCOrTXPUTS6M3Rg4H/u1TYMrny2YJav5ulfXxBbQ2Ar3r1DxL2', NULL, 1, '2yREuCa17GtaEd1WipDW6L5SPcJXLzjuxao0XEG9vYQsc2TMViMjkHooRYNf', '2020-10-10 19:13:20', '2020-10-10 19:13:20'),
+(5027, 'apoogee24', 'apoogee25', 'tatusar1993@gmail.com', '01700000000', 5020, 5014, 'Moyez123', 2, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$2YvMhhoOhFnipt6DJm/ZxevVoDnDjHNAkcynnNQFPAJgj98o53/hi', NULL, 1, '3l6wwvRIcfPHhrfdGfE5LE57LcG3gAxs6bcRzCBm5YcB6GBQjZTvFpZ9A75n', '2020-10-10 19:15:18', '2020-10-10 19:15:19'),
+(5028, 'appogee24', 'apoogee26', 'tatusar1993@gmail.com', '01700000000', 5021, 5014, 'Moyez123', 1, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$O/N8mzSjMlbfngYTWXxUP.8Dl3cqbdxHYAQmJBZBKSImUbaMvp4EK', NULL, 1, 'L8ZBCGbeyqlw8rjQHUKng8XLfyzYl8UZ3Apffn1zBIeV2koO1Fx1BZ2ebbIk', '2020-10-10 19:16:56', '2020-10-10 19:16:57'),
+(5029, 'appogee24', 'apoogee27', 'tatusar1993@gmail.com', '01700000000', 5021, 5015, 'Sujon123', 2, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$g0KSkDfhFEcghhSSqQFXweF9/2Zpan8XyZDBAuPntUgqBdctuWchO', NULL, 1, 'lHN1Y5PSINLWukNd5rnYPmJxGgqlLaCWTF7TNVQVdfZO191Hhe3aq2ZRxzZk', '2020-10-10 19:18:46', '2020-10-10 19:18:47'),
+(5030, 'appogee24', 'apoogee28', 'tatusar1993@gmail.com', '01700000000', 5022, 5015, 'Sujon123', 1, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$qbR2AtV45DJkLvB2Hr2TSuJBPg.pPkhP0BcGjfvuDoxgKxFE/2RjW', NULL, 1, 'YQkIZJZkUFZQwBs1kddOg1SRBwdViwyfsAipGhkWKWqmIeFTBzZjLpwfQVoe', '2020-10-10 19:21:59', '2020-10-10 19:21:59'),
+(5031, 'appogee24', 'apoogee29', 'tatusar1993@gmail.com', '01700000000', 5022, 5016, 'appogee13', 2, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$KAAwNsjqabrZ4Y8PylXxd.Y36YATaWa1JNiAlGrdsP0aJwZgCZH/2', NULL, 1, 'u6XtStUc2vFdj3w5TIv4YWEi3GjTV2ioX7OAREB5xwnu6oNkSqmAt6r2MQxs', '2020-10-10 19:23:28', '2020-10-10 19:23:28'),
+(5032, 'appogee24', 'apoogee30', 'tatusar1993@gmail.com', '01700000000', 5023, 5016, 'appogee13', 1, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$/5AviYr821TEno7v5H85TuqLbRYJ//b7hnKvvoxmGzyGyIhAun2Fu', NULL, 1, 'z8ITnRHenurLjLs2D9avmDQKgWvIG5Ly7gSdNNdok2IeuSt7iTFd5QinlRxC', '2020-10-10 19:24:56', '2020-10-10 19:24:57'),
+(5033, 'appogee24', 'apoogee31', 'tatusar1993@gmail.com', '01700000000', 5023, 5017, 'apoogee14', 2, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$h4g40QDY01/Q.umM7xIZRum7uHJ6wIP9vXzJaLem7wgwFrRHv.4Gy', NULL, 1, 'CpOYK4bNiTiuZ6ocJUGpaxKmYgMQWVKXP8GPtFmjIbXLKBIO4IOvGloITseu', '2020-10-10 19:26:09', '2020-10-10 19:26:09'),
+(5034, 'appogee24', 'apoogee32', 'tatusar1993@gmail.com', '01700000000', 5024, 5017, 'apoogee14', 1, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$uhyR4oSlmH5bUcyYNjwVMev.J2w.o.NVF4ImbizLa9MPj/dC8IXx.', NULL, 1, 'RbgH7AcaHkgjaLK0v2aN6w08ZF4F50u7zmx0MofzQBHuVznMNJrqeP6N1MAe', '2020-10-10 19:28:09', '2020-10-10 19:28:10'),
+(5035, 'appogee24', 'apoogee33', 'tatusar1993@gmail.com', '01700000000', 5024, 5018, 'apoogee15', 2, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$uBh7J1D3YM79DJ/CkGiCuOzF07KEctsAHdeFBpp4uxpeVODbVVvOS', NULL, 1, 'US3WxE5pzohXzUPlq8kOOeYEHTOnwMtrHxmp13h3fToARGP1huZldqLtoiWk', '2020-10-10 19:29:24', '2020-10-10 19:29:24'),
+(5036, 'apoogee24', 'apoogee34', 'tatusar1993@gmail.com', '01700000000', 5025, 5018, 'apoogee15', 1, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$8VaEnedtUXTs9eUJiRS0juSVqpE7FJ0tZYAgjBOSSfkw3VjA.SkSm', NULL, 1, 'HWLotPQ0hr6ow4EngRTbvZo4ELxxksVT17HRn6dRmrByLHdNQPu34XFSb7mh', '2020-10-10 19:30:56', '2020-10-10 19:30:57'),
+(5037, 'appogee24', 'apoogee35', 'tatusar1993@gmail.com', '01700000000', 5025, 5019, 'apoogee16', 2, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$iY.os7oUkvRw7geR7ecY/.y8TPGn.DJqBC5XEBDjiidaMUsvfZidi', NULL, 1, '9H2ghRvNPSlzODAjnT6x79VBsBUFn9XivVVadQ6mucs8Tr9tnwuB3oZJn86B', '2020-10-10 19:34:00', '2020-10-10 19:34:01'),
+(5038, 'appogee24', 'apoogee36', 'tatusar1993@gmail.com', '01700000000', 5026, 5019, 'apoogee16', 1, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$gIwyWrVLnjezkCc4rcfErObCx4AaLD/LDHRNccuQWGRi7C2LO9rOG', NULL, 1, 'YuiJiUvMMvHDtuzMXGMIQCWWPEvaB6K1Rm0sU17t2rIcE6HCHFZqj8WXfn5r', '2020-10-10 19:42:56', '2020-10-10 19:42:56'),
+(5039, 'appogee24', 'apoogee37', 'tatusar1993@gmail.com', '01700000000', 5026, 5020, 'apoogee17', 2, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$xAlPt6QFyvAhQrbHUqouHuQZrgrZ5n9xOi7FELoHrB8RmEQFh8UrO', NULL, 1, 'Qc4zRQ3bduBsvV3jDfoOlbS78kV4r34Md7mfVkDwkYKEGGIoonXDRLE3tF0O', '2020-10-10 19:44:17', '2020-10-10 19:44:18'),
+(5040, 'appogee24', 'apoogee38', 'tatusar1993@gmail.com', '01700000000', 5027, 5020, 'apoogee17', 1, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$LjHbiMbwM2LQ8r1GxpxSu.ryuXbfnvj9UAVP/RG2RkbyHyDYpc7cu', NULL, 1, 'aOqFL61RWHLGxpL6vl3HeXfb6v4VZBXwF0UwKfPCSdogrfrmkGAdCCaULiki', '2020-10-10 19:46:07', '2020-10-10 19:46:07'),
+(5041, 'appogee24', 'apoogee40', 'tatusar1993@gmail.com', '01700000000', 5027, 2021, 'apoogee18', 2, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$isxVS6cwuDlY5oDYAsJmeOhuzq7CY0nxRbLE8nqpLc70vP148hjpW', NULL, 1, 'yeV08cJzAp3R1DkE3ICr7yKd72mUwY2b0q9WvwanlhCDziEcCRSpoUQM4ftQ', '2020-10-10 19:47:28', '2020-10-10 19:47:29'),
+(5042, 'appogee24', 'apoogee41', 'tatusar1993@gmail.com', '01700000000', 5028, 5021, 'apoogee18', 1, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$8uzXlfb.rIN/0NXdn3YK3umuKbL42rPZF2TQoAtGGbjrr4ni0d..K', NULL, 1, 'f0Wm2iQ09i4R7lzYriaQkMp7SYLJkuacSwj6acMdgPZTOeNMVfEJsxFisMSp', '2020-10-10 19:48:54', '2020-10-10 19:48:54'),
+(5043, 'appogee24', 'apoogee42', 'tatusar1993@gmail.com', '01700000000', 5028, 5022, 'apoogee19', 2, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$qHS6cwKp1.Q5ocqr3gtMR.pAueuUXugjYhToLELnM3p9p7P4dGoZy', NULL, 1, 'bPUBNtAG6QQig4Dx0idcogT6FqxycXUIJvJ2Pt87hCBt0vWge8XYdjw0hp1S', '2020-10-10 19:50:22', '2020-10-10 19:50:23'),
+(5044, 'appogee24', 'apoogee43', 'tatusar1993@gmail.com', '01700000000', 5029, 5022, 'apoogee19', 1, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$ay864CO/0JK57J7a0i4kNuCDTnj8QOkeOptg.rZOMi.4gR0C4xDvG', NULL, 1, 'Nr3d4x8S5a09unNqTSPlsoKHHsIQb86xx5Zd11vH5xLihheVinMzzItV0Cz6', '2020-10-10 19:51:41', '2020-10-10 19:51:41'),
+(5045, 'appogee24', 'apoogee44', 'tatusar1993@gmail.com', '01700000000', 5029, 5023, 'apoogee20', 2, 0, 0, 0, NULL, NULL, NULL, 1, 1, b'0', '$2y$10$5x2ehTlCN6gKB6TSlTDGK.fWRoRwzMqh8J3Nh3yJqEAX5WKMMpXU2', NULL, 1, '93pXcBNiqlqCv5DzsggWJT07VKR5RFyaFpGFZgzPUU5DLtjAd1aWWXDaedvr', '2020-10-10 19:52:49', '2020-10-10 16:19:03'),
+(5046, 'Test', 'test', 'shahadat@asiancoder.com', '01757839516', 5000, 5023, 'apoogee20', 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$ULDqeUjKeWsd3rRlpGo9hODpufFbvwlPi9PqF4bQn7o1fxi0um2He', NULL, 1, '93AHwjw26zGZu1uBbH0IDKSY3kGIeLtjAG3R2cb8vndT2s518WaMA5aDxeNo', '2020-10-30 04:08:40', '2020-10-30 04:08:40'),
+(5047, 'Test2', 'test2', 'shahadat@asiancoder.com', '01757839516', 5000, 5024, 'apoogee21', 2, 0, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$e/wzqjuKgsL4QBWAsrwdyOJfDsVTGe8EQF3x/scCk0DU8NyGl1rLm', NULL, 1, NULL, '2020-10-30 04:39:49', '2020-10-30 04:39:49'),
+(5048, 'Test', 'test3', 'shahadat@asiancoder.com', '01757839516', 5000, 5024, 'apoogee21', 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$acGkhbQdjlfCFTkBN48NCOyq6kgofZWpYGS2Q3ta5E8owBaUBxKwG', NULL, 1, NULL, '2020-10-30 04:44:47', '2020-10-30 04:44:47'),
+(5049, 'Test', 'test8', 'shahadat@asiancoder.com', '01757839516', 5000, 5025, 'apoogee22', 2, 0, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$ar/N1rTBybAGb.aJp5wlT.DHDPSthv1RgKVbOBwar5Nt2Mz3jCzxi', NULL, 1, NULL, '2020-10-30 10:59:21', '2020-10-30 10:59:21'),
+(5050, 'Test', 'test9', 'shahadat@asiancoder.com', '01757839516', 5000, 5001, 'apoogee1', 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$pqMzNlWHwoIRudgqZ5IqyuNaBTjPK4HwdbG29iLMT0GWvQUz/O/VS', NULL, 1, NULL, '2020-10-30 11:02:37', '2020-10-30 11:02:37'),
+(5051, 'Test', 'test11', 'shahadat@asiancoder.com', '01757839516', 5000, 5004, NULL, 2, 0, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$IsMgpXGh80aXw0bCfSwrT.Hj1pLmg9poCHjHqsL3HVtqUEiFqAI8y', NULL, 1, NULL, '2020-10-30 11:48:27', '2020-10-30 11:48:27'),
+(5052, 'Test', 'test12', 'shahadat@asiancoder.com', '01757839516', 5000, 5001, 'apoogee1', 2, 0, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$WgrHrS5cqxrj8EnAPUMxeeZULpyEnRnggPCZx5RgubDUmLYCepLPW', NULL, 1, NULL, '2020-10-30 11:51:10', '2020-10-30 11:51:10'),
+(5053, 'Azmira', 'test66', 'shahadat@asiancoder.com', '01757839516', 5000, 5051, 'test11', 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$6.iOVbcx7QdK2ZlPbHZ3bewfI1Ze6VCMrq99x1VJlzqhAMxbDIZ5e', NULL, 1, NULL, '2020-11-02 02:16:23', '2020-11-02 02:16:23'),
+(5054, 'Azmira', 'test78', 'shahadat@asiancoder.com', '01757839516', 5000, 5051, 'test11', 2, 0, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$JUo7F8MMz2sfSWYRD9Q1Qu3D9R04Yy4Z2l0tMhT3oXwHjSYTDzEU2', NULL, 1, NULL, '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
+(5055, 'Azmira', 'test788', 'shahadat@asiancoder.com', '01757839516', 5000, 5050, 'test9', 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$JUo7F8MMz2sfSWYRD9Q1Qu3D9R04Yy4Z2l0tMhT3oXwHjSYTDzEU2', NULL, 1, NULL, '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
+(5056, 'Azmira', 'test788e', 'shahadat@asiancoder.com', '01757839516', 5000, 5050, 'test9', 2, 0, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$JUo7F8MMz2sfSWYRD9Q1Qu3D9R04Yy4Z2l0tMhT3oXwHjSYTDzEU2', NULL, 1, NULL, '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
+(5057, 'Azmira', 'test788w', 'shahadat@asiancoder.com', '01757839516', 5000, 5052, 'test12', 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$JUo7F8MMz2sfSWYRD9Q1Qu3D9R04Yy4Z2l0tMhT3oXwHjSYTDzEU2', NULL, 1, NULL, '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
+(5058, 'Azmira', 'test788ew', 'shahadat@asiancoder.com', '01757839516', 5000, 5052, 'test12', 2, 0, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$JUo7F8MMz2sfSWYRD9Q1Qu3D9R04Yy4Z2l0tMhT3oXwHjSYTDzEU2', NULL, 1, NULL, '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
+(5059, 'Azmira', 'test788wq', 'shahadat@asiancoder.com', '01757839516', 5000, 5057, 'test788w', 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$JUo7F8MMz2sfSWYRD9Q1Qu3D9R04Yy4Z2l0tMhT3oXwHjSYTDzEU2', NULL, 1, NULL, '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
+(5060, 'Azmira', 'test788ewq', 'shahadat@asiancoder.com', '01757839516', 5000, 5057, 'test788w', 2, 0, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$JUo7F8MMz2sfSWYRD9Q1Qu3D9R04Yy4Z2l0tMhT3oXwHjSYTDzEU2', NULL, 1, NULL, '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
+(5061, 'Azmira', 'test788wqa', 'shahadat@asiancoder.com', '01757839516', 5000, 5058, 'test788ew', 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$JUo7F8MMz2sfSWYRD9Q1Qu3D9R04Yy4Z2l0tMhT3oXwHjSYTDzEU2', NULL, 1, NULL, '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
+(5062, 'Azmira', 'test788ewqa', 'shahadat@asiancoder.com', '01757839516', 5000, 5058, 'test788ew', 2, 0, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$JUo7F8MMz2sfSWYRD9Q1Qu3D9R04Yy4Z2l0tMhT3oXwHjSYTDzEU2', NULL, 1, NULL, '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
+(5063, 'Azmira', 'test788wqaq', 'shahadat@asiancoder.com', '01757839516', 5000, 5055, 'test788', 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$JUo7F8MMz2sfSWYRD9Q1Qu3D9R04Yy4Z2l0tMhT3oXwHjSYTDzEU2', NULL, 1, NULL, '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
+(5064, 'Azmira', 'test788ewqad', 'shahadat@asiancoder.com', '01757839516', 5000, 5055, 'test788', 2, 0, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$JUo7F8MMz2sfSWYRD9Q1Qu3D9R04Yy4Z2l0tMhT3oXwHjSYTDzEU2', NULL, 1, NULL, '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
+(5065, 'Azmira', 'test788wqaqn', 'shahadat@asiancoder.com', '01757839516', 5000, 5056, 'test788e', 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$JUo7F8MMz2sfSWYRD9Q1Qu3D9R04Yy4Z2l0tMhT3oXwHjSYTDzEU2', NULL, 1, NULL, '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
+(5066, 'Azmira', 'test788ewqadm', 'shahadat@asiancoder.com', '01757839516', 5000, 5056, 'test788e', 2, 0, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$JUo7F8MMz2sfSWYRD9Q1Qu3D9R04Yy4Z2l0tMhT3oXwHjSYTDzEU2', NULL, 1, 'p9qBARiUuutSZZWiVsuyg88QieLDZ51ayJ7F3YklpU0DfSaqjJwGpzOT0SlH', '2020-11-02 02:17:24', '2020-11-02 02:17:24'),
+(5067, 'Shahadat Hosain', 'test112', 'azmiranu@gmail.com', '01757839516', 5000, 5066, 'test788ewqadm', 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$7tXAloTLjOQ3ZWfmRifNzujMeZHqiaHv4f9zC5JG26RrFRIRnq9mu', NULL, 1, NULL, '2020-11-06 09:37:22', '2020-11-06 09:37:22'),
+(5068, 'Shahadat Hosain', 'test7852', 'shahadat@asiancoder.com', '01757839516', 5000, 5066, 'test788ewqadm', 2, 0, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$6EMF/G/IJfirtcOkQIlMJOjgQY0ytD4OTJtOkBlwPwy6Xz3U112pG', NULL, 1, NULL, '2020-11-14 13:55:23', '2020-11-14 13:55:23'),
+(5069, 'Azmira', 'test87', 'shahadat@asiancoder.com', '01757839516', 5000, 5067, 'test112', 1, 0, 0, 0, NULL, NULL, NULL, 2, 0, b'0', '$2y$10$XXdimbclaL.mGFo1hz1JqOOQoK9YtN6B8VPCUTPiTays4z3t02SDm', NULL, 1, NULL, '2020-11-14 14:10:12', '2020-11-14 14:10:12'),
+(5070, 'Shahadat Hosain', 'test7852777', 'shahadat@asiancoder.com', '01755', 5000, 5067, 'test87', 1, 0, 0, 0, NULL, NULL, NULL, 1, 0, b'0', '$2y$10$P92As1.qpkQ1g2Kl3waNquT0vPGxpKAlS4WMz615F6q2wi4Y5Qjru', NULL, 1, NULL, '2020-11-16 02:30:04', '2020-11-16 02:30:04'),
+(5072, 'Shahadat Hosain fd', 'test879', 'shahadat@asiancoder.com', '01757839516', 5021, 5068, 'test7852', 1, 0, 0, 0, NULL, NULL, NULL, 5, 0, b'0', '$2y$10$p1FnxEcQg/hWfd4E3PoNgemylBeJbm34AkWg/Hb8I1V2SpXG15lxi', NULL, 1, NULL, '2020-11-20 02:56:30', '2020-11-20 02:56:30'),
+(5073, 'Test gene', 'test56567', 'shahadat1@asiancoder.com', '01757839516', 5022, 5072, 'test879', 1, 0, 0, 0, NULL, NULL, NULL, 5, 0, b'0', '$2y$10$aA1esAuIfMTyQ7AKMq.om.XGHpNtG7buvu0lnCXtsBMqktFeTQrM.', NULL, 1, NULL, '2020-12-11 08:08:33', '2020-12-11 08:08:33'),
+(5074, 'AC-2', 'test4343', 'shahadat@asiancoder.com', '01757839516', 5022, 5072, 'test879', 2, 0, 0, 0, NULL, NULL, NULL, 4, 0, b'0', '$2y$10$urZr1ewQ7agkAk1jUoHhCuKKibwSSKfFfeJgFWO.qN8mKakiKnAIW', NULL, 1, NULL, '2020-12-11 09:54:59', '2020-12-11 09:54:59');
 
 -- --------------------------------------------------------
 
@@ -569,9 +577,9 @@ CREATE TABLE `wallets` (
 
 INSERT INTO `wallets` (`id`, `user_id`, `receipt`, `payment`, `wType`, `adminWid`, `transfar`, `receive`, `remark`, `created_at`, `updated_at`) VALUES
 (1, 5000, '5000.000', NULL, 'registerWallet', NULL, NULL, NULL, 'Receipt Form Admin', '2020-10-29 17:46:46', '2020-10-29 17:46:46'),
-(2, 5000, NULL, '200.00', 'registerWallet', NULL, NULL, NULL, 'Buy Product #1', '2020-10-30 04:08:40', '2020-10-30 04:08:40'),
-(3, 5000, '20.000', NULL, 'refferWallet', NULL, NULL, NULL, 'Buy Product', '2020-10-30 04:08:40', '2020-10-30 04:08:40'),
-(4, 5000, NULL, '200.00', 'registerWallet', NULL, NULL, NULL, 'Buy Product #2', '2020-10-30 04:39:48', '2020-10-30 04:39:48'),
+(2, 5000, NULL, '200.00', 'generationWallet', NULL, NULL, NULL, 'Buy Product #1', '2020-09-30 04:08:40', '2020-10-30 04:08:40'),
+(3, 5000, '200.000', NULL, 'refferWallet', NULL, NULL, NULL, 'Buy Product', '2020-10-30 04:08:40', '2020-10-30 04:08:40'),
+(4, 5000, NULL, '200.00', 'generationWallet', NULL, NULL, NULL, 'Buy Product #2', '2020-10-30 04:39:48', '2020-10-30 04:39:48'),
 (5, 5000, '20.000', NULL, 'refferWallet', NULL, NULL, NULL, 'Buy Product', '2020-10-30 04:39:48', '2020-10-30 04:39:48'),
 (6, 5000, NULL, '200.00', 'registerWallet', NULL, NULL, NULL, 'Buy Product #3', '2020-10-30 04:44:47', '2020-10-30 04:44:47'),
 (7, 5000, '20.000', NULL, 'refferWallet', NULL, NULL, NULL, 'Buy Product', '2020-10-30 04:44:47', '2020-10-30 04:44:47'),
@@ -582,7 +590,7 @@ INSERT INTO `wallets` (`id`, `user_id`, `receipt`, `payment`, `wType`, `adminWid
 (12, 5000, NULL, '200.00', 'registerWallet', NULL, NULL, NULL, 'Buy Product #6', '2020-10-30 11:48:27', '2020-10-30 11:48:27'),
 (13, 5000, '20.000', NULL, 'refferWallet', NULL, NULL, NULL, 'Buy Product', '2020-10-30 11:48:27', '2020-10-30 11:48:27'),
 (14, 5000, NULL, '200.00', 'registerWallet', NULL, NULL, NULL, 'Buy Product #7', '2020-10-30 11:51:10', '2020-10-30 11:51:10'),
-(15, 5000, '20.000', NULL, 'refferWallet', NULL, NULL, NULL, 'Buy Product', '2020-10-30 11:51:10', '2020-10-30 11:51:10'),
+(15, 5000, '20.000', NULL, 'referralWallet', NULL, NULL, NULL, 'Buy Product', '2020-10-30 11:51:10', '2020-10-30 11:51:10'),
 (16, 5046, '500.000', NULL, 'shoppingWallet', NULL, NULL, NULL, 'Receipt Form Admin', '2020-10-30 15:43:29', '2020-10-30 15:43:29'),
 (17, 5046, '500.000', NULL, 'registerWallet', NULL, NULL, NULL, 'Receipt Form Admin', '2020-10-30 15:45:25', '2020-10-30 15:45:25'),
 (18, 5046, NULL, '10.00', 'shoppingWallet', NULL, NULL, NULL, 'Sent to ID# 5001', '2020-10-30 15:48:25', '2020-10-30 15:48:25'),
@@ -626,7 +634,90 @@ INSERT INTO `wallets` (`id`, `user_id`, `receipt`, `payment`, `wType`, `adminWid
 (58, 5066, '5.000', NULL, 'worksWallet', NULL, NULL, NULL, 'Youtube Bonus #5069', '2020-11-14 16:12:36', '2020-11-14 16:12:36'),
 (59, 5056, '2.500', NULL, 'worksWallet', NULL, NULL, NULL, 'Youtube Bonus #5069', '2020-11-14 16:12:36', '2020-11-14 16:12:36'),
 (60, 5050, '2.500', NULL, 'worksWallet', NULL, NULL, NULL, 'Youtube Bonus #5069', '2020-11-14 16:12:36', '2020-11-14 16:12:36'),
-(61, 5067, '2.500', NULL, 'worksWallet', NULL, NULL, NULL, 'Youtube Bonus #5069', '2020-11-14 16:12:36', '2020-11-14 16:12:36');
+(61, 5067, '2.500', NULL, 'worksWallet', NULL, NULL, NULL, 'Youtube Bonus #5069', '2020-11-14 16:12:36', '2020-11-14 16:12:36'),
+(62, 5000, '125.000', NULL, 'rankWallet', NULL, NULL, NULL, 'Rank Bonus #2', '2020-11-15 13:12:12', '2020-11-15 13:12:12'),
+(63, 5000, '6.250', NULL, 'matchingWallet', NULL, NULL, NULL, 'Matching Bonus #1', '2020-11-15 13:12:12', '2020-11-15 13:12:12'),
+(64, 5000, '125.000', NULL, 'rankWallet', NULL, NULL, NULL, 'Rank Bonus #2', '2020-11-15 13:19:28', '2020-11-15 13:19:28'),
+(65, 5000, '6.250', NULL, 'matchingWallet', NULL, NULL, NULL, 'Matching Bonus #1', '2020-11-15 13:19:28', '2020-11-15 13:19:28'),
+(66, 5000, '125.000', NULL, 'rankWallet', NULL, NULL, NULL, 'Rank Bonus #2', '2020-11-15 13:54:32', '2020-11-15 13:54:32'),
+(67, 5000, '6.250', NULL, 'matchingWallet', NULL, NULL, NULL, 'Matching Bonus #1', '2020-11-15 13:54:33', '2020-11-15 13:54:33'),
+(68, 5000, '125.000', NULL, 'rankWallet', NULL, NULL, NULL, 'Rank Bonus #2', '2020-11-15 15:26:36', '2020-11-15 15:26:36'),
+(69, 5000, '6.250', NULL, 'matchingWallet', NULL, NULL, NULL, 'Matching Bonus #1', '2020-11-15 15:26:37', '2020-11-15 15:26:37'),
+(70, 5000, '125.000', NULL, 'rankWallet', NULL, NULL, NULL, 'Rank Bonus #2', '2020-11-15 15:28:00', '2020-11-15 15:28:00'),
+(71, 5000, '6.250', NULL, 'matchingWallet', NULL, NULL, NULL, 'Matching Bonus #1', '2020-11-15 15:28:00', '2020-11-15 15:28:00'),
+(72, 5000, '125.000', NULL, 'rankWallet', NULL, NULL, NULL, 'Rank Bonus #2', '2020-11-15 15:28:10', '2020-11-15 15:28:10'),
+(73, 5000, '6.250', NULL, 'matchingWallet', NULL, NULL, NULL, 'Matching Bonus #1', '2020-11-15 15:28:10', '2020-11-15 15:28:10'),
+(74, 5000, '125.000', NULL, 'rankWallet', NULL, NULL, NULL, 'Rank Bonus #2', '2020-11-15 15:39:28', '2020-11-15 15:39:28'),
+(75, 5000, '6.250', NULL, 'matchingWallet', NULL, NULL, NULL, 'Matching Bonus #1', '2020-11-15 15:39:28', '2020-11-15 15:39:28'),
+(76, 5000, '125.000', NULL, 'rankWallet', NULL, NULL, NULL, 'Rank Bonus #2', '2020-11-15 15:43:15', '2020-11-15 15:43:15'),
+(77, 5000, '6.250', NULL, 'matchingWallet', NULL, NULL, NULL, 'Matching Bonus #1', '2020-11-15 15:43:15', '2020-11-15 15:43:15'),
+(78, 5000, '125.000', NULL, 'rankWallet', NULL, NULL, NULL, 'Rank Bonus #2', '2020-11-15 15:59:28', '2020-11-15 15:59:28'),
+(79, 5000, '0.625', NULL, 'generationWallet', NULL, NULL, NULL, 'Generation Bonus #1', '2020-11-15 15:59:28', '2020-11-15 15:59:28'),
+(80, 5000, '125.000', NULL, 'rankWallet', NULL, NULL, NULL, 'Rank Bonus #2', '2020-11-15 16:13:21', '2020-11-15 16:13:21'),
+(81, 5000, '0.625', NULL, 'generationWallet', NULL, NULL, NULL, 'Generation Bonus #1', '2020-11-15 16:13:21', '2020-11-15 16:13:21'),
+(82, 5000, '125.000', NULL, 'rankWallet', NULL, NULL, NULL, 'Rank Bonus #2', '2020-11-15 17:05:42', '2020-11-15 17:05:42'),
+(83, 5000, '0.625', NULL, 'generationWallet', NULL, NULL, NULL, 'Generation Bonus #1', '2020-11-15 17:05:43', '2020-11-15 17:05:43'),
+(84, 5000, '125.000', NULL, 'rankWallet', NULL, NULL, NULL, 'Rank Bonus #2', '2020-11-16 02:06:46', '2020-11-16 02:06:46'),
+(85, 5000, '0.625', NULL, 'generationWallet', NULL, NULL, NULL, 'Generation Bonus #1', '2020-11-16 02:06:46', '2020-11-16 02:06:46'),
+(86, 5000, '125.000', NULL, 'rankWallet', NULL, NULL, NULL, 'Rank Bonus #2', '2020-11-16 02:11:20', '2020-11-16 02:11:20'),
+(87, 5000, '6.250', NULL, 'matchingWallet', NULL, NULL, NULL, 'Matching Bonus #1', '2020-11-16 02:16:02', '2020-11-16 02:16:02'),
+(88, 5000, '12.500', NULL, 'matchingWallet', NULL, NULL, NULL, 'Matching Bonus #2', '2020-11-16 02:17:12', '2020-11-16 02:17:12'),
+(89, 5000, '25.000', NULL, 'matchingWallet', NULL, NULL, NULL, 'Matching Bonus #3', '2020-11-16 02:17:24', '2020-11-16 02:17:24'),
+(90, 5000, '0.625', NULL, 'matchingWallet', NULL, NULL, NULL, 'Matching Bonus #1', '2020-11-16 02:20:06', '2020-11-16 02:20:06'),
+(91, 5000, '0.625', NULL, 'matchingWallet', NULL, NULL, NULL, 'Matching Bonus #1', '2020-11-16 02:22:54', '2020-11-16 02:22:54'),
+(92, 5000, NULL, '12.50', 'registerWallet', NULL, NULL, NULL, 'New Member #test7852777', '2020-11-16 02:30:04', '2020-11-16 02:30:04'),
+(93, 5000, '1.250', NULL, 'referralWallet', NULL, NULL, NULL, 'New Member #test7852777', '2020-11-16 02:30:04', '2020-11-16 02:30:04'),
+(94, 5000, '1.250', NULL, 'matchingWallet', NULL, NULL, NULL, 'Matching Bonus #2', '2020-11-16 02:30:05', '2020-11-16 02:30:05'),
+(95, 5000, '2.500', NULL, 'matchingWallet', NULL, NULL, NULL, 'Matching Bonus #3', '2020-11-16 02:32:59', '2020-11-16 02:32:59'),
+(96, 5000, '5.000', NULL, 'matchingWallet', NULL, NULL, NULL, 'Matching Bonus #4', '2020-11-16 02:33:03', '2020-11-16 02:33:03'),
+(97, 5000, '10.000', NULL, 'matchingWallet', NULL, NULL, NULL, 'Matching Bonus #5', '2020-11-16 02:33:06', '2020-11-16 02:33:06'),
+(98, 5000, NULL, '3.00', 'referralWallet', NULL, NULL, NULL, NULL, '2020-11-16 15:32:46', '2020-11-16 15:32:46'),
+(99, 5000, NULL, NULL, 'withdrawWallet', NULL, NULL, NULL, 'Withdraw - ', '2020-11-16 15:32:46', '2020-11-16 15:32:46'),
+(100, 5000, NULL, '10.00', 'registerWallet', NULL, NULL, NULL, 'Sent to ID# apoogee1 ', '2020-11-16 15:42:23', '2020-11-16 15:42:23'),
+(101, 5000, NULL, '10.00', 'registerWallet', NULL, NULL, NULL, 'Sent to ID# apoogee1 ', '2020-11-16 15:45:01', '2020-11-16 15:45:01'),
+(102, 5000, NULL, '10.00', 'registerWallet', NULL, NULL, NULL, 'Sent to ID# apoogee1 ', '2020-11-16 15:48:33', '2020-11-16 15:48:33'),
+(103, 5001, '10.000', NULL, 'registerWallet', NULL, NULL, NULL, 'Receipt Form ID# shahadat', '2020-11-16 15:48:33', '2020-11-16 15:48:33'),
+(104, 5021, '500.000', NULL, 'registerWallet', NULL, NULL, 1, 'Receipt Form Admin', '2020-11-20 02:48:25', '2020-11-20 02:48:25'),
+(105, 5021, NULL, '250.00', 'registerWallet', NULL, NULL, NULL, 'New Member #test879', '2020-11-20 02:53:09', '2020-11-20 02:53:09'),
+(106, 5021, '25.000', NULL, 'referralWallet', NULL, NULL, NULL, 'New Member #test879', '2020-11-20 02:53:09', '2020-11-20 02:53:09'),
+(107, 5021, NULL, '250.00', 'registerWallet', NULL, NULL, NULL, 'New Member #test879', '2020-11-20 02:56:30', '2020-11-20 02:56:30'),
+(108, 5021, '25.000', NULL, 'referralWallet', NULL, NULL, NULL, 'New Member #test879', '2020-11-20 02:56:30', '2020-11-20 02:56:30'),
+(109, 5068, '0.750', NULL, 'generationWallet', NULL, NULL, NULL, 'Generation Bonus(Refer)#test7852', '2020-11-20 02:56:30', '2020-11-20 02:56:30'),
+(110, 5066, '0.500', NULL, 'generationWallet', NULL, NULL, NULL, 'Generation Bonus(Refer)#test7852', '2020-11-20 02:56:30', '2020-11-20 02:56:30'),
+(111, 5056, '0.250', NULL, 'generationWallet', NULL, NULL, NULL, 'Generation Bonus(Refer)#test7852', '2020-11-20 02:56:30', '2020-11-20 02:56:30'),
+(112, 5050, '0.250', NULL, 'generationWallet', NULL, NULL, NULL, 'Generation Bonus(Refer)#test7852', '2020-11-20 02:56:30', '2020-11-20 02:56:30'),
+(113, 5068, '0.250', NULL, 'generationWallet', NULL, NULL, NULL, 'Generation Bonus(Refer)#test7852', '2020-11-20 02:56:30', '2020-11-20 02:56:30'),
+(114, 5000, '25.000', NULL, 'matchingWallet', NULL, NULL, NULL, 'Matching Bonus #6', '2020-11-20 15:35:51', '2020-11-20 15:35:51'),
+(115, 5000, '5.000', NULL, 'test', NULL, NULL, NULL, 'Matching Bonus #', '2020-11-28 17:57:29', '2020-11-28 17:57:29'),
+(116, 5000, '5.000', NULL, 'test', NULL, NULL, NULL, 'Matching Bonus #', '2020-11-28 18:00:09', '2020-11-28 18:00:09'),
+(132, 5000, '0.625', NULL, 'matchingWallet', NULL, NULL, NULL, 'Matching Bonus #1', '2020-11-29 18:27:05', '2020-11-29 18:27:05'),
+(133, 5000, '12.500', NULL, 'rightCarry', NULL, NULL, NULL, '', '2020-11-29 18:27:05', '2020-11-29 18:27:05'),
+(134, 5002, '12.500', NULL, 'leftFlash', NULL, NULL, NULL, '', '2020-11-29 18:27:05', '2020-11-29 18:27:05'),
+(135, 5003, '12.500', NULL, 'rightFlash', NULL, NULL, NULL, '', '2020-11-29 18:27:05', '2020-11-29 18:27:05'),
+(136, 5006, '12.500', NULL, 'leftFlash', NULL, NULL, NULL, '', '2020-11-29 18:27:05', '2020-11-29 18:27:05'),
+(137, 5000, NULL, '10.00', 'rankWallet', NULL, NULL, NULL, 'Withdraw 88', '2020-12-05 15:59:35', '2020-12-05 15:59:35'),
+(138, 5000, '10.000', NULL, 'withdrawWallet', NULL, NULL, NULL, 'Withdraw - 88', '2020-12-05 15:59:35', '2020-12-05 15:59:35'),
+(139, 5000, NULL, '15.00', 'rankWallet', NULL, NULL, NULL, 'Withdraw ', '2020-12-05 15:59:46', '2020-12-05 15:59:46'),
+(140, 5000, '15.000', NULL, 'withdrawWallet', NULL, NULL, NULL, 'Withdraw - ', '2020-12-05 15:59:46', '2020-12-05 15:59:46'),
+(141, 5022, '1000.000', NULL, 'registerWallet', NULL, NULL, 1, 'Receipt Form Admin', '2020-12-11 08:05:54', '2020-12-11 08:05:54'),
+(142, 5022, NULL, '250.00', 'registerWallet', NULL, NULL, NULL, 'New Member #test56567', '2020-12-11 08:08:33', '2020-12-11 08:08:33'),
+(143, 5022, '25.000', NULL, 'referralWallet', NULL, NULL, NULL, 'New Member #test56567', '2020-12-11 08:08:33', '2020-12-11 08:08:33'),
+(144, 5011, '0.750', NULL, 'generationWallet', NULL, NULL, NULL, 'Generation Bonus(Refer)#apoogee11', '2020-12-11 08:08:33', '2020-12-11 08:08:33'),
+(145, 5006, '0.500', NULL, 'generationWallet', NULL, NULL, NULL, 'Generation Bonus(Refer)#apoogee11', '2020-12-11 08:08:33', '2020-12-11 08:08:33'),
+(146, 5003, '0.250', NULL, 'generationWallet', NULL, NULL, NULL, 'Generation Bonus(Refer)#apoogee11', '2020-12-11 08:08:33', '2020-12-11 08:08:33'),
+(147, 5022, '0.250', NULL, 'generationWallet', NULL, NULL, NULL, 'Generation Bonus(Refer)#apoogee11', '2020-12-11 08:08:34', '2020-12-11 08:08:34'),
+(148, 5000, '0.250', NULL, 'generationWallet', NULL, NULL, NULL, 'Generation Bonus(Refer)#apoogee11', '2020-12-11 08:08:34', '2020-12-11 08:08:34'),
+(149, 5022, NULL, '0.25', 'generationWallet', NULL, NULL, NULL, 'Withdraw 444', '2020-12-11 08:18:13', '2020-12-11 08:18:13'),
+(150, 5022, '0.250', NULL, 'withdrawWallet', NULL, NULL, NULL, 'Withdraw - 444', '2020-12-11 08:18:13', '2020-12-11 08:18:13'),
+(151, 5022, NULL, '125.00', 'registerWallet', NULL, NULL, NULL, 'New Member #test4343', '2020-12-11 09:54:59', '2020-12-11 09:54:59'),
+(152, 5022, '12.500', NULL, 'referralWallet', NULL, NULL, NULL, 'New Member #test4343', '2020-12-11 09:54:59', '2020-12-11 09:54:59'),
+(153, 5011, '3.750', NULL, 'generationWallet', NULL, NULL, NULL, 'Generation Bonus(Refer)#apoogee11', '2020-12-11 09:54:59', '2020-12-11 09:54:59'),
+(154, 5006, '2.500', NULL, 'generationWallet', NULL, NULL, NULL, 'Generation Bonus(Refer)#apoogee11', '2020-12-11 09:54:59', '2020-12-11 09:54:59'),
+(155, 5003, '1.250', NULL, 'generationWallet', NULL, NULL, NULL, 'Generation Bonus(Refer)#apoogee11', '2020-12-11 09:54:59', '2020-12-11 09:54:59'),
+(156, 5002, '1.250', NULL, 'generationWallet', NULL, NULL, NULL, 'Generation Bonus(Refer)#apoogee11', '2020-12-11 09:55:00', '2020-12-11 09:55:00'),
+(157, 5000, '1.250', NULL, 'generationWallet', NULL, NULL, NULL, 'Generation Bonus(Refer)#apoogee11', '2020-12-11 09:55:00', '2020-12-11 09:55:00'),
+(158, 5000, '62.500', NULL, 'vipIncentive', NULL, NULL, NULL, 'VIP Incentive #1', '2020-12-15 19:36:00', '2020-12-15 19:36:00'),
+(159, 5000, '10.000', NULL, 'withdrawWallet', NULL, NULL, 1, 'Refund Form Admin', '2020-12-16 15:49:37', '2020-12-16 15:49:37');
 
 --
 -- Indexes for dumped tables
@@ -744,7 +835,7 @@ ALTER TABLE `wallets`
 -- AUTO_INCREMENT for table `admin_wallets`
 --
 ALTER TABLE `admin_wallets`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `bett_balances`
@@ -822,7 +913,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5070;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5075;
 
 --
 -- AUTO_INCREMENT for table `user_pins`
@@ -834,7 +925,7 @@ ALTER TABLE `user_pins`
 -- AUTO_INCREMENT for table `wallets`
 --
 ALTER TABLE `wallets`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=160;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
